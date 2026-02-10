@@ -5,35 +5,7 @@ import Navbar from './Navbar';
 const FeaturesPage = () => {
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden">
-            <header className="w-full border-b border-solid border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
-                <div className="px-4 md:px-10 py-4 max-w-7xl mx-auto flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-3 text-white">
-                        <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
-                            <span className="material-symbols-outlined">smart_toy</span>
-                        </div>
-                        <h2 className="text-white text-xl font-bold leading-tight tracking-tight">RecruitAI</h2>
-                    </Link>
-                    <div className="hidden md:flex flex-1 justify-end items-center gap-8">
-                        <nav className="flex items-center gap-6">
-                            <Link to="/features" className="text-white text-sm font-bold transition-colors">Features</Link>
-                            <Link to="/candidates" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Candidates</Link>
-                            <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Employers</a>
-                            <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
-                        </nav>
-                        <div className="flex gap-3">
-                            <button className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
-                                Log In
-                            </button>
-                            <button className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
-                                Get Started
-                            </button>
-                        </div>
-                    </div>
-                    <div className="md:hidden text-white">
-                        <span className="material-symbols-outlined">menu</span>
-                    </div>
-                </div>
-            </header>
+            <Navbar />
             <main className="flex-grow flex flex-col items-center w-full">
                 <section className="w-full px-4 py-16 md:py-24 flex justify-center bg-[url('https://placeholder.pics/svg/100x100/111621/1c212e')] bg-[length:40px_40px] relative overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-primary/10 blur-[100px] pointer-events-none rounded-full"></div>
