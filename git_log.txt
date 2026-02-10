@@ -1,0 +1,20 @@
+﻿* 466fbf5 Remove default Vite padding and layout styles
+* 5effd47 Fix Tailwind CSS v4 configuration
+* 64da9f3 Implement landing page details
+* 9ae8c6b Initial commit of Django+React project
+* f75a997 feat(frontend): messaging UI and job detail view
+* 1ea5f76 feat(frontend): employer dashboard, job management, and candidates view
+* 76b52cd feat(frontend): job seeker views, navigation, and core feature flows
+* b7a8867 feat(frontend): implementation of authentication pages and forms
+* 89c29e6 feat(frontend): setup React app routing, navbar, and core services
+* 7bb76ac feat: implement backend applications for core features
+* 548b29a chore: setup backend infrastructure, media handling, and utility scripts
+* 977055f Initial commit of Django+React project
+* 96fb3c3 Implement Login page and finalize navigation
+* 25975da Fix FeaturesPage header and task list
+* 71558f9 Implement Sign Up page and consistent navigation
+* da67c0d Implement Employers page and navigation
+* 9358322 Refactor navigation to use shared Navbar component
+* e12b9c0 Implement Candidates page and routing
+* f5276da Implement Features page and routing
+* 6e9a4e0 Remove default Vite padding and layout styles

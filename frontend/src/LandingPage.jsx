@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
     return (
@@ -14,7 +15,7 @@ const LandingPage = () => {
                     </div>
                     <div className="hidden md:flex flex-1 justify-end items-center gap-8">
                         <nav className="flex items-center gap-6">
-                            <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Features</a>
+                            <Link to="/features" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Features</Link>
                             <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Candidates</a>
                             <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Employers</a>
                             <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
@@ -315,7 +316,7 @@ const LandingPage = () => {
                         </div>
                         <div className="flex flex-col gap-4">
                             <h4 className="text-white font-bold text-sm uppercase tracking-wider">Product</h4>
-                            <a className="text-text-secondary hover:text-primary transition-colors text-sm" href="#">Features</a>
+                            <Link to="/features" className="text-text-secondary hover:text-primary transition-colors text-sm">Features</Link>
                             <a className="text-text-secondary hover:text-primary transition-colors text-sm" href="#">Pricing</a>
                             <a className="text-text-secondary hover:text-primary transition-colors text-sm" href="#">Enterprise</a>
                             <a className="text-text-secondary hover:text-primary transition-colors text-sm" href="#">Case Studies</a>
