@@ -354,9 +354,9 @@ const CandidatesPage = () => {
               <p className="text-blue-100 text-lg max-w-md">Create your profile in minutes and let the offers come to you.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full md:w-auto">
-              <button className="px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg w-full md:w-auto text-center">
+              <Link to="/signup" className="px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg w-full md:w-auto text-center">
                 Get Started Free
-              </button>
+              </Link>
               <button className="px-8 py-4 bg-primary-dark/30 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-colors w-full md:w-auto text-center">
                 Browse Jobs
               </button>

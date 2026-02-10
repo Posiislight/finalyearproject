@@ -16,15 +16,15 @@ const Navbar = () => {
                         <Link to="/features" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Features</Link>
                         <Link to="/candidates" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Candidates</Link>
                         <Link to="/employers" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Employers</Link>
-                        <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
+                        
                     </nav>
                     <div className="flex gap-3">
                         <button className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
                             Log In
                         </button>
-                        <button className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
+                        <Link to="/signup" className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
                             Sign Up Free
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 {/* Mobile Menu Icon */}

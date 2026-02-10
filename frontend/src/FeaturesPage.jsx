@@ -127,10 +127,10 @@ const FeaturesPage = () => {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full justify-center">
-                            <button className="px-10 py-4 bg-primary text-white font-bold text-lg rounded-full hover:bg-primary-hover transition-all shadow-[0_0_20px_rgba(36,99,235,0.4)] w-full sm:w-auto flex items-center justify-center gap-2 group">
+                            <Link to="/signup" className="px-10 py-4 bg-primary text-white font-bold text-lg rounded-full hover:bg-primary-hover transition-all shadow-[0_0_20px_rgba(36,99,235,0.4)] w-full sm:w-auto flex items-center justify-center gap-2 group">
                                 Sign Up Now
                                 <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </button>
+                            </Link>
                             <button className="px-10 py-4 bg-transparent border border-border-dark text-white font-bold text-lg rounded-full hover:bg-white/5 transition-colors w-full sm:w-auto">
                                 Talk to Sales
                             </button>

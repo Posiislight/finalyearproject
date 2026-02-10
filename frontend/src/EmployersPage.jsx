@@ -24,10 +24,10 @@ const EmployersPage = () => {
                 Stop sifting through irrelevant resumes. Our AI identifies the top 5% of candidates instantly, allowing you to focus on interviewing and closing.
               </p>
               <div className="flex flex-wrap gap-4 justify-center mt-4">
-                <button className="h-12 px-8 rounded-full bg-primary hover:bg-primary-hover text-white font-bold text-base transition-all shadow-[0_0_20px_rgba(36,99,235,0.5)] flex items-center gap-2 group">
+                <Link to="/signup" className="h-12 px-8 rounded-full bg-primary hover:bg-primary-hover text-white font-bold text-base transition-all shadow-[0_0_20px_rgba(36,99,235,0.5)] flex items-center gap-2 group">
                   Start Hiring Free
                   <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </button>
+                </Link>
                 <button className="h-12 px-8 rounded-full bg-surface-dark border border-border-dark hover:border-primary/50 text-white font-bold text-base transition-colors flex items-center gap-2">
                   Request a Demo
                 </button>
@@ -241,9 +241,9 @@ const EmployersPage = () => {
               <p className="text-blue-100 text-lg max-w-md">Join over 10,000 companies using RecruitAI to build world-class teams.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full md:w-auto">
-              <button className="px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg w-full md:w-auto text-center">
+              <Link to="/signup" className="px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg w-full md:w-auto text-center">
                 Start Hiring Free
-              </button>
+              </Link>
               <button className="px-8 py-4 bg-primary-dark/30 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-colors w-full md:w-auto text-center">
                 Request a Demo
               </button>
