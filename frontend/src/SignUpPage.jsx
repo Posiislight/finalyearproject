@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
+    const [userType, setUserType] = useState('Job Seeker');
+
+    const handleInitialSubmit = (e) => {
+        e.preventDefault();
+        // Mock authentication - in real app this would verify credentials
+        if (userType === 'Employer') {
+            navigate('/company-info');
+        } else {
+            navigate('/jobseeker-home');
+        }
+    };
+
     return (
         <div className="flex min-h-screen w-full flex-row">
             {/* Left Side: Vibrant Branding & Carousel (40%) */}
@@ -104,20 +117,32 @@ const SignUpPage = () => {
                         <div className="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
                     </div>
                     {/* Main Form */}
-                    <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+                    <form className="flex flex-col gap-6" onSubmit={handleInitialSubmit}>
                         {/* User Type Selection (RadioList) */}
                         <div className="flex flex-col gap-2">
                             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">I am a</label>
                             <div className="grid grid-cols-2 gap-3">
-                                <label className="relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark px-4 py-3 text-sm font-medium text-slate-900 dark:text-white transition-all hover:bg-slate-50 dark:hover:bg-[#2c3442] has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+                                <label className={`relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-all ${userType === 'Job Seeker' ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-[#2c3442]'}`}>
                                     <span className="material-symbols-outlined text-[20px]">person_search</span>
                                     Job Seeker
-                                    <input defaultChecked className="invisible absolute" name="user_type" type="radio" />
+                                    <input 
+                                        className="invisible absolute" 
+                                        name="user_type" 
+                                        type="radio" 
+                                        checked={userType === 'Job Seeker'}
+                                        onChange={() => setUserType('Job Seeker')}
+                                    />
                                 </label>
-                                <label className="relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark px-4 py-3 text-sm font-medium text-slate-900 dark:text-white transition-all hover:bg-slate-50 dark:hover:bg-[#2c3442] has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
+                                <label className={`relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-all ${userType === 'Employer' ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-[#2c3442]'}`}>
                                     <span className="material-symbols-outlined text-[20px]">business_center</span>
                                     Employer
-                                    <input className="invisible absolute" name="user_type" type="radio" />
+                                    <input 
+                                        className="invisible absolute" 
+                                        name="user_type" 
+                                        type="radio" 
+                                        checked={userType === 'Employer'}
+                                        onChange={() => setUserType('Employer')}
+                                    />
                                 </label>
                             </div>
                         </div>

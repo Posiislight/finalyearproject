@@ -9,8 +9,8 @@
   --color-border-dark: #282d39;
   --color-text-secondary: #9da6b9;
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Noto Sans", sans-serif;
+  --font-display: "DM Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
 
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
@@ -19,7 +19,7 @@
 }
 
 :root {
-  font-family: 'Noto Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
 body {
