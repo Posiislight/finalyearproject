@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
@@ -24,6 +25,14 @@ function App() {
         </p>
       </div>
     </>
+=======
+import LandingPage from './LandingPage'
+import './App.css'
+
+function App() {
+  return (
+    <LandingPage />
+>>>>>>> ebac274 (Implement landing page details)
   )
 }
 
