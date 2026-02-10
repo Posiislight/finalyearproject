@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SignUpPage = () => {
+const LoginPage = () => {
     return (
         <div className="flex min-h-screen w-full flex-row">
             {/* Left Side: Vibrant Branding & Carousel (40%) */}
@@ -70,18 +70,17 @@ const SignUpPage = () => {
                         <div className="flex h-12 w-full items-center justify-center rounded-xl bg-slate-200 dark:bg-surface-dark p-1">
                             <label className="flex h-full flex-1 cursor-pointer items-center justify-center rounded-lg px-2 text-sm font-medium transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#2c3442] has-[:checked]:text-primary has-[:checked]:shadow-sm text-slate-500 dark:text-slate-400">
                                 <span className="truncate">Sign In</span>
-                                <input className="invisible w-0" name="auth_mode" type="radio" value="Sign In" />
+                                <input defaultChecked className="invisible w-0" name="auth_mode" type="radio" value="Sign In" />
                             </label>
-                            <label className="flex h-full flex-1 cursor-pointer items-center justify-center rounded-lg px-2 text-sm font-medium transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#2c3442] has-[:checked]:text-primary has-[:checked]:shadow-sm text-slate-500 dark:text-slate-400">
+                            <Link to="/signup" className="flex h-full flex-1 cursor-pointer items-center justify-center rounded-lg px-2 text-sm font-medium transition-all text-slate-500 dark:text-slate-400 hover:text-primary">
                                 <span className="truncate">Create Account</span>
-                                <input defaultChecked className="invisible w-0" name="auth_mode" type="radio" value="Create Account" />
-                            </label>
+                            </Link>
                         </div>
                     </div>
                     {/* Header Text */}
                     <div className="text-center">
-                        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Create your account</h1>
-                        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Join thousands of professionals finding their dream jobs.</p>
+                        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome back</h1>
+                        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Sign in to continue your job search.</p>
                     </div>
                     {/* Social Login Buttons */}
                     <div className="flex flex-col gap-3">
@@ -105,23 +104,6 @@ const SignUpPage = () => {
                     </div>
                     {/* Main Form */}
                     <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
-                        {/* User Type Selection (RadioList) */}
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">I am a</label>
-                            <div className="grid grid-cols-2 gap-3">
-                                <label className="relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark px-4 py-3 text-sm font-medium text-slate-900 dark:text-white transition-all hover:bg-slate-50 dark:hover:bg-[#2c3442] has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
-                                    <span className="material-symbols-outlined text-[20px]">person_search</span>
-                                    Job Seeker
-                                    <input defaultChecked className="invisible absolute" name="user_type" type="radio" />
-                                </label>
-                                <label className="relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark px-4 py-3 text-sm font-medium text-slate-900 dark:text-white transition-all hover:bg-slate-50 dark:hover:bg-[#2c3442] has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary has-[:checked]:ring-1 has-[:checked]:ring-primary">
-                                    <span className="material-symbols-outlined text-[20px]">business_center</span>
-                                    Employer
-                                    <input className="invisible absolute" name="user_type" type="radio" />
-                                </label>
-                            </div>
-                        </div>
-                        {/* Input Fields */}
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300" htmlFor="email">Email Address</label>
@@ -138,23 +120,14 @@ const SignUpPage = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* Terms */}
-                        <div className="flex items-start gap-2">
-                            <div className="flex h-5 items-center">
-                                <input className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary dark:border-slate-600 dark:bg-surface-dark dark:ring-offset-slate-800" id="terms" type="checkbox" />
-                            </div>
-                            <label className="text-sm text-slate-500 dark:text-slate-400" htmlFor="terms">
-                                By creating an account, you agree to our <a className="font-medium text-primary hover:underline" href="#">Terms of Service</a> and <a className="font-medium text-primary hover:underline" href="#">Privacy Policy</a>.
-                            </label>
-                        </div>
                         {/* Submit Button */}
                         <button className="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-blue-600 hover:shadow-primary/40 active:scale-[0.98]">
-                            Create Account
+                            Sign In
                             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </button>
                     </form>
                     <div className="text-center text-sm text-slate-500 dark:text-slate-400">
-                        Already have an account? <Link className="font-medium text-primary hover:underline" to="/login">Log in</Link>
+                        Don't have an account? <Link className="font-medium text-primary hover:underline" to="/signup">Sign up</Link>
                     </div>
                 </div>
             </div>
@@ -162,4 +135,4 @@ const SignUpPage = () => {
     );
 };
 
-export default SignUpPage;
+export default LoginPage;

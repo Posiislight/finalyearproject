@@ -4,6 +4,7 @@ import FeaturesPage from './FeaturesPage';
 import CandidatesPage from './CandidatesPage';
 import EmployersPage from './EmployersPage';
 import SignUpPage from './SignUpPage';
+import LoginPage from './LoginPage';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/candidates" element={<CandidatesPage />} />
         <Route path="/employers" element={<EmployersPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );

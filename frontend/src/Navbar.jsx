@@ -19,9 +19,9 @@ const Navbar = () => {
                         
                     </nav>
                     <div className="flex gap-3">
-                        <button className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
+                        <Link to="/login" className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
                             Log In
-                        </button>
+                        </Link>
                         <Link to="/signup" className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
                             Sign Up Free
                         </Link>
