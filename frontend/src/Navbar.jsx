@@ -15,7 +15,7 @@ const Navbar = () => {
                     <nav className="flex items-center gap-6">
                         <Link to="/features" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Features</Link>
                         <Link to="/candidates" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Candidates</Link>
-                        <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Employers</a>
+                        <Link to="/employers" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Employers</Link>
                         <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
                     </nav>
                     <div className="flex gap-3">
