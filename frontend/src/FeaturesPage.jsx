@@ -15,7 +15,7 @@ const FeaturesPage = () => {
                     <div className="hidden md:flex flex-1 justify-end items-center gap-8">
                         <nav className="flex items-center gap-6">
                             <Link to="/features" className="text-white text-sm font-bold transition-colors">Features</Link>
-                            <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Candidates</a>
+                            <Link to="/candidates" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Candidates</Link>
                             <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">For Employers</a>
                             <a className="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Pricing</a>
                         </nav>
