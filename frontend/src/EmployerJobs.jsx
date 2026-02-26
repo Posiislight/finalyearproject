@@ -1,67 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import EmployerSidebar from './EmployerSidebar';
+import { employerService } from './services/employerService';
 
 const EmployerJobs = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('active');
+    const [jobs, setJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const jobs = [
-        {
-            id: 1,
-            title: 'Senior Product Designer',
-            location: 'Remote',
-            type: 'Full-time',
-            posted: 'Posted 2 days ago',
-            status: 'active',
-            matches: 42,
-            applications: 18,
-            avatars: [11, 12, 13],
-            extraAvatars: 15,
-            icon: 'design_services',
-        },
-        {
-            id: 2,
-            title: 'Frontend Developer (React)',
-            location: 'San Francisco',
-            type: 'Hybrid',
-            posted: 'Posted 5 days ago',
-            status: 'active',
-            matches: 65,
-            applications: 28,
-            avatars: [14, 15],
-            extraAvatars: 26,
-            icon: 'code',
-        },
-        {
-            id: 3,
-            title: 'Marketing Manager',
-            location: 'New York',
-            type: 'On-site',
-            posted: 'Posted 1 week ago',
-            status: 'paused',
-            matches: 12,
-            applications: 4,
-            avatars: [],
-            extraAvatars: 0,
-            icon: 'campaign',
-        },
-        {
-            id: 4,
-            title: 'Data Scientist',
-            location: 'London',
-            type: 'Remote',
-            posted: 'Posted 3 days ago',
-            status: 'active',
-            matches: 31,
-            applications: 9,
-            avatars: [16, 17],
-            extraAvatars: 7,
-            icon: 'query_stats',
-        },
-    ];
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const data = await employerService.getJobPosts();
+                setJobs(data);
+            } catch (error) {
+                console.error("Failed to fetch jobs:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchJobs();
+    }, []);
 
-    const filteredJobs = activeTab === 'all' ? jobs : jobs.filter(j => j.status === activeTab);
+    const filteredJobs = activeTab === 'all' 
+        ? jobs 
+        : activeTab === 'active' 
+            ? jobs.filter(j => j.status === 'open')
+            : jobs.filter(j => j.status !== 'open');
+
+    const activeCount = jobs.filter(j => j.status === 'open').length;
+    const totalApplications = jobs.reduce((sum, job) => sum + job.applications_count, 0);
 
     return (
         <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex overflow-hidden">
@@ -101,7 +70,7 @@ const EmployerJobs = () => {
                                             <span className="material-symbols-outlined text-[10px]">trending_up</span>+12%
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-[#f9fafb]">8</p>
+                                    <p className="text-2xl font-bold text-[#f9fafb]">{activeCount}</p>
                                     <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium mt-0.5">Active Jobs</p>
                                 </div>
                                 <div className="bg-[#1F2937] p-4 rounded-xl border border-[#374151]">
@@ -111,7 +80,7 @@ const EmployerJobs = () => {
                                             <span className="material-symbols-outlined text-[10px]">trending_up</span>+24%
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-[#f9fafb]">142</p>
+                                    <p className="text-2xl font-bold text-[#f9fafb]">{totalApplications}</p>
                                     <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium mt-0.5">Total Applicants</p>
                                 </div>
                                 <div className="bg-[#1F2937] p-4 rounded-xl border border-[#374151]">
@@ -169,17 +138,19 @@ const EmployerJobs = () => {
                             </div>
 
                             <div className="space-y-4">
+                                {loading && <p className="text-center text-[#9ca3af] py-10">Loading jobs...</p>}
+                                {!loading && filteredJobs.length === 0 && <p className="text-center text-[#9ca3af] py-10">No jobs found in this category.</p>}
                                 {filteredJobs.map(job => (
-                                    <div key={job.id} className="bg-[#1F2937] rounded-2xl border border-[#374151] p-6 hover:border-[#2563eb]/40 transition-colors cursor-pointer group">
+                                    <div key={job.id} onClick={() => navigate('/employer-candidates')} className="bg-[#1F2937] rounded-2xl border border-[#374151] p-6 hover:border-[#2563eb]/40 transition-colors cursor-pointer group">
                                         <div className="flex items-start gap-4">
                                             <div className="w-12 h-12 rounded-xl bg-gray-800 border border-[#374151] flex items-center justify-center shrink-0 group-hover:border-[#2563eb]/30 transition-colors">
-                                                <span className="material-symbols-outlined text-[#2563eb]">{job.icon}</span>
+                                                <span className="material-symbols-outlined text-[#2563eb]">work</span>
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-3 mb-1">
                                                     <h4 className="font-bold text-[#f9fafb]">{job.title}</h4>
                                                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded uppercase tracking-wider ${
-                                                        job.status === 'active'
+                                                        job.status === 'open'
                                                             ? 'bg-green-900/20 text-[#22c55e] border border-green-900/30'
                                                             : 'bg-yellow-900/20 text-yellow-400 border border-yellow-900/30'
                                                     }`}>
@@ -191,37 +162,15 @@ const EmployerJobs = () => {
                                                 </div>
                                                 <div className="flex items-center gap-2 text-xs text-[#9ca3af] mb-4">
                                                     <span className="material-symbols-outlined text-sm">location_on</span>
-                                                    {job.location}
+                                                    {job.location || 'Not specified'}
                                                     <span className="text-gray-600">•</span>
-                                                    {job.type}
-                                                    <span className="text-gray-600">•</span>
-                                                    {job.posted}
+                                                    {new Date(job.created_at).toLocaleDateString()}
                                                 </div>
                                                 <div className="flex items-center gap-6">
                                                     <div>
-                                                        <p className="text-xl font-bold text-[#f9fafb]">{job.matches}</p>
-                                                        <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium">New Matches</p>
-                                                    </div>
-                                                    <div className="w-px h-8 bg-[#374151]"></div>
-                                                    <div>
-                                                        <p className="text-xl font-bold text-[#f9fafb]">{job.applications}</p>
+                                                        <p className="text-xl font-bold text-[#f9fafb]">{job.applications_count}</p>
                                                         <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium">Applications</p>
                                                     </div>
-                                                    {job.avatars.length > 0 && (
-                                                        <>
-                                                            <div className="w-px h-8 bg-[#374151]"></div>
-                                                            <div className="flex items-center -space-x-2">
-                                                                {job.avatars.map((av, i) => (
-                                                                    <img key={i} src={`https://i.pravatar.cc/150?img=${av}`} alt="" className="w-8 h-8 rounded-full border-2 border-[#1F2937] object-cover" />
-                                                                ))}
-                                                                {job.extraAvatars > 0 && (
-                                                                    <div className="w-8 h-8 rounded-full bg-gray-700 border-2 border-[#1F2937] flex items-center justify-center text-[10px] font-bold text-[#9ca3af]">
-                                                                        +{job.extraAvatars}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        </>
-                                                    )}
                                                 </div>
                                             </div>
                                         </div>

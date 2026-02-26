@@ -52,6 +52,15 @@ const EmployerSidebar = () => {
                     <span className={`font-medium text-sm ${isActive('/employer-analytics') ? 'font-semibold' : ''}`}>Analytics</span>
                 </a>
 
+                <a 
+                    onClick={() => navigate('/employer-messages')} 
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors cursor-pointer group ${isActive('/employer-messages') ? 'bg-[#2563eb]/10 text-[#2563eb]' : 'text-[#9ca3af] hover:bg-gray-800 hover:text-[#f9fafb]'}`}
+                >
+                    <span className={`material-symbols-outlined text-xl ${isActive('/employer-messages') ? '' : 'group-hover:text-[#2563eb]'}`}>chat</span>
+                    <span className={`font-medium text-sm ${isActive('/employer-messages') ? 'font-semibold' : ''}`}>Messages</span>
+                    <span className="ml-auto bg-[#2563eb] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+                </a>
+
                 <div className="pt-4 mt-4 border-t border-[#374151]">
                     <p className="px-4 text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">Settings</p>
                     <a
@@ -72,15 +81,23 @@ const EmployerSidebar = () => {
             </nav>
 
             <div className="p-4 border-t border-[#374151]">
-                <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-800 cursor-pointer transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center border border-blue-500/30">
-                        <span className="font-bold text-white text-sm">TF</span>
+                <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-800 cursor-pointer transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center border border-blue-500/30">
+                            <span className="font-bold text-white text-sm">EM</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-[#f9fafb] truncate">Employer Portal</p>
+                            <p className="text-xs text-[#9ca3af] truncate">Standard Plan</p>
+                        </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#f9fafb] truncate">TechFlow Systems</p>
-                        <p className="text-xs text-[#9ca3af] truncate">Premium Plan</p>
-                    </div>
-                    <span className="material-symbols-outlined text-[#9ca3af]">unfold_more</span>
+                    <button 
+                        onClick={() => { logout(); navigate('/login'); }}
+                        className="flex items-center gap-3 px-4 py-2 text-red-500 hover:bg-red-500/10 rounded-xl transition-all font-medium text-sm"
+                    >
+                        <span className="material-symbols-outlined text-xl">logout</span>
+                        Log Out
+                    </button>
                 </div>
             </div>
         </aside>
