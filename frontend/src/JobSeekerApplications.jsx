@@ -1,90 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import JobSeekerBottomNav from './JobSeekerBottomNav';
+import { jobSeekerService } from './services/jobSeekerService';
 
 const JobSeekerApplications = () => {
     const [activeFilter, setActiveFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchApps = async () => {
+            try {
+                const data = await jobSeekerService.getApplications();
+                setApplications(data);
+            } catch (error) {
+                console.error("Failed to fetch applications:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchApps();
+    }, []);
 
     const stats = [
-        { label: 'Total Sent', value: '24', icon: 'send', trend: '+5 this week', color: '#2563eb' },
-        { label: 'Response Rate', value: '62%', icon: 'reply', trend: '+8% vs avg', color: '#22c55e' },
-        { label: 'Interviews', value: '4', icon: 'event', trend: '2 upcoming', color: '#7c3aed' },
-    ];
-
-    const applications = [
-        {
-            id: 1, title: 'Senior Frontend Developer', company: 'TechFlow Systems', logo: 'TF', logoColor: '#2563eb',
-            appliedDate: 'Feb 16, 2026', status: 'interview',
-            timeline: [
-                { step: 'Applied', date: 'Feb 16', done: true },
-                { step: 'Reviewed', date: 'Feb 17', done: true },
-                { step: 'Shortlisted', date: 'Feb 17', done: true },
-                { step: 'Interview', date: 'Feb 20', done: false, active: true },
-                { step: 'Offer', date: '—', done: false },
-            ]
-        },
-        {
-            id: 2, title: 'Lead UX Designer', company: 'DesignHub Pro', logo: 'DH', logoColor: '#7c3aed',
-            appliedDate: 'Feb 14, 2026', status: 'shortlisted',
-            timeline: [
-                { step: 'Applied', date: 'Feb 14', done: true },
-                { step: 'Reviewed', date: 'Feb 15', done: true },
-                { step: 'Shortlisted', date: 'Feb 16', done: true },
-                { step: 'Interview', date: '—', done: false },
-                { step: 'Offer', date: '—', done: false },
-            ]
-        },
-        {
-            id: 3, title: 'Full Stack Engineer', company: 'NexGen Labs', logo: 'NL', logoColor: '#059669',
-            appliedDate: 'Feb 12, 2026', status: 'review',
-            timeline: [
-                { step: 'Applied', date: 'Feb 12', done: true },
-                { step: 'Reviewed', date: '—', done: false, active: true },
-                { step: 'Shortlisted', date: '—', done: false },
-                { step: 'Interview', date: '—', done: false },
-                { step: 'Offer', date: '—', done: false },
-            ]
-        },
-        {
-            id: 4, title: 'React Developer', company: 'CloudScale Inc.', logo: 'CS', logoColor: '#0891b2',
-            appliedDate: 'Feb 8, 2026', status: 'rejected',
-            timeline: [
-                { step: 'Applied', date: 'Feb 8', done: true },
-                { step: 'Reviewed', date: 'Feb 10', done: true },
-                { step: 'Rejected', date: 'Feb 11', done: true, rejected: true },
-            ]
-        },
-        {
-            id: 5, title: 'Software Engineer', company: 'DataVault', logo: 'DV', logoColor: '#dc2626',
-            appliedDate: 'Feb 5, 2026', status: 'offer',
-            timeline: [
-                { step: 'Applied', date: 'Feb 5', done: true },
-                { step: 'Reviewed', date: 'Feb 6', done: true },
-                { step: 'Shortlisted', date: 'Feb 7', done: true },
-                { step: 'Interview', date: 'Feb 10', done: true },
-                { step: 'Offer', date: 'Feb 14', done: true },
-            ]
-        },
+        { label: 'Total Sent', value: applications.length.toString(), icon: 'send', trend: '', color: '#2563eb' },
+        { label: 'Response Rate', value: applications.length > 0 ? `${Math.round((applications.filter(a => a.status !== 'applied').length / applications.length) * 100)}%` : '0%', icon: 'reply', trend: '', color: '#22c55e' },
+        { label: 'Interviews', value: applications.filter(a => a.status === 'interviewing').length.toString(), icon: 'event', trend: '', color: '#7c3aed' },
     ];
 
     const statusConfig = {
-        review: { label: 'Under Review', color: 'text-yellow-400', bg: 'bg-yellow-900/20', border: 'border-yellow-900/30' },
-        shortlisted: { label: 'Shortlisted', color: 'text-[#22c55e]', bg: 'bg-green-900/20', border: 'border-green-900/30' },
-        interview: { label: 'Interview', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', border: 'border-[#2563eb]/30' },
+        applied: { label: 'Applied', color: 'text-gray-400', bg: 'bg-gray-900/20', border: 'border-gray-900/30' },
+        reviewing: { label: 'Under Review', color: 'text-yellow-400', bg: 'bg-yellow-900/20', border: 'border-yellow-900/30' },
+        interviewing: { label: 'Interview', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', border: 'border-[#2563eb]/30' },
         rejected: { label: 'Not Selected', color: 'text-red-400', bg: 'bg-red-900/20', border: 'border-red-900/30' },
-        offer: { label: 'Offer Received', color: 'text-emerald-400', bg: 'bg-emerald-900/20', border: 'border-emerald-900/30' },
+        offered: { label: 'Offer Received', color: 'text-emerald-400', bg: 'bg-emerald-900/20', border: 'border-emerald-900/30' },
     };
 
     const filters = [
         { key: 'all', label: 'All' },
-        { key: 'review', label: 'In Review' },
-        { key: 'shortlisted', label: 'Shortlisted' },
-        { key: 'interview', label: 'Interview' },
-        { key: 'offer', label: 'Offers' },
+        { key: 'applied', label: 'Applied' },
+        { key: 'reviewing', label: 'In Review' },
+        { key: 'interviewing', label: 'Interview' },
+        { key: 'offered', label: 'Offers' },
         { key: 'rejected', label: 'Rejected' },
     ];
 
-    const filteredApps = activeFilter === 'all' ? applications : applications.filter(a => a.status === activeFilter);
+    let filteredApps = activeFilter === 'all' ? applications : applications.filter(a => a.status === activeFilter);
+    // Apply search filter
+    if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        filteredApps = filteredApps.filter(a => {
+            const job = a.job_post_details;
+            return job && (
+                (job.title || '').toLowerCase().includes(q) ||
+                (job.company_name || '').toLowerCase().includes(q)
+            );
+        });
+    }
+    
+    // Helper to generate a dynamic timeline depending on status
+    const generateTimeline = (status) => {
+        const statuses = ['applied', 'reviewing', 'interviewing', 'offered'];
+        let isRejected = status === 'rejected';
+        
+        // If rejected, the timeline drops 'interviewing' and 'offered' and goes to 'rejected'
+        if (isRejected) {
+             return [
+                 { step: 'Applied', done: true },
+                 { step: 'Reviewed', done: true },
+                 { step: 'Rejected', done: true, rejected: true },
+             ];
+        }
+
+        const currentStatusIndex = statuses.indexOf(status);
+        
+        return statuses.map((s, i) => ({
+            step: s.charAt(0).toUpperCase() + s.slice(1),
+            done: i <= currentStatusIndex,
+            active: i === currentStatusIndex && i !== statuses.length - 1
+        }));
+    };
 
     return (
         <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
@@ -139,17 +134,20 @@ const JobSeekerApplications = () => {
             {/* Application List */}
             <div className="flex-1 overflow-y-auto px-5 pb-24 pt-3 space-y-3">
                 {filteredApps.map(app => {
-                    const status = statusConfig[app.status];
+                    const status = statusConfig[app.status] || statusConfig.applied;
+                    const job = app.job_post_details;
+                    const timeline = generateTimeline(app.status);
+
                     return (
                         <div key={app.id} className="bg-[#1F2937] rounded-2xl border border-[#374151] p-4 hover:border-[#2563eb]/30 transition-colors">
                             {/* Job Info */}
                             <div className="flex items-start gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0" style={{ backgroundColor: app.logoColor }}>
-                                    {app.logo}
+                                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0" style={{ backgroundColor: job.logo_color }}>
+                                    {job.logo_initials}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className="font-bold text-[#f9fafb] text-sm">{app.title}</h3>
-                                    <p className="text-xs text-[#9ca3af]">{app.company}</p>
+                                    <h3 className="font-bold text-[#f9fafb] text-sm">{job.title}</h3>
+                                    <p className="text-xs text-[#9ca3af]">{job.company_name}</p>
                                 </div>
                                 <span className={`shrink-0 px-2 py-1 rounded-lg text-[11px] font-semibold ${status.bg} ${status.color} border ${status.border}`}>
                                     {status.label}
@@ -158,7 +156,7 @@ const JobSeekerApplications = () => {
 
                             {/* Timeline */}
                             <div className="flex items-center gap-0 mb-3 px-1">
-                                {app.timeline.map((step, i) => (
+                                {timeline.map((step, i) => (
                                     <React.Fragment key={i}>
                                         <div className="flex flex-col items-center gap-1 relative" style={{ minWidth: '44px' }}>
                                             <div className={`w-3 h-3 rounded-full border-2 ${
@@ -169,7 +167,7 @@ const JobSeekerApplications = () => {
                                             }`}></div>
                                             <span className={`text-[9px] text-center leading-tight ${step.done || step.active ? 'text-[#f9fafb]' : 'text-[#9ca3af]/50'}`}>{step.step}</span>
                                         </div>
-                                        {i < app.timeline.length - 1 && (
+                                        {i < timeline.length - 1 && (
                                             <div className={`flex-1 h-0.5 -mt-4 ${step.done ? 'bg-[#22c55e]' : 'bg-[#374151]'}`}></div>
                                         )}
                                     </React.Fragment>
@@ -178,7 +176,7 @@ const JobSeekerApplications = () => {
 
                             {/* Footer */}
                             <div className="flex items-center justify-between pt-2 border-t border-[#374151]/50">
-                                <span className="text-[10px] text-[#9ca3af]">Applied {app.appliedDate}</span>
+                                <span className="text-[10px] text-[#9ca3af]">Applied {new Date(app.created_at).toLocaleDateString()}</span>
                                 <button className="text-xs text-[#2563eb] hover:underline flex items-center gap-1">
                                     View Details <span className="material-symbols-outlined text-xs">arrow_forward</span>
                                 </button>
