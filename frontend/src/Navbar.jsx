@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
 
 const Navbar = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
+    const getDashboardPath = () => {
+        if (!user) return '/login';
+        return user.is_employer ? '/employer-dashboard' : '/jobseeker-home';
+    };
+
     return (
         <header className="w-full border-b border-solid border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
             <div className="px-4 md:px-10 py-4 max-w-7xl mx-auto flex items-center justify-between">
@@ -19,12 +33,28 @@ const Navbar = () => {
                         
                     </nav>
                     <div className="flex gap-3">
-                        <Link to="/login" className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
-                            Log In
-                        </Link>
-                        <Link to="/signup" className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
-                            Sign Up Free
-                        </Link>
+                        {user ? (
+                            <>
+                                <Link to={getDashboardPath()} className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
+                                    Dashboard
+                                </Link>
+                                <button 
+                                    onClick={handleLogout}
+                                    className="flex items-center justify-center rounded-full h-10 px-5 bg-red-600/10 border border-red-600/30 text-red-500 text-sm font-bold hover:bg-red-600/20 transition-colors"
+                                >
+                                    Log Out
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
+                                    Log In
+                                </Link>
+                                <Link to="/signup" className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
+                                    Sign Up Free
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
                 {/* Mobile Menu Icon */}
