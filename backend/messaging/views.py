@@ -16,8 +16,31 @@ class ThreadViewSet(viewsets.ModelViewSet):
             Q(job_seeker=user) | Q(employer=user)
         ).distinct().order_by('-updated_at')
 
-    def perform_create(self, serializer):
-        serializer.save()
+    def create(self, request, *args, **kwargs):
+        """
+        POST /messaging/threads/ — get or create a thread between two users.
+        Expects: { "job_seeker": <id>, "employer": <id> }
+        Returns the existing thread if one already exists (200),
+        or creates a new one (201).
+        """
+        job_seeker_id = request.data.get('job_seeker')
+        employer_id = request.data.get('employer')
+
+        if not job_seeker_id or not employer_id:
+            return Response(
+                {"detail": "Both job_seeker and employer are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        thread, created = Thread.objects.get_or_create(
+            job_seeker_id=job_seeker_id,
+            employer_id=employer_id,
+        )
+        serializer = self.get_serializer(thread)
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED if created else status.HTTP_200_OK,
+        )
 
     @action(detail=True, methods=['get'])
     def messages(self, request, pk=None):

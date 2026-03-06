@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JobSeekerBottomNav from './JobSeekerBottomNav';
 import { jobSeekerService } from './services/jobSeekerService';
+import BlockLoader from './components/ui/block-loader';
 
 const JobSeekerMatches = () => {
     const navigate = useNavigate();
@@ -50,14 +51,14 @@ const JobSeekerMatches = () => {
 
     if (loading) {
         return (
-            <div className="bg-[#111827] h-screen flex items-center justify-center">
-                <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            <div className="bg-black h-screen flex items-center justify-center">
+                <BlockLoader size={30} gap={4} />
             </div>
         );
     }
 
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-3 shrink-0">
                 <div className="flex items-center justify-between mb-4">
@@ -69,7 +70,7 @@ const JobSeekerMatches = () => {
                         <select
                             value={sortBy}
                             onChange={e => setSortBy(e.target.value)}
-                            className="appearance-none bg-[#1F2937] border border-[#374151] text-[#9ca3af] text-xs rounded-lg px-3 py-2 pr-8 outline-none focus:border-[#2563eb] cursor-pointer"
+                            className="appearance-none bg-white/5 border border-white/10 text-[#9ca3af] text-xs rounded-lg px-3 py-2 pr-8 outline-none focus:border-[#2563eb] cursor-pointer"
                         >
                             <option value="recent">Most Recent</option>
                         </select>
@@ -86,11 +87,11 @@ const JobSeekerMatches = () => {
                             className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors flex items-center gap-1.5 ${
                                 activeFilter === f.key
                                     ? 'bg-[#2563eb] text-white'
-                                    : 'bg-[#1F2937] text-[#9ca3af] border border-[#374151] hover:text-[#f9fafb]'
+                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
                             }`}
                         >
                             {f.label}
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeFilter === f.key ? 'bg-white/20' : 'bg-[#374151]'}`}>{f.count}</span>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeFilter === f.key ? 'bg-white/20' : 'bg-white/10'}`}>{f.count}</span>
                         </button>
                     ))}
                 </div>
@@ -109,7 +110,7 @@ const JobSeekerMatches = () => {
                     const job = app.job_post_details;
                     if (!job) return null;
                     return (
-                        <div key={app.id} className="bg-[#1F2937] rounded-2xl border border-[#374151] p-4 hover:border-[#2563eb]/30 transition-colors">
+                        <div key={app.id} className="bg-white/5 rounded-2xl border border-white/10 p-4 hover:border-[#2563eb]/30 transition-colors">
                             <div className="flex items-start gap-3">
                                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0" style={{ backgroundColor: job.logo_color || '#2563eb' }}>
                                     {job.logo_initials || 'C'}
@@ -130,11 +131,11 @@ const JobSeekerMatches = () => {
                                         <span className="text-[10px] text-[#9ca3af]">{job.salary}</span>
                                     </div>
 
-                                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#374151]/50">
+                                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
                                         <span className="text-[10px] text-[#9ca3af]">Updated {new Date(app.updated_at).toLocaleDateString()}</span>
                                         <div className="flex items-center gap-2">
                                             <button
-                                                onClick={() => navigate(`/job-seeker/applications`)}
+                                                onClick={() => navigate('/jobseeker-applications')}
                                                 className="text-xs text-[#9ca3af] hover:text-[#f9fafb] transition-colors flex items-center gap-1"
                                             >
                                                 <span className="material-symbols-outlined text-sm">visibility</span>Details

@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import JobSeekerBottomNav from './JobSeekerBottomNav';
 import { useAuth } from './contexts/AuthContext';
 import { jobSeekerService } from './services/jobSeekerService';
+import BlockLoader from './components/ui/block-loader';
+import { useNavigate } from 'react-router-dom';
 
 const JobSeekerProfile = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('overview');
 
     const profile = user?.job_seeker_profile || {};
@@ -72,7 +75,7 @@ const JobSeekerProfile = () => {
     const [insightsFetched, setInsightsFetched] = useState(false);
 
     useEffect(() => {
-        if (activeTab === 'ai insights' && !insightsFetched) {
+        if (!insightsFetched) {
             const fetchInsights = async () => {
                 setInsightsLoading(true);
                 try {
@@ -87,7 +90,7 @@ const JobSeekerProfile = () => {
             };
             fetchInsights();
         }
-    }, [activeTab, insightsFetched]);
+    }, [insightsFetched]);
 
     // Fetch AI optimizations when resume tab is opened
     useEffect(() => {
@@ -135,33 +138,33 @@ const JobSeekerProfile = () => {
     };
 
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Profile Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="relative">
-                        <div className="w-16 h-16 rounded-full bg-[#2563eb] flex items-center justify-center text-white font-bold text-xl border-2 border-[#111827] overflow-hidden">
+                        <div className="w-16 h-16 rounded-full bg-[#2563eb] flex items-center justify-center text-white font-bold text-xl border-2 border-black overflow-hidden">
                             {profile.profile_picture ? (
                                 <img src={profile.profile_picture} alt="Profile" className="w-full h-full object-cover" />
                             ) : initials}
                         </div>
                         <svg className="absolute -inset-1 w-[72px] h-[72px] -rotate-90" viewBox="0 0 72 72">
                             <circle cx="36" cy="36" r="33" fill="none" stroke="#374151" strokeWidth="3" />
-                            <circle cx="36" cy="36" r="33" fill="none" stroke="#22c55e" strokeWidth="3" strokeDasharray={`${(profileCompleteness / 100) * 207} ${207}`} strokeLinecap="round" />
+                            <circle cx="36" cy="36" r="33" fill="none" stroke={aiInsights.ats_score >= 80 ? '#22c55e' : aiInsights.ats_score >= 60 ? '#eab308' : '#ef4444'} strokeWidth="3" strokeDasharray={`${(aiInsights.ats_score / 100) * 207} ${207}`} strokeLinecap="round" />
                         </svg>
-                        <div className="absolute -bottom-1 -right-1 bg-[#22c55e] text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full border-2 border-[#111827]">{profileCompleteness}%</div>
+                        <div className={`absolute -bottom-1 -right-1 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full border-2 border-black ${aiInsights.ats_score >= 80 ? 'bg-[#22c55e]' : aiInsights.ats_score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}>{aiInsights.ats_score}%</div>
                     </div>
                     <div className="flex-1">
                         <h1 className="text-lg font-bold text-[#f9fafb]">{fullName}</h1>
                         <p className="text-sm text-[#9ca3af]">{profile.bio || 'Add a professional title'}</p>
                         <p className="text-xs text-[#9ca3af]">{profile.location || 'Location not set'}</p>
                     </div>
-                    <button className="w-9 h-9 rounded-lg bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-800 transition-colors">
+                    <button onClick={() => navigate('/job-seeker-settings')} className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
                         <span className="material-symbols-outlined text-[#9ca3af] text-lg">edit</span>
                     </button>
                 </div>
 
-                <div className="flex gap-1 border-b border-[#374151]">
+                <div className="flex gap-1 border-b border-white/10">
                     {['overview', 'resume', 'ai insights'].map(tab => (
                         <button
                             key={tab}
@@ -183,7 +186,7 @@ const JobSeekerProfile = () => {
                 {/* Overview Tab */}
                 {activeTab === 'overview' && (
                     <>
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">person</span>
                                 Personal Information
@@ -203,7 +206,7 @@ const JobSeekerProfile = () => {
                             </div>
                         </div>
 
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">code</span>
                                 Skills & Expertise
@@ -225,7 +228,7 @@ const JobSeekerProfile = () => {
                             )}
                         </div>
 
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">work</span>
                                 Experience
@@ -235,8 +238,8 @@ const JobSeekerProfile = () => {
                                     {experience.map((exp, i) => (
                                         <div key={i} className="flex gap-3 relative">
                                             <div className="flex flex-col items-center">
-                                                <div className={`w-3 h-3 rounded-full border-2 ${exp.is_current ? 'bg-[#2563eb] border-[#2563eb]' : 'bg-transparent border-[#374151]'}`}></div>
-                                                {i < experience.length - 1 && <div className="w-0.5 flex-1 bg-[#374151]"></div>}
+                                                <div className={`w-3 h-3 rounded-full border-2 ${exp.is_current ? 'bg-[#2563eb] border-[#2563eb]' : 'bg-transparent border-white/10'}`}></div>
+                                                {i < experience.length - 1 && <div className="w-0.5 flex-1 bg-white/10"></div>}
                                             </div>
                                             <div className="pb-5">
                                                 <p className="text-sm font-semibold text-[#f9fafb]">{exp.role}</p>
@@ -260,14 +263,14 @@ const JobSeekerProfile = () => {
                 {activeTab === 'resume' && (
                     <>
                         {/* Current Resume */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">description</span>
                                 Current Resume
                             </h4>
 
                             {resumeUrl ? (
-                                <div className="flex items-center gap-4 p-4 bg-[#111827] rounded-xl border border-[#374151]">
+                                <div className="flex items-center gap-4 p-4 bg-black rounded-xl border border-white/10">
                                     <div className="w-12 h-16 rounded-lg bg-[#2563eb]/10 border border-[#2563eb]/30 flex items-center justify-center">
                                         <span className="material-symbols-outlined text-[#2563eb] text-2xl">description</span>
                                     </div>
@@ -306,12 +309,12 @@ const JobSeekerProfile = () => {
                             className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all cursor-pointer ${
                                 resumeUploading
                                     ? 'border-[#2563eb]/30 bg-[#2563eb]/5'
-                                    : 'border-[#374151] hover:border-[#2563eb]/40'
+                                    : 'border-white/10 hover:border-[#2563eb]/40'
                             }`}
                         >
                             {resumeUploading ? (
                                 <div className="flex flex-col items-center">
-                                    <span className="material-symbols-outlined animate-spin text-[#2563eb] text-3xl mb-2">progress_activity</span>
+                                    <BlockLoader size={24} gap={3} className="mb-3" />
                                     <p className="text-sm text-[#9ca3af]">Uploading...</p>
                                 </div>
                             ) : (
@@ -324,7 +327,7 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* AI-Optimized Versions */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">auto_awesome</span>
                                 AI Resume Optimization
@@ -332,13 +335,13 @@ const JobSeekerProfile = () => {
 
                             {optimizationsLoading ? (
                                 <div className="flex flex-col items-center py-8">
-                                    <span className="material-symbols-outlined animate-spin text-3xl text-[#2563eb] mb-3">progress_activity</span>
+                                    <BlockLoader size={24} gap={3} className="mb-4" />
                                     <p className="text-sm text-[#9ca3af]">Analyzing your profile against applied jobs...</p>
                                 </div>
                             ) : optimizations.length > 0 ? (
                                 <div className="space-y-3">
                                     {optimizations.map((opt, i) => (
-                                        <div key={i} className="p-4 bg-[#111827] rounded-xl border border-[#374151]">
+                                        <div key={i} className="p-4 bg-black rounded-xl border border-white/10">
                                             <div className="flex items-center justify-between mb-3">
                                                 <div className="flex items-center gap-2">
                                                     <div className="w-9 h-9 rounded-lg bg-[#2563eb]/10 flex items-center justify-center shrink-0">
@@ -387,13 +390,13 @@ const JobSeekerProfile = () => {
                     <>
                         {insightsLoading ? (
                             <div className="flex flex-col items-center justify-center py-12">
-                                <span className="material-symbols-outlined animate-spin text-4xl text-[#2563eb] mb-4">progress_activity</span>
+                                <BlockLoader size={30} gap={4} className="mb-4" />
                                 <p className="text-sm text-[#9ca3af]">Generating your AI insights...</p>
                             </div>
                         ) : (
                         <>
                         {/* ATS Score */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">speed</span>
                                 ATS Compatibility Score
@@ -420,7 +423,7 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Skill Gap Analysis */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">troubleshoot</span>
                                 Skill Gap Analysis
@@ -437,7 +440,7 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Trending Skills */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">trending_up</span>
                                 Trending in Your Industry
@@ -453,14 +456,14 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Suggested Courses */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">school</span>
                                 Recommended Courses
                             </h4>
                             <div className="space-y-3">
                                 {aiInsights.courses.map((c, i) => (
-                                    <div key={i} className="flex items-center gap-3 p-3 bg-[#111827] rounded-xl border border-[#374151]">
+                                    <div key={i} className="flex items-center gap-3 p-3 bg-black rounded-xl border border-white/10">
                                         <div className="w-10 h-10 rounded-lg bg-purple-600/10 flex items-center justify-center shrink-0">
                                             <span className="material-symbols-outlined text-purple-400 text-lg">play_circle</span>
                                         </div>

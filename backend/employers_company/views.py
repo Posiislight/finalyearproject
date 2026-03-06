@@ -1,15 +1,20 @@
 from datetime import date, datetime
 
-from django.db.models import Sum
+from django.db.models import Sum, Count, Q
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import CompanyAnalytics, CompanyGalleryImage, CompanyProfile
+from job_seekers.models import JobApplication
+from messaging.models import Message
+
+from .models import CompanyAnalytics, CompanyGalleryImage, CompanyProfile, CompanyVerificationDocument, TeamMember
 from .serializers import (
     CompanyAnalyticsSerializer,
     CompanyGalleryImageSerializer,
     CompanyProfileSerializer,
+    CompanyVerificationDocumentSerializer,
+    TeamMemberSerializer,
 )
 
 
@@ -161,4 +166,83 @@ class CompanyAnalyticsEventView(APIView):
             CompanyAnalyticsSerializer(analytics).data,
             status=status.HTTP_200_OK,
         )
+
+
+class EmployerSidebarCountsView(APIView):
+    """
+    Returns aggregated counts for the Employer Sidebar badges:
+    - unread_candidates (pending applications for their jobs)
+    - unread_messages (unread incoming messages)
+    """
+    permission_classes = [IsEmployerAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        # 1. Unread Candidates (pending applications)
+        unread_candidates = JobApplication.objects.filter(
+            job_post__employer=user,
+            status='pending'
+        ).count()
+
+        # 2. Unread Messages for this employer
+        unread_messages = Message.objects.filter(
+            thread__employer=user,
+            is_read=False
+        ).exclude(sender=user).count()
+
+        return Response({
+            "unread_candidates": unread_candidates,
+            "unread_messages": unread_messages
+        })
+
+
+class CompanyVerificationDocumentListCreateView(generics.ListCreateAPIView):
+    serializer_class = CompanyVerificationDocumentSerializer
+    permission_classes = [IsEmployerAuthenticated]
+
+    def get_queryset(self):
+        return CompanyVerificationDocument.objects.filter(
+            company__owner=self.request.user
+        ).select_related("company")
+
+    def perform_create(self, serializer):
+        company = CompanyProfile.objects.get(owner=self.request.user)
+        # Check if the client uploaded a file
+        document = self.request.data.get('document')
+        if document:
+            serializer.save(company=company, filename=document.name)
+        else:
+            serializer.save(company=company, filename="Unknown Document")
+
+class CompanyVerificationDocumentDetailView(generics.RetrieveDestroyAPIView):
+    serializer_class = CompanyVerificationDocumentSerializer
+    permission_classes = [IsEmployerAuthenticated]
+
+    def get_queryset(self):
+        return CompanyVerificationDocument.objects.filter(
+            company__owner=self.request.user
+        ).select_related("company")
+
+class TeamMemberListCreateView(generics.ListCreateAPIView):
+    serializer_class = TeamMemberSerializer
+    permission_classes = [IsEmployerAuthenticated]
+
+    def get_queryset(self):
+        return TeamMember.objects.filter(
+            company__owner=self.request.user
+        ).select_related("company")
+
+    def perform_create(self, serializer):
+        company = CompanyProfile.objects.get(owner=self.request.user)
+        serializer.save(company=company)
+
+class TeamMemberDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TeamMemberSerializer
+    permission_classes = [IsEmployerAuthenticated]
+
+    def get_queryset(self):
+        return TeamMember.objects.filter(
+            company__owner=self.request.user
+        ).select_related("company")
 

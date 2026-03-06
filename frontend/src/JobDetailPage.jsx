@@ -127,7 +127,17 @@ const JobDetailPage = () => {
                     <button onClick={() => setSaved(!saved)} className="w-10 h-10 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-800 transition-colors">
                         <span className={`material-symbols-outlined text-xl ${saved ? 'text-[#2563eb]' : 'text-[#9ca3af]'}`} style={saved ? { fontVariationSettings: "'FILL' 1" } : {}}>bookmark</span>
                     </button>
-                    <button className="w-10 h-10 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-800 transition-colors">
+                    <button 
+                        onClick={() => {
+                            if (navigator.share) {
+                                navigator.share({ title: job.title, text: `Check out this job at ${job.company}`, url: window.location.href });
+                            } else {
+                                navigator.clipboard.writeText(window.location.href);
+                                alert("Link copied to clipboard!");
+                            }
+                        }}
+                        className="w-10 h-10 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-800 transition-colors"
+                    >
                         <span className="material-symbols-outlined text-[#9ca3af] text-xl">share</span>
                     </button>
                 </div>
@@ -317,7 +327,7 @@ const JobDetailPage = () => {
                             <p className="text-xs text-[#9ca3af] leading-relaxed line-clamp-3">
                                 Dear Hiring Manager, I am excited to apply for the {job.title} position at {job.company}. With my extensive experience and passion for building exceptional products, I believe I would be a valuable addition to your team...
                             </p>
-                            <button className="text-xs text-[#2563eb] mt-2 hover:underline">Preview full letter →</button>
+                            <button onClick={() => alert("Full cover letter preview is an upcoming Premium feature.")} className="text-xs text-[#2563eb] mt-2 hover:underline">Preview full letter →</button>
                         </div>
                         <div className="bg-[#111827] border border-[#374151] rounded-xl p-4 flex items-center gap-3">
                             <div className="w-10 h-12 rounded-lg bg-[#2563eb]/10 border border-[#2563eb]/30 flex items-center justify-center shrink-0">

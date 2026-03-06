@@ -23,7 +23,7 @@ const JobSeekerBottomNav = () => {
     };
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#1F2937] border-t border-[#374151] px-2 pb-[env(safe-area-inset-bottom)]">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-white/10 px-2 pb-[env(safe-area-inset-bottom)]">
             <div className="flex items-center justify-around max-w-lg mx-auto">
                 {tabs.map(tab => (
                     <button

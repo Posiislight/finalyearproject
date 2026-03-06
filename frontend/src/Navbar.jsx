@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
+import { NavBar as TubelightNavBar } from './components/ui/tubelight-navbar';
+import { Home, Lightbulb, User, Briefcase, LogIn, UserPlus, LayoutDashboard, LogOut } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -16,53 +18,38 @@ const Navbar = () => {
         return user.is_employer ? '/employer-dashboard' : '/jobseeker-home';
     };
 
+    // Build nav items dynamically based on auth state
+    const navItems = [
+        { name: 'Home', url: '/', icon: Home },
+        { name: 'Features', url: '/features', icon: Lightbulb },
+        { name: 'Candidates', url: '/candidates', icon: User },
+        { name: 'Employers', url: '/employers', icon: Briefcase },
+    ];
+
+    // Add auth items
+    if (user) {
+        navItems.push({ name: 'Dashboard', url: getDashboardPath(), icon: LayoutDashboard });
+        navItems.push({ name: 'Log Out', url: '#logout', icon: LogOut, onClick: handleLogout });
+    } else {
+        navItems.push({ name: 'Log In', url: '/login', icon: LogIn });
+        navItems.push({ name: 'Sign Up Free', url: '/signup', icon: UserPlus });
+    }
+
     return (
-        <header className="w-full border-b border-solid border-border-dark bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
-            <div className="px-4 md:px-10 py-4 max-w-7xl mx-auto flex items-center justify-between">
-                <Link to="/" className="flex items-center gap-3 text-white">
-                    <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
-                        <span className="material-symbols-outlined">smart_toy</span>
+        <>
+            {/* RecruitAI Logo — positioned top-left, separate from the tube */}
+            <div className="fixed top-5 left-6 z-[101] flex items-center gap-3">
+                <Link to="/" className="flex items-center gap-3 text-white group">
+                    <div className="size-9 bg-primary rounded-lg flex items-center justify-center text-white shadow-[0_0_15px_rgba(36,99,235,0.4)] group-hover:shadow-[0_0_25px_rgba(36,99,235,0.6)] transition-shadow">
+                        <span className="material-symbols-outlined text-[20px]">smart_toy</span>
                     </div>
-                    <h2 className="text-white text-xl font-bold leading-tight tracking-tight">RecruitAI</h2>
+                    <h2 className="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block">RecruitAI</h2>
                 </Link>
-                <div className="hidden md:flex flex-1 justify-end items-center gap-8">
-                    <nav className="flex items-center gap-6">
-                        <Link to="/features" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Features</Link>
-                        <Link to="/candidates" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Candidates</Link>
-                        <Link to="/employers" className="text-white/80 hover:text-white text-sm font-medium transition-colors">For Employers</Link>
-                        
-                    </nav>
-                    <div className="flex gap-3">
-                        {user ? (
-                            <>
-                                <Link to={getDashboardPath()} className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
-                                    Dashboard
-                                </Link>
-                                <button 
-                                    onClick={handleLogout}
-                                    className="flex items-center justify-center rounded-full h-10 px-5 bg-red-600/10 border border-red-600/30 text-red-500 text-sm font-bold hover:bg-red-600/20 transition-colors"
-                                >
-                                    Log Out
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <Link to="/login" className="flex items-center justify-center rounded-full h-10 px-5 bg-transparent border border-border-dark text-white text-sm font-bold hover:bg-surface-dark transition-colors">
-                                    Log In
-                                </Link>
-                                <Link to="/signup" className="flex items-center justify-center rounded-full h-10 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold transition-colors shadow-[0_0_15px_rgba(36,99,235,0.4)]">
-                                    Sign Up Free
-                                </Link>
-                            </>
-                        )}
-                    </div>
-                </div>
-                {/* Mobile Menu Icon */}
-                <div className="md:hidden text-white">
-                    <span className="material-symbols-outlined">menu</span>
-                </div>
             </div>
-        </header>
+
+            {/* The floating Tubelight Navbar pill */}
+            <TubelightNavBar items={navItems} />
+        </>
     );
 };
 

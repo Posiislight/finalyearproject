@@ -3,9 +3,6 @@ import axios from 'axios';
 // Create an Axios instance with default configuration
 const apiClient = axios.create({
   baseURL: 'http://localhost:8000/api/v1/', // Pointing to the Django backend
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 // Request interceptor to attach the JWT access token

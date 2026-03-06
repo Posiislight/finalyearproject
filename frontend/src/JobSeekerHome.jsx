@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JobSeekerBottomNav from './JobSeekerBottomNav';
 import { jobSeekerService } from './services/jobSeekerService';
+import BlockLoader from './components/ui/block-loader';
 
 const SLIDE_DURATION = 400; // ms
 
@@ -195,20 +196,20 @@ const JobSeekerHome = () => {
 
     if (loading) {
         return (
-            <div className="bg-[#111827] h-screen flex flex-col items-center justify-center gap-6 px-8">
+            <div className="bg-black h-screen flex flex-col items-center justify-center gap-6 px-8">
                 {/* Pulsing logo icon */}
                 <div className="relative">
-                    <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#2563eb] to-purple-600 flex items-center justify-center shadow-2xl shadow-[#2563eb]/30 animate-pulse">
+                    <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center shadow-2xl shadow-[#2563eb]/30 animate-pulse">
                         <span className="material-symbols-outlined text-white text-4xl">work</span>
                     </div>
                     {/* Orbiting dot */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#22c55e] border-2 border-[#111827] animate-bounce"></div>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#22c55e] border-2 border-black animate-bounce"></div>
                 </div>
 
                 {/* Animated text */}
                 <div className="text-center space-y-2">
                     <h2 className="text-xl font-bold text-[#f9fafb]" style={{
-                        background: 'linear-gradient(90deg, #2563eb, #a855f7, #2563eb)',
+                        background: 'linear-gradient(90deg, #60a5fa, #2563eb, #60a5fa)',
                         backgroundSize: '200% auto',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -221,7 +222,7 @@ const JobSeekerHome = () => {
 
                 {/* Animated progress bar */}
                 <div className="w-48 h-1.5 bg-[#1F2937] rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#2563eb] to-purple-500 rounded-full" style={{
+                    <div className="h-full bg-gradient-to-r from-[#60a5fa] to-[#2563eb] rounded-full" style={{
                         width: '60%',
                         animation: 'loading-bar 1.5s ease-in-out infinite',
                     }}></div>
@@ -262,7 +263,7 @@ const JobSeekerHome = () => {
     const isSaved = job ? savedJobs.has(job.id) : false;
 
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
 
             {/* Top Bar */}
             <header className="flex items-center justify-between px-5 py-3 shrink-0 z-10">
@@ -277,16 +278,16 @@ const JobSeekerHome = () => {
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => setShowFilterModal(true)}
-                        className="relative w-10 h-10 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-700 transition-colors"
+                        className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                     >
                         <span className="material-symbols-outlined text-[#9ca3af] text-xl">tune</span>
                     </button>
                     <button
                         onClick={() => setShowNotifModal(true)}
-                        className="relative w-10 h-10 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center hover:bg-gray-700 transition-colors"
+                        className="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                     >
                         <span className="material-symbols-outlined text-[#9ca3af] text-xl">notifications</span>
-                        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-[#111827]"></span>
+                        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-black"></span>
                     </button>
                 </div>
             </header>
@@ -301,11 +302,11 @@ const JobSeekerHome = () => {
                         {/* Scrollable Card */}
                         <div
                             ref={cardRef}
-                            className="flex-1 overflow-y-auto rounded-3xl bg-[#1F2937] border border-[#374151] shadow-2xl min-h-0"
+                            className="flex-1 overflow-y-auto rounded-3xl bg-black border border-white/10 shadow-2xl min-h-0"
                             style={{ scrollbarWidth: 'thin', scrollbarColor: '#374151 transparent' }}
                         >
                             {/* Card Header */}
-                            <div className="bg-gradient-to-br from-[#2563eb]/20 via-purple-600/10 to-[#1F2937] px-6 pt-6 pb-5 sticky top-0 z-10 backdrop-blur-sm bg-[#1F2937]/90 border-b border-[#374151]/50">
+                            <div className="bg-gradient-to-br from-[#2563eb]/20 via-purple-600/10 to-black px-6 pt-6 pb-5 sticky top-0 z-10 backdrop-blur-sm bg-black/90 border-b border-white/5">
                                 <div className="flex items-start gap-4">
                                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg shadow-lg shrink-0"
                                         style={{ backgroundColor: job.logo_color || '#2563eb' }}>
@@ -319,7 +320,7 @@ const JobSeekerHome = () => {
                                     <div className="shrink-0 flex flex-col items-center">
                                         <div className="w-12 h-12 rounded-full border-2 border-[#22c55e] flex items-center justify-center bg-[#22c55e]/10">
                                             {matchLoading && !currentMatch ? (
-                                                <span className="material-symbols-outlined animate-spin text-[#22c55e] text-sm">progress_activity</span>
+                                                <BlockLoader size={12} gap={2} blockColor="bg-[#22c55e]" borderColor="border-transparent" />
                                             ) : (
                                                 <span className="text-[#22c55e] font-extrabold text-sm">{currentMatch?.match_score ?? '—'}%</span>
                                             )}
@@ -329,13 +330,13 @@ const JobSeekerHome = () => {
                                 </div>
                                 {/* Tags */}
                                 <div className="flex flex-wrap gap-2 mt-4">
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#111827]/60 text-[#9ca3af] text-xs font-medium">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#9ca3af] text-xs font-medium border border-white/5">
                                         <span className="material-symbols-outlined text-xs">location_on</span>{job.location}
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#111827]/60 text-[#22c55e] text-xs font-medium">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#22c55e] text-xs font-medium border border-white/5">
                                         <span className="material-symbols-outlined text-xs">payments</span>{job.salary}
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#111827]/60 text-[#9ca3af] text-xs font-medium">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#9ca3af] text-xs font-medium border border-white/5">
                                         <span className="material-symbols-outlined text-xs">schedule</span>
                                         {new Date(job.created_at).toLocaleDateString()}
                                     </span>
@@ -383,7 +384,7 @@ const JobSeekerHome = () => {
                                 <button
                                     onClick={() => goNext('skip')}
                                     disabled={animating}
-                                    className="flex-1 py-3.5 rounded-2xl border border-[#374151] bg-[#1F2937] hover:bg-[#374151] text-[#9ca3af] hover:text-white text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-2"
+                                    className="flex-1 py-3.5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-[#9ca3af] hover:text-white text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-2"
                                 >
                                     <span className="material-symbols-outlined text-base">arrow_downward</span>
                                     Skip
@@ -393,7 +394,7 @@ const JobSeekerHome = () => {
                                     className={`px-5 py-3.5 rounded-2xl border text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-1.5 ${
                                         isSaved
                                             ? 'bg-yellow-500/10 border-yellow-500/50 text-yellow-400'
-                                            : 'bg-[#1F2937] border-[#374151] text-[#9ca3af] hover:bg-[#374151]'
+                                            : 'bg-white/5 border-white/10 text-[#9ca3af] hover:bg-white/10'
                                     }`}
                                 >
                                     <span className="material-symbols-outlined text-base">{isSaved ? 'bookmark_added' : 'bookmark'}</span>
@@ -427,24 +428,24 @@ const JobSeekerHome = () => {
                     onClick={() => setShowApplyModal(false)}
                 >
                     <div
-                        className="w-full max-w-lg bg-[#1F2937] border-t border-[#374151] rounded-t-3xl flex flex-col"
+                        className="w-full max-w-lg bg-black border-t border-white/10 rounded-t-3xl flex flex-col"
                         style={{ maxHeight: '85vh' }}
                         onClick={e => e.stopPropagation()}
                     >
-                        <div className="w-10 h-1 bg-[#374151] rounded-full mx-auto mt-3 mb-4 shrink-0" />
+                        <div className="w-10 h-1 bg-white/10 rounded-full mx-auto mt-3 mb-4 shrink-0" />
                         <div className="px-6 pb-4 text-center shrink-0">
                             <h3 className="text-lg font-bold text-[#f9fafb]">Apply to {job.title}?</h3>
                             <p className="text-sm text-[#9ca3af] mt-1">at {job.company_name}</p>
                         </div>
                         <div className="flex-1 overflow-y-auto px-6 space-y-4 pb-2">
-                            <div className="bg-[#111827] border border-[#374151] rounded-xl p-4">
+                            <div className="bg-black border border-white/10 rounded-xl p-4">
                                 <div className="flex items-center gap-2 mb-3">
                                     <span className="material-symbols-outlined text-[#2563eb] text-sm">auto_awesome</span>
                                     <span className="text-xs font-bold text-[#2563eb]">AI-Generated Cover Letter</span>
                                 </div>
                                 {coverLetterLoading ? (
                                     <div className="flex items-center gap-2 py-2">
-                                        <span className="material-symbols-outlined animate-spin text-[#2563eb] text-sm">progress_activity</span>
+                                        <BlockLoader size={12} gap={2} />
                                         <span className="text-xs text-[#9ca3af]">Generating personalised cover letter...</span>
                                     </div>
                                 ) : (
@@ -457,10 +458,10 @@ const JobSeekerHome = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="px-6 py-4 flex gap-3 shrink-0 border-t border-[#374151]">
+                        <div className="px-6 py-4 flex gap-3 shrink-0 border-t border-white/10">
                             <button
                                 onClick={() => setShowApplyModal(false)}
-                                className="flex-1 py-3 rounded-xl border border-[#374151] text-[#9ca3af] hover:text-[#f9fafb] hover:bg-gray-800 text-sm font-semibold transition-colors"
+                                className="flex-1 py-3 rounded-xl border border-white/10 text-[#9ca3af] hover:text-[#f9fafb] hover:bg-white/10 text-sm font-semibold transition-colors"
                             >
                                 Cancel
                             </button>
@@ -483,10 +484,10 @@ const JobSeekerHome = () => {
                     onClick={() => setShowFilterModal(false)}
                 >
                     <div
-                        className="w-full max-w-lg bg-[#1F2937] border-t border-[#374151] rounded-t-3xl p-6 space-y-5"
+                        className="w-full max-w-lg bg-black border-t border-white/10 rounded-t-3xl p-6 space-y-5"
                         onClick={e => e.stopPropagation()}
                     >
-                        <div className="w-10 h-1 bg-[#374151] rounded-full mx-auto" />
+                        <div className="w-10 h-1 bg-white/10 rounded-full mx-auto" />
                         <h3 className="text-lg font-bold text-[#f9fafb] text-center">Filter Jobs</h3>
                         {selectedFilters.size > 0 && (
                             <p className="text-center text-xs text-[#2563eb]">{selectedFilters.size} filter{selectedFilters.size > 1 ? 's' : ''} active</p>
@@ -519,7 +520,7 @@ const JobSeekerHome = () => {
                         <div className="flex gap-3">
                             <button
                                 onClick={clearFilters}
-                                className="flex-1 py-3 rounded-xl border border-[#374151] text-[#9ca3af] hover:text-[#f9fafb] hover:bg-[#374151] font-semibold text-sm transition-colors"
+                                className="flex-1 py-3 rounded-xl border border-white/10 text-[#9ca3af] hover:text-[#f9fafb] hover:bg-white/10 font-semibold text-sm transition-colors"
                             >
                                 Clear All
                             </button>
@@ -541,11 +542,11 @@ const JobSeekerHome = () => {
                     onClick={() => setShowNotifModal(false)}
                 >
                     <div
-                        className="w-full max-w-lg bg-[#1F2937] border-t border-[#374151] rounded-t-3xl p-6 space-y-4"
+                        className="w-full max-w-lg bg-black border-t border-white/10 rounded-t-3xl p-6 space-y-4"
                         onClick={e => e.stopPropagation()}
                         style={{ maxHeight: '70vh', overflowY: 'auto' }}
                     >
-                        <div className="w-10 h-1 bg-[#374151] rounded-full mx-auto" />
+                        <div className="w-10 h-1 bg-white/10 rounded-full mx-auto" />
                         <h3 className="text-lg font-bold text-[#f9fafb] text-center">Notifications</h3>
                         {[
                             { icon: 'work', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', title: 'New Job Match', desc: 'A new Senior Developer role matches 92% of your profile.', time: '2m ago' },

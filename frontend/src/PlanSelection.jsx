@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const PlanSelection = () => {
     const navigate = useNavigate();
     const [selectedPlan, setSelectedPlan] = useState('pro');
+    const [isAnnual, setIsAnnual] = useState(false);
 
     const plans = [
         {
@@ -139,7 +140,7 @@ const PlanSelection = () => {
                         <p className="text-sm text-[#9ca3af]">Select the plan that best fits your hiring needs. Upgrade or downgrade anytime.</p>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="text-sm font-medium text-[#9ca3af] hover:text-[#f9fafb]">Save as Draft</button>
+                        <button onClick={() => alert("Draft saved locally. (Implementation pending)")} className="text-sm font-medium text-[#9ca3af] hover:text-[#f9fafb]">Save as Draft</button>
                         <div className="h-8 w-8 rounded-full bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 flex items-center justify-center text-sm font-bold">TC</div>
                     </div>
                 </header>
@@ -150,7 +151,7 @@ const PlanSelection = () => {
                         <div className="flex items-center justify-center gap-3 mb-10">
                             <span className="text-sm text-[#9ca3af]">Monthly</span>
                             <label className="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" className="sr-only peer" />
+                                <input type="checkbox" checked={isAnnual} onChange={() => setIsAnnual(!isAnnual)} className="sr-only peer" />
                                 <div className="w-11 h-6 bg-gray-700 peer-focus:ring-2 peer-focus:ring-[#2563eb]/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563eb]"></div>
                             </label>
                             <span className="text-sm text-[#9ca3af]">Annual</span>
@@ -196,6 +197,7 @@ const PlanSelection = () => {
                                     </ul>
 
                                     <button
+                                        onClick={() => alert(`Selected ${plan.name} plan. Billing integration pending.`)}
                                         className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-all ${
                                             selectedPlan === plan.id
                                                 ? 'bg-[#2563eb] hover:bg-[#1d4ed8] text-white shadow-lg shadow-[#2563eb]/25'
@@ -210,7 +212,7 @@ const PlanSelection = () => {
 
                         {/* Compare Features Link */}
                         <div className="text-center mt-6">
-                            <button className="text-sm text-[#2563eb] hover:underline font-medium inline-flex items-center gap-1">
+                            <button onClick={() => alert("Detailed feature comparison coming soon")} className="text-sm text-[#2563eb] hover:underline font-medium inline-flex items-center gap-1">
                                 <span className="material-symbols-outlined text-sm">compare_arrows</span>
                                 Compare all features
                             </button>

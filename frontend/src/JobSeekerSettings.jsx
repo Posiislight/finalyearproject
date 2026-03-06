@@ -36,6 +36,10 @@ const JobSeekerSettings = () => {
         return localStorage.getItem('profile_visibility') || 'visible';
     });
 
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('job_seeker_theme') || 'dark';
+    });
+
     // Load user data into form
     useEffect(() => {
         if (user) {
@@ -89,6 +93,11 @@ const JobSeekerSettings = () => {
         localStorage.setItem('profile_visibility', value);
     };
 
+    const handleThemeChange = (value) => {
+        setTheme(value);
+        localStorage.setItem('job_seeker_theme', value);
+    };
+
     const handleLogout = () => {
         logout();
         navigate('/login');
@@ -104,7 +113,7 @@ const JobSeekerSettings = () => {
     ];
 
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <h1 className="text-xl font-bold text-[#f9fafb] mb-3">Settings</h1>
@@ -118,7 +127,7 @@ const JobSeekerSettings = () => {
                             className={`shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
                                 activeSection === s.id
                                     ? 'bg-[#2563eb]/10 text-[#2563eb] border border-[#2563eb]/30'
-                                    : 'bg-[#1F2937] text-[#9ca3af] border border-[#374151] hover:text-[#f9fafb]'
+                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
                             }`}
                         >
                             <span className="material-symbols-outlined text-sm">{s.icon}</span>
@@ -134,12 +143,12 @@ const JobSeekerSettings = () => {
                 {/* Account */}
                 {activeSection === 'account' && (
                     <>
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
+                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
                             <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">person</span>
                                 Personal Information
                             </h4>
-                            <div className="flex items-center gap-4 mb-5 pb-5 border-b border-[#374151]">
+                            <div className="flex items-center gap-4 mb-5 pb-5 border-b border-white/10">
                                 <div className="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center text-white font-bold text-lg">{initials}</div>
                                 <div>
                                     <p className="font-semibold text-[#f9fafb]">{formData.first_name} {formData.last_name}</p>
@@ -160,7 +169,7 @@ const JobSeekerSettings = () => {
                                             type={f.type}
                                             value={formData[f.field]}
                                             onChange={e => handleChange(f.field, e.target.value)}
-                                            className="w-full bg-[#111827] border border-[#374151] rounded-xl px-4 py-2.5 text-[#f9fafb] text-sm outline-none focus:border-[#2563eb] transition-colors"
+                                            className="w-full bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[#f9fafb] text-sm outline-none focus:border-[#2563eb] transition-colors"
                                         />
                                     </div>
                                 ))}
@@ -215,7 +224,7 @@ const JobSeekerSettings = () => {
                                 { key: 'jobAlerts', label: 'Job Alerts', desc: 'Instant alerts for high-match jobs' },
                                 { key: 'marketingEmails', label: 'Product Updates', desc: 'Tips, news, and feature announcements' },
                             ].map(n => (
-                                <div key={n.key} className="flex items-center justify-between py-3.5 border-b border-[#374151] last:border-0">
+                                <div key={n.key} className="flex items-center justify-between py-3.5 border-b border-white/10 last:border-0">
                                     <div>
                                         <p className="font-medium text-[#f9fafb] text-sm">{n.label}</p>
                                         <p className="text-xs text-[#9ca3af] mt-0.5">{n.desc}</p>
@@ -252,11 +261,11 @@ const JobSeekerSettings = () => {
                                     className={`w-full flex items-start gap-3 p-3 rounded-xl border text-left transition-colors ${
                                         profileVisibility === opt.value
                                             ? 'bg-[#2563eb]/10 border-[#2563eb]/40'
-                                            : 'bg-[#111827] border-[#374151] hover:border-[#374151]/80'
+                                            : 'bg-black border-white/10 hover:border-white/20'
                                     }`}
                                 >
                                     <div className={`w-4 h-4 rounded-full border-2 mt-0.5 shrink-0 flex items-center justify-center ${
-                                        profileVisibility === opt.value ? 'border-[#2563eb]' : 'border-[#374151]'
+                                        profileVisibility === opt.value ? 'border-[#2563eb]' : 'border-white/10'
                                     }`}>
                                         {profileVisibility === opt.value && <div className="w-2 h-2 rounded-full bg-[#2563eb]"></div>}
                                     </div>
@@ -280,16 +289,17 @@ const JobSeekerSettings = () => {
                         <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-3">
                                 {[
-                                    { value: 'dark', label: 'Dark', icon: 'dark_mode', active: true },
-                                    { value: 'light', label: 'Light', icon: 'light_mode', active: false },
-                                    { value: 'system', label: 'System', icon: 'brightness_auto', active: false },
+                                    { value: 'dark', label: 'Dark', icon: 'dark_mode' },
+                                    { value: 'light', label: 'Light', icon: 'light_mode' },
+                                    { value: 'system', label: 'System', icon: 'brightness_auto' },
                                 ].map(t => (
                                     <button
                                         key={t.value}
+                                        onClick={() => handleThemeChange(t.value)}
                                         className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-colors ${
-                                            t.active
+                                            theme === t.value
                                                 ? 'bg-[#2563eb]/10 border-[#2563eb]/40 text-[#2563eb]'
-                                                : 'bg-[#111827] border-[#374151] text-[#9ca3af] hover:border-[#374151]/80'
+                                                : 'bg-black border-white/10 text-[#9ca3af] hover:border-white/20'
                                         }`}
                                     >
                                         <span className="material-symbols-outlined text-2xl">{t.icon}</span>

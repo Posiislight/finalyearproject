@@ -25,5 +25,5 @@ class JobPostSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'employer', 'created_at', 'updated_at']
 
     def get_applications_count(self, obj):
-        return obj.jobapplication_set.count()
+        return obj.applications.count()
 

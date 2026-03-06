@@ -31,5 +31,18 @@ export const authService = {
   getCurrentUser: async () => {
     const response = await apiClient.get('users/me/');
     return response.data;
+  },
+
+  updateProfile: async (data) => {
+    const response = await apiClient.patch('users/me/', data);
+    return response.data;
+  },
+
+  changePassword: async (oldPassword, newPassword) => {
+    const response = await apiClient.put('users/change-password/', {
+      old_password: oldPassword,
+      new_password: newPassword
+    });
+    return response.data;
   }
 };

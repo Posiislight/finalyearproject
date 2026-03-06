@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import JobSeekerBottomNav from './JobSeekerBottomNav';
 import { jobSeekerService } from './services/jobSeekerService';
 
 const JobSeekerApplications = () => {
+    const navigate = useNavigate();
     const [activeFilter, setActiveFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [applications, setApplications] = useState([]);
@@ -82,7 +84,7 @@ const JobSeekerApplications = () => {
     };
 
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <h1 className="text-xl font-bold text-[#f9fafb] mb-3">Applications</h1>
@@ -90,7 +92,7 @@ const JobSeekerApplications = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-3 mb-4">
                     {stats.map((s, i) => (
-                        <div key={i} className="bg-[#1F2937] rounded-xl border border-[#374151] p-3 text-center">
+                        <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
                             <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-1.5" style={{ backgroundColor: s.color + '15' }}>
                                 <span className="material-symbols-outlined text-lg" style={{ color: s.color }}>{s.icon}</span>
                             </div>
@@ -102,7 +104,7 @@ const JobSeekerApplications = () => {
                 </div>
 
                 {/* Search */}
-                <div className="flex items-center gap-2 bg-[#1F2937] border border-[#374151] rounded-xl px-3 py-2.5 mb-3 focus-within:border-[#2563eb] transition-colors">
+                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 mb-3 focus-within:border-[#2563eb] transition-colors">
                     <span className="material-symbols-outlined text-[#9ca3af] text-lg">search</span>
                     <input
                         type="text"
@@ -122,7 +124,7 @@ const JobSeekerApplications = () => {
                             className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                                 activeFilter === f.key
                                     ? 'bg-[#2563eb] text-white'
-                                    : 'bg-[#1F2937] text-[#9ca3af] border border-[#374151] hover:text-[#f9fafb]'
+                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
                             }`}
                         >
                             {f.label}
@@ -139,7 +141,7 @@ const JobSeekerApplications = () => {
                     const timeline = generateTimeline(app.status);
 
                     return (
-                        <div key={app.id} className="bg-[#1F2937] rounded-2xl border border-[#374151] p-4 hover:border-[#2563eb]/30 transition-colors">
+                        <div key={app.id} className="bg-white/5 rounded-2xl border border-white/10 p-4 hover:border-[#2563eb]/30 transition-colors">
                             {/* Job Info */}
                             <div className="flex items-start gap-3 mb-4">
                                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0" style={{ backgroundColor: job.logo_color }}>
@@ -163,21 +165,21 @@ const JobSeekerApplications = () => {
                                                 step.rejected ? 'bg-red-500 border-red-500' :
                                                 step.done ? 'bg-[#22c55e] border-[#22c55e]' :
                                                 step.active ? 'bg-[#2563eb] border-[#2563eb] animate-pulse' :
-                                                'bg-transparent border-[#374151]'
+                                                'bg-transparent border-white/10'
                                             }`}></div>
                                             <span className={`text-[9px] text-center leading-tight ${step.done || step.active ? 'text-[#f9fafb]' : 'text-[#9ca3af]/50'}`}>{step.step}</span>
                                         </div>
                                         {i < timeline.length - 1 && (
-                                            <div className={`flex-1 h-0.5 -mt-4 ${step.done ? 'bg-[#22c55e]' : 'bg-[#374151]'}`}></div>
+                                            <div className={`flex-1 h-0.5 -mt-4 ${step.done ? 'bg-[#22c55e]' : 'bg-white/10'}`}></div>
                                         )}
                                     </React.Fragment>
                                 ))}
                             </div>
 
                             {/* Footer */}
-                            <div className="flex items-center justify-between pt-2 border-t border-[#374151]/50">
+                            <div className="flex items-center justify-between pt-2 border-t border-white/10">
                                 <span className="text-[10px] text-[#9ca3af]">Applied {new Date(app.created_at).toLocaleDateString()}</span>
-                                <button className="text-xs text-[#2563eb] hover:underline flex items-center gap-1">
+                                <button onClick={() => navigate(`/job/${job.id}`)} className="text-xs text-[#2563eb] hover:underline flex items-center gap-1">
                                     View Details <span className="material-symbols-outlined text-xs">arrow_forward</span>
                                 </button>
                             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jobSeekerService } from './services/jobSeekerService';
+import BlockLoader from './components/ui/block-loader';
 
 const STEPS = [
     { label: 'Personal Info', desc: 'Basic details', icon: 'person' },
@@ -171,7 +172,7 @@ const JobSeekerOnboarding = () => {
     // --------------- CHOOSE PATH SCREEN ---------------
     if (path === null) {
         return (
-            <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex items-center justify-center p-6">
+            <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex items-center justify-center p-6">
                 <div className="max-w-3xl w-full">
                     {/* Logo */}
                     <div className="flex items-center gap-3 justify-center mb-8">
@@ -188,7 +189,7 @@ const JobSeekerOnboarding = () => {
                         {/* Resume Upload Card */}
                         <button
                             onClick={() => setPath('resume')}
-                            className="bg-[#1F2937] rounded-2xl border-2 border-[#374151] p-8 text-left hover:border-[#2563eb] hover:shadow-xl hover:shadow-[#2563eb]/10 transition-all group"
+                            className="bg-white/5 rounded-2xl border-2 border-white/10 p-8 text-left hover:border-[#2563eb] hover:shadow-xl hover:shadow-[#2563eb]/10 transition-all group"
                         >
                             <div className="w-14 h-14 rounded-2xl bg-[#2563eb]/10 border border-[#2563eb]/30 flex items-center justify-center mb-5 group-hover:bg-[#2563eb]/20 transition-colors">
                                 <span className="material-symbols-outlined text-[#2563eb] text-3xl">upload_file</span>
@@ -204,7 +205,7 @@ const JobSeekerOnboarding = () => {
                         {/* Manual Fill Card */}
                         <button
                             onClick={() => setPath('manual')}
-                            className="bg-[#1F2937] rounded-2xl border-2 border-[#374151] p-8 text-left hover:border-[#22c55e] hover:shadow-xl hover:shadow-[#22c55e]/10 transition-all group"
+                            className="bg-white/5 rounded-2xl border-2 border-white/10 p-8 text-left hover:border-[#22c55e] hover:shadow-xl hover:shadow-[#22c55e]/10 transition-all group"
                         >
                             <div className="w-14 h-14 rounded-2xl bg-[#22c55e]/10 border border-[#22c55e]/30 flex items-center justify-center mb-5 group-hover:bg-[#22c55e]/20 transition-colors">
                                 <span className="material-symbols-outlined text-[#22c55e] text-3xl">edit_note</span>
@@ -231,14 +232,14 @@ const JobSeekerOnboarding = () => {
     // --------------- RESUME UPLOAD PATH ---------------
     if (path === 'resume' && !parsedData) {
         return (
-            <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex items-center justify-center p-6">
+            <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex items-center justify-center p-6">
                 <div className="max-w-xl w-full">
                     <button onClick={() => setPath(null)} className="flex items-center gap-1 text-sm text-[#9ca3af] hover:text-[#f9fafb] mb-6 transition-colors">
                         <span className="material-symbols-outlined text-lg">arrow_back</span>
                         Back to options
                     </button>
 
-                    <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-8">
+                    <div className="bg-white/5 rounded-2xl border border-white/10 p-8">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="w-12 h-12 rounded-xl bg-[#2563eb]/10 border border-[#2563eb]/30 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-[#2563eb] text-2xl">upload_file</span>
@@ -252,7 +253,7 @@ const JobSeekerOnboarding = () => {
                         {parsing ? (
                             <div className="flex flex-col items-center py-12">
                                 <div className="relative mb-6">
-                                    <span className="material-symbols-outlined animate-spin text-5xl text-[#2563eb]">progress_activity</span>
+                                    <BlockLoader size={40} gap={6} />
                                 </div>
                                 <h3 className="text-lg font-bold mb-2">AI is reading your resume...</h3>
                                 <p className="text-sm text-[#9ca3af] text-center">Extracting your name, skills, experience, and more. This may take 10-20 seconds.</p>
@@ -268,7 +269,7 @@ const JobSeekerOnboarding = () => {
                                 />
                                 <div
                                     onClick={() => resumeInputRef.current?.click()}
-                                    className="border-2 border-dashed border-[#374151] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb]/50 hover:bg-[#2563eb]/5 transition-all group"
+                                    className="border-2 border-dashed border-white/10 rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb]/50 hover:bg-[#2563eb]/5 transition-all group"
                                 >
                                     <span className="material-symbols-outlined text-4xl text-[#9ca3af] group-hover:text-[#2563eb] mb-3 transition-colors">cloud_upload</span>
                                     <p className="text-sm font-medium text-[#f9fafb]">Click to upload your resume</p>
@@ -296,8 +297,8 @@ const JobSeekerOnboarding = () => {
     // --------------- RESUME REVIEW (after AI parsed) ---------------
     if (path === 'resume' && parsedData) {
         return (
-            <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
-                <header className="flex items-center justify-between px-8 py-4 bg-[#1F2937] border-b border-[#374151] shadow-sm shrink-0">
+            <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+                <header className="flex items-center justify-between px-8 py-4 bg-white/5 border-b border-white/10 shadow-sm shrink-0">
                     <div>
                         <h2 className="text-lg font-bold text-[#f9fafb]">Review Your Extracted Profile</h2>
                         <p className="text-sm text-[#9ca3af]">AI has filled in the details from your resume. Review and edit as needed.</p>
@@ -313,8 +314,8 @@ const JobSeekerOnboarding = () => {
                 <div className="flex-1 overflow-y-auto p-6 lg:p-10 scrollbar-thin">
                     <div className="max-w-3xl mx-auto space-y-6">
                         {/* Personal Info Card */}
-                        <section className="bg-[#1F2937] rounded-2xl border border-[#374151] overflow-hidden shadow-lg">
-                            <div className="p-5 border-b border-[#374151] flex items-center gap-2">
+                        <section className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden shadow-lg">
+                            <div className="p-5 border-b border-white/10 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">person</span>
                                 <h3 className="text-base font-bold">Personal Information</h3>
                             </div>
@@ -345,8 +346,8 @@ const JobSeekerOnboarding = () => {
                         </section>
 
                         {/* Skills Card */}
-                        <section className="bg-[#1F2937] rounded-2xl border border-[#374151] overflow-hidden shadow-lg">
-                            <div className="p-5 border-b border-[#374151] flex items-center justify-between">
+                        <section className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden shadow-lg">
+                            <div className="p-5 border-b border-white/10 flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     <span className="material-symbols-outlined text-[#2563eb] text-lg">psychology</span>
                                     <h3 className="text-base font-bold">Skills ({skills.length})</h3>
@@ -370,8 +371,8 @@ const JobSeekerOnboarding = () => {
                         </section>
 
                         {/* Experience Card */}
-                        <section className="bg-[#1F2937] rounded-2xl border border-[#374151] overflow-hidden shadow-lg">
-                            <div className="p-5 border-b border-[#374151] flex items-center gap-2">
+                        <section className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden shadow-lg">
+                            <div className="p-5 border-b border-white/10 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">work</span>
                                 <h3 className="text-base font-bold">Experience ({experiences.length})</h3>
                             </div>
@@ -399,7 +400,7 @@ const JobSeekerOnboarding = () => {
                         <div className="flex justify-between items-center pt-4 pb-12">
                             <button
                                 onClick={() => { setParsedData(null); setPath(null); }}
-                                className="px-6 py-3 rounded-xl border border-[#374151] text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm"
+                                className="px-6 py-3 rounded-xl border border-white/10 text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm"
                             >
                                 <span className="material-symbols-outlined text-sm">arrow_back</span>
                                 Start Over
@@ -410,7 +411,7 @@ const JobSeekerOnboarding = () => {
                                 className="px-8 py-3 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-40 text-white font-bold shadow-lg shadow-[#2563eb]/30 transition-all flex items-center gap-2"
                             >
                                 {saving ? (
-                                    <><span className="material-symbols-outlined animate-spin text-sm">progress_activity</span> Saving...</>
+                                    <div className="flex items-center gap-2"><BlockLoader size={12} gap={2} /> Saving...</div>
                                 ) : (
                                     <>Save & Continue <span className="material-symbols-outlined text-sm">arrow_forward</span></>
                                 )}
@@ -424,9 +425,9 @@ const JobSeekerOnboarding = () => {
 
     // --------------- MANUAL PATH (3-step flow) ---------------
     return (
-        <div className="bg-[#111827] text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex overflow-hidden">
             {/* Sidebar */}
-            <aside className="hidden lg:flex flex-col w-64 h-full bg-[#1F2937] border-r border-[#374151] shadow-sm z-10 shrink-0">
+            <aside className="hidden lg:flex flex-col w-64 h-full bg-white/5 border-r border-white/10 shadow-sm z-10 shrink-0">
                 <div className="flex items-center gap-3 p-6 mb-4">
                     <div className="bg-[#2563eb]/20 rounded-xl p-2">
                         <span className="material-symbols-outlined text-[#2563eb] text-3xl">swipe</span>
@@ -445,7 +446,7 @@ const JobSeekerOnboarding = () => {
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                                     isComplete ? 'bg-[#22c55e] ring-4 ring-[#22c55e]/20 shadow-lg shadow-[#22c55e]/30'
                                         : isActive ? 'bg-[#2563eb] ring-4 ring-[#2563eb]/20 shadow-lg shadow-[#2563eb]/30'
-                                            : 'bg-gray-700 border-2 border-gray-600 ring-4 ring-[#1F2937]'
+                                            : 'bg-gray-700 border-2 border-gray-600 ring-4 ring-black'
                                 }`}>
                                     {isComplete ? (
                                         <span className="material-symbols-outlined text-white text-sm">check</span>
@@ -462,7 +463,7 @@ const JobSeekerOnboarding = () => {
                     })}
                 </div>
                 <div className="mt-auto p-6">
-                    <div className="bg-gray-800/50 rounded-xl p-4 border border-[#374151]">
+                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                         <div className="flex items-center gap-2 mb-2 text-[#f9fafb] font-semibold text-sm">
                             <span className="material-symbols-outlined text-yellow-500">lightbulb</span>
                             Quick tip
@@ -477,8 +478,8 @@ const JobSeekerOnboarding = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-[#111827]">
-                <header className="flex items-center justify-between px-8 py-4 bg-[#1F2937] border-b border-[#374151] shadow-sm z-10 shrink-0">
+            <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-black">
+                <header className="flex items-center justify-between px-8 py-4 bg-white/5 border-b border-white/10 shadow-sm z-10 shrink-0">
                     <div>
                         <h2 className="text-lg font-bold text-[#f9fafb]">{stepTitles[step].title}</h2>
                         <p className="text-sm text-[#9ca3af]">{stepTitles[step].subtitle}</p>
@@ -496,7 +497,7 @@ const JobSeekerOnboarding = () => {
                 {/* Mobile Step Indicator */}
                 <div className="lg:hidden px-6 pt-4 flex gap-2">
                     {STEPS.map((_, i) => (
-                        <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${i <= step ? 'bg-[#2563eb]' : 'bg-[#374151]'}`} />
+                        <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${i <= step ? 'bg-[#2563eb]' : 'bg-white/10'}`} />
                     ))}
                 </div>
 
@@ -577,8 +578,8 @@ const JobSeekerOnboarding = () => {
                         {/* Step 1: Skills */}
                         {step === 1 && (
                             <>
-                                <section className="bg-[#1F2937] rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-[#374151] overflow-hidden">
-                                    <div className="p-6 border-b border-[#374151] flex justify-between items-start">
+                                <section className="bg-white/5 rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-white/10 overflow-hidden">
+                                    <div className="p-6 border-b border-white/10 flex justify-between items-start">
                                         <div>
                                             <div className="flex items-center gap-2 mb-1">
                                                 <h3 className="text-lg font-bold text-[#f9fafb]">Add Your Skills</h3>
@@ -614,7 +615,7 @@ const JobSeekerOnboarding = () => {
                                 </section>
                                 {skills.length > 0 && (
                                     <section className="bg-[#1F2937] rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-[#374151] overflow-hidden">
-                                        <div className="p-6 border-b border-[#374151]">
+                                        <div className="p-6 border-b border-white/10">
                                             <h3 className="text-lg font-bold text-[#f9fafb]">Your Skills ({skills.length})</h3>
                                         </div>
                                         <div className="p-6 space-y-3">
@@ -639,8 +640,8 @@ const JobSeekerOnboarding = () => {
                         {/* Step 2: Experience */}
                         {step === 2 && (
                             <>
-                                <section className="bg-[#1F2937] rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-[#374151] overflow-hidden">
-                                    <div className="p-6 border-b border-[#374151] flex justify-between items-start">
+                                <section className="bg-white/5 rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-white/10 overflow-hidden">
+                                    <div className="p-6 border-b border-white/10 flex justify-between items-start">
                                         <div>
                                             <div className="flex items-center gap-2 mb-1">
                                                 <h3 className="text-lg font-bold text-[#f9fafb]">Work Experience</h3>
@@ -690,7 +691,7 @@ const JobSeekerOnboarding = () => {
                                 </section>
                                 {experiences.length > 0 && (
                                     <section className="bg-[#1F2937] rounded-2xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.3)] border border-[#374151] overflow-hidden">
-                                        <div className="p-6 border-b border-[#374151]">
+                                        <div className="p-6 border-b border-white/10">
                                             <h3 className="text-lg font-bold text-[#f9fafb]">Added Experience ({experiences.length})</h3>
                                         </div>
                                         <div className="p-6 space-y-3">
@@ -719,19 +720,19 @@ const JobSeekerOnboarding = () => {
                         <div className="flex justify-between items-center pt-4 pb-12">
                             {step > 0 ? (
                                 <button onClick={() => setStep(s => s - 1)}
-                                    className="px-6 py-3 rounded-xl border border-[#374151] text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm">
+                                    className="px-6 py-3 rounded-xl border border-white/10 text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm">
                                     <span className="material-symbols-outlined text-sm">arrow_back</span> Back
                                 </button>
                             ) : (
                                 <button onClick={() => setPath(null)}
-                                    className="px-6 py-3 rounded-xl border border-[#374151] text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm">
+                                    className="px-6 py-3 rounded-xl border border-white/10 text-[#9ca3af] hover:text-[#f9fafb] hover:border-gray-500 font-semibold transition-all flex items-center gap-2 text-sm">
                                     <span className="material-symbols-outlined text-sm">arrow_back</span> Back
                                 </button>
                             )}
                             <button onClick={handleContinue} disabled={!canProceed() || saving}
                                 className="px-8 py-3 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-40 text-white font-bold shadow-lg shadow-[#2563eb]/30 transition-all flex items-center gap-2">
                                 {saving ? (
-                                    <><span className="material-symbols-outlined animate-spin text-sm">progress_activity</span> Saving...</>
+                                    <div className="flex items-center gap-2"><BlockLoader size={12} gap={2} /> Saving...</div>
                                 ) : (
                                     <>{buttonLabels[step]} <span className="material-symbols-outlined text-sm">arrow_forward</span></>
                                 )}
