@@ -138,7 +138,7 @@ const JobSeekerProfile = () => {
     };
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['Plus_Jakarta_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Profile Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <div className="flex items-center gap-4 mb-4">
@@ -152,7 +152,7 @@ const JobSeekerProfile = () => {
                             <circle cx="36" cy="36" r="33" fill="none" stroke="#374151" strokeWidth="3" />
                             <circle cx="36" cy="36" r="33" fill="none" stroke={aiInsights.ats_score >= 80 ? '#22c55e' : aiInsights.ats_score >= 60 ? '#eab308' : '#ef4444'} strokeWidth="3" strokeDasharray={`${(aiInsights.ats_score / 100) * 207} ${207}`} strokeLinecap="round" />
                         </svg>
-                        <div className={`absolute -bottom-1 -right-1 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full border-2 border-black ${aiInsights.ats_score >= 80 ? 'bg-[#22c55e]' : aiInsights.ats_score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}>{aiInsights.ats_score}%</div>
+                        <div className={`absolute -bottom-1 -right-1 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full border-2 border-black font-['DM_Mono',monospace] ${aiInsights.ats_score >= 80 ? 'bg-[#22c55e]' : aiInsights.ats_score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}>{aiInsights.ats_score}%</div>
                     </div>
                     <div className="flex-1">
                         <h1 className="text-lg font-bold text-[#f9fafb]">{fullName}</h1>
@@ -164,15 +164,15 @@ const JobSeekerProfile = () => {
                     </button>
                 </div>
 
-                <div className="flex gap-1 border-b border-white/10">
+                <div className="flex gap-1 border-b border-neutral-900">
                     {['overview', 'resume', 'ai insights'].map(tab => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
-                            className={`px-4 py-2.5 text-sm font-medium capitalize transition-colors border-b-2 -mb-px ${
+                            className={`px-4 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors border-b-2 -mb-px ${
                                 activeTab === tab
-                                    ? 'text-[#2563eb] border-[#2563eb]'
-                                    : 'text-[#9ca3af] border-transparent hover:text-[#f9fafb]'
+                                    ? 'text-blue-500 border-blue-500'
+                                    : 'text-neutral-500 border-transparent hover:text-white'
                             }`}
                         >
                             {tab === 'ai insights' ? 'AI Insights' : tab}
@@ -186,8 +186,8 @@ const JobSeekerProfile = () => {
                 {/* Overview Tab */}
                 {activeTab === 'overview' && (
                     <>
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">person</span>
                                 Personal Information
                             </h4>
@@ -206,8 +206,8 @@ const JobSeekerProfile = () => {
                             </div>
                         </div>
 
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">code</span>
                                 Skills & Expertise
                             </h4>
@@ -219,7 +219,7 @@ const JobSeekerProfile = () => {
                                             <div className="flex-1 bg-gray-700 rounded-full h-2">
                                                 <div className="h-2 rounded-full bg-gradient-to-r from-[#2563eb] to-blue-400" style={{ width: `${skill.level}%` }}></div>
                                             </div>
-                                            <span className="text-xs text-[#9ca3af] w-8 text-right">{skill.level}%</span>
+                                            <span className="text-xs text-[#9ca3af] w-8 text-right font-['DM_Mono',monospace]">{skill.level}%</span>
                                         </div>
                                     ))}
                                 </div>
@@ -228,8 +228,8 @@ const JobSeekerProfile = () => {
                             )}
                         </div>
 
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">work</span>
                                 Experience
                             </h4>
@@ -263,28 +263,28 @@ const JobSeekerProfile = () => {
                 {activeTab === 'resume' && (
                     <>
                         {/* Current Resume */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">description</span>
                                 Current Resume
                             </h4>
 
                             {resumeUrl ? (
-                                <div className="flex items-center gap-4 p-4 bg-black rounded-xl border border-white/10">
-                                    <div className="w-12 h-16 rounded-lg bg-[#2563eb]/10 border border-[#2563eb]/30 flex items-center justify-center">
-                                        <span className="material-symbols-outlined text-[#2563eb] text-2xl">description</span>
+                                <div className="flex items-center gap-4 p-4 bg-black rounded-xl border border-neutral-900">
+                                    <div className="w-12 h-16 rounded-lg bg-blue-900/10 border border-blue-500/30 flex items-center justify-center">
+                                        <span className="material-symbols-outlined text-blue-500 text-2xl">description</span>
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-sm font-semibold text-[#f9fafb]">{getResumeFilename()}</p>
+                                        <p className="text-sm font-bold tracking-tight text-white">{getResumeFilename()}</p>
                                         <div className="flex items-center gap-1 mt-1">
-                                            <span className="material-symbols-outlined text-[#22c55e] text-xs">verified</span>
-                                            <span className="text-[10px] text-[#22c55e] font-medium">Uploaded</span>
+                                            <span className="material-symbols-outlined text-green-500 text-[14px]">verified</span>
+                                            <span className="text-[10px] text-green-500 font-bold uppercase tracking-widest">Uploaded</span>
                                         </div>
                                     </div>
                                     <div className="flex gap-2">
                                         <a href={resumeUrl} target="_blank" rel="noopener noreferrer"
-                                            className="w-8 h-8 rounded-lg bg-[#374151]/50 flex items-center justify-center hover:bg-gray-700 transition-colors">
-                                            <span className="material-symbols-outlined text-[#9ca3af] text-sm">download</span>
+                                            className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center hover:bg-neutral-800 transition-colors border border-neutral-800">
+                                            <span className="material-symbols-outlined text-neutral-400 text-sm">download</span>
                                         </a>
                                     </div>
                                 </div>
@@ -308,27 +308,27 @@ const JobSeekerProfile = () => {
                             onClick={() => !resumeUploading && resumeInputRef.current?.click()}
                             className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all cursor-pointer ${
                                 resumeUploading
-                                    ? 'border-[#2563eb]/30 bg-[#2563eb]/5'
-                                    : 'border-white/10 hover:border-[#2563eb]/40'
+                                    ? 'border-blue-500/50 bg-blue-900/10'
+                                    : 'border-neutral-800 hover:border-neutral-600'
                             }`}
                         >
                             {resumeUploading ? (
                                 <div className="flex flex-col items-center">
                                     <BlockLoader size={24} gap={3} className="mb-3" />
-                                    <p className="text-sm text-[#9ca3af]">Uploading...</p>
+                                    <p className="text-sm text-neutral-400 font-semibold tracking-wide">Uploading...</p>
                                 </div>
                             ) : (
                                 <>
-                                    <span className="material-symbols-outlined text-[#9ca3af] text-3xl mb-2">cloud_upload</span>
-                                    <p className="text-sm text-[#9ca3af]">{resumeUrl ? 'Upload a new resume' : 'Upload your resume'}</p>
-                                    <p className="text-[10px] text-[#9ca3af]/60 mt-1">PDF (max 5MB)</p>
+                                    <span className="material-symbols-outlined text-neutral-500 text-3xl mb-2">cloud_upload</span>
+                                    <p className="text-sm text-neutral-300 font-bold">{resumeUrl ? 'Upload a new resume' : 'Upload your resume'}</p>
+                                    <p className="text-[10px] font-bold text-neutral-600 mt-1 uppercase tracking-widest">PDF (max 5MB)</p>
                                 </>
                             )}
                         </div>
 
                         {/* AI-Optimized Versions */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">auto_awesome</span>
                                 AI Resume Optimization
                             </h4>
@@ -359,7 +359,7 @@ const JobSeekerProfile = () => {
                                                             ? 'bg-yellow-900/20 text-yellow-400 border border-yellow-800/30'
                                                             : 'bg-red-900/20 text-red-400 border border-red-800/30'
                                                 }`}>
-                                                    ATS: {opt.ats_score}%
+                                                    ATS: <span className="font-['DM_Mono',monospace]">{opt.ats_score}%</span>
                                                 </span>
                                             </div>
                                             <div className="space-y-1.5">
@@ -396,8 +396,8 @@ const JobSeekerProfile = () => {
                         ) : (
                         <>
                         {/* ATS Score */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">speed</span>
                                 ATS Compatibility Score
                             </h4>
@@ -407,7 +407,7 @@ const JobSeekerProfile = () => {
                                         <circle cx="40" cy="40" r="35" fill="none" stroke="#374151" strokeWidth="6" />
                                         <circle cx="40" cy="40" r="35" fill="none" stroke={aiInsights.ats_score >= 80 ? '#22c55e' : aiInsights.ats_score >= 60 ? '#eab308' : '#ef4444'} strokeWidth="6" strokeDasharray={`${(aiInsights.ats_score/100) * 220} 220`} strokeLinecap="round" />
                                     </svg>
-                                    <span className={`absolute inset-0 flex items-center justify-center text-xl font-extrabold ${aiInsights.ats_score >= 80 ? 'text-[#22c55e]' : aiInsights.ats_score >= 60 ? 'text-yellow-500' : 'text-red-500'}`}>{aiInsights.ats_score}%</span>
+                                    <span className={`absolute inset-0 flex items-center justify-center text-xl font-extrabold font-['DM_Mono',monospace] ${aiInsights.ats_score >= 80 ? 'text-[#22c55e]' : aiInsights.ats_score >= 60 ? 'text-yellow-500' : 'text-red-500'}`}>{aiInsights.ats_score}%</span>
                                 </div>
                                 <div>
                                     <p className="text-sm text-[#f9fafb] font-medium">
@@ -423,8 +423,8 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Skill Gap Analysis */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">troubleshoot</span>
                                 Skill Gap Analysis
                             </h4>
@@ -440,8 +440,8 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Trending Skills */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">trending_up</span>
                                 Trending in Your Industry
                             </h4>
@@ -456,8 +456,8 @@ const JobSeekerProfile = () => {
                         </div>
 
                         {/* Suggested Courses */}
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
                                 <span className="material-symbols-outlined text-[#2563eb] text-lg">school</span>
                                 Recommended Courses
                             </h4>

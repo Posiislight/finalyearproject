@@ -1,18 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import { WebGLShader } from './components/ui/web-gl-shader';
 import CTASection from './components/CTASection';
 import { BentoItem } from './components/ui/bento-item';
 
 const FeaturesPage = () => {
     return (
-        <div className="bg-transparent font-display text-white min-h-screen flex flex-col overflow-x-hidden relative">
-            <WebGLShader />
-            <Navbar />
-            <main className="flex-grow flex flex-col items-center w-full">
-                <section className="w-full px-4 py-16 md:py-24 flex justify-center bg-transparent relative overflow-hidden">
+        <>
+            <section className="w-full px-4 py-16 md:py-24 flex justify-center bg-transparent relative overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-primary/10 blur-[100px] pointer-events-none rounded-full"></div>
                     <div className="max-w-4xl w-full flex flex-col gap-8 items-center text-center z-10">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-900/40 backdrop-blur-sm border border-gray-800 text-text-secondary text-xs font-medium uppercase tracking-wider">
@@ -96,10 +90,7 @@ const FeaturesPage = () => {
                         </div>
                     </div>
                 </section>
-                <CTASection />
-            </main>
-            <Footer />
-        </div>
+        </>
     );
 };
 

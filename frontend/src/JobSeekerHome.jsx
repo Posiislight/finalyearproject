@@ -197,65 +197,13 @@ const JobSeekerHome = () => {
     if (loading) {
         return (
             <div className="bg-black h-screen flex flex-col items-center justify-center gap-6 px-8">
-                {/* Pulsing logo icon */}
-                <div className="relative">
-                    <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center shadow-2xl shadow-[#2563eb]/30 animate-pulse">
-                        <span className="material-symbols-outlined text-white text-4xl">work</span>
-                    </div>
-                    {/* Orbiting dot */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#22c55e] border-2 border-black animate-bounce"></div>
-                </div>
-
-                {/* Animated text */}
+                <BlockLoader size={30} gap={4} />
                 <div className="text-center space-y-2">
-                    <h2 className="text-xl font-bold text-[#f9fafb]" style={{
-                        background: 'linear-gradient(90deg, #60a5fa, #2563eb, #60a5fa)',
-                        backgroundSize: '200% auto',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        animation: 'shimmer 2s ease-in-out infinite',
-                    }}>
+                    <h2 className="text-xl font-bold text-[#f9fafb]">
                         Finding your perfect jobs
                     </h2>
                     <p className="text-sm text-[#9ca3af]">AI is matching your profile to opportunities</p>
                 </div>
-
-                {/* Animated progress bar */}
-                <div className="w-48 h-1.5 bg-[#1F2937] rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#60a5fa] to-[#2563eb] rounded-full" style={{
-                        width: '60%',
-                        animation: 'loading-bar 1.5s ease-in-out infinite',
-                    }}></div>
-                </div>
-
-                {/* Bouncing dots */}
-                <div className="flex gap-1.5">
-                    {[0, 1, 2].map(i => (
-                        <div
-                            key={i}
-                            className="w-2 h-2 bg-[#2563eb] rounded-full"
-                            style={{
-                                animation: `bounce-dot 1.2s ease-in-out ${i * 0.15}s infinite`,
-                            }}
-                        ></div>
-                    ))}
-                </div>
-
-                <style>{`
-                    @keyframes shimmer {
-                        0%, 100% { background-position: 0% center; }
-                        50% { background-position: 200% center; }
-                    }
-                    @keyframes loading-bar {
-                        0% { width: 10%; margin-left: 0; }
-                        50% { width: 60%; margin-left: 20%; }
-                        100% { width: 10%; margin-left: 90%; }
-                    }
-                    @keyframes bounce-dot {
-                        0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-                        40% { transform: translateY(-8px); opacity: 1; }
-                    }
-                `}</style>
             </div>
         );
     }
@@ -263,17 +211,21 @@ const JobSeekerHome = () => {
     const isSaved = job ? savedJobs.has(job.id) : false;
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
-
+        <div className="bg-black text-[#f9fafb] font-['Plus_Jakarta_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Top Bar */}
             <header className="flex items-center justify-between px-5 py-3 shrink-0 z-10">
-                <div>
-                    <h1 className="text-lg font-bold text-[#f9fafb]">For You 🔥</h1>
-                    <p className="text-xs text-[#9ca3af]">
-                        {jobs.length > 0 && currentCard < jobs.length
-                            ? `${jobs.length - currentCard} jobs matched for you`
-                            : 'No more jobs right now'}
-                    </p>
+                <div className="flex items-center gap-2.5">
+                    <div className="bg-blue-600/10 border border-blue-500/20 rounded-xl p-1.5 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-blue-500 text-2xl font-light">dashboard_customize</span>
+                    </div>
+                    <div>
+                        <h1 className="text-lg font-bold text-[#f9fafb] tracking-tight">RecruitAI</h1>
+                        <p className="text-[10px] text-[#9ca3af] font-medium">
+                            {jobs.length > 0 && currentCard < jobs.length
+                                ? `${jobs.length - currentCard} jobs matched for you`
+                                : 'No more jobs right now'}
+                        </p>
+                    </div>
                 </div>
                 <div className="flex items-center gap-3">
                     <button
@@ -306,10 +258,10 @@ const JobSeekerHome = () => {
                             style={{ scrollbarWidth: 'thin', scrollbarColor: '#374151 transparent' }}
                         >
                             {/* Card Header */}
-                            <div className="bg-gradient-to-br from-[#2563eb]/20 via-purple-600/10 to-black px-6 pt-6 pb-5 sticky top-0 z-10 backdrop-blur-sm bg-black/90 border-b border-white/5">
+                            <div className="bg-[#0a0a0a] px-6 pt-6 pb-5 sticky top-0 z-10 border-b border-neutral-900">
                                 <div className="flex items-start gap-4">
-                                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg shadow-lg shrink-0"
-                                        style={{ backgroundColor: job.logo_color || '#2563eb' }}>
+                                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg shadow-sm border border-neutral-800 shrink-0"
+                                        style={{ backgroundColor: job.logo_color || '#171717' }}>
                                         {job.logo_initials || job.title?.[0] || '?'}
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -322,7 +274,7 @@ const JobSeekerHome = () => {
                                             {matchLoading && !currentMatch ? (
                                                 <BlockLoader size={12} gap={2} blockColor="bg-[#22c55e]" borderColor="border-transparent" />
                                             ) : (
-                                                <span className="text-[#22c55e] font-extrabold text-sm">{currentMatch?.match_score ?? '—'}%</span>
+                                                <span className="text-[#22c55e] font-extrabold text-sm font-['DM_Mono',monospace]">{currentMatch?.match_score ?? '—'}%</span>
                                             )}
                                         </div>
                                         <span className="text-[9px] text-[#9ca3af] mt-1 font-medium">Match</span>
@@ -330,14 +282,14 @@ const JobSeekerHome = () => {
                                 </div>
                                 {/* Tags */}
                                 <div className="flex flex-wrap gap-2 mt-4">
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#9ca3af] text-xs font-medium border border-white/5">
-                                        <span className="material-symbols-outlined text-xs">location_on</span>{job.location}
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-neutral-900 text-neutral-400 text-xs font-medium border border-neutral-800">
+                                        <span className="material-symbols-outlined text-[14px]">location_on</span>{job.location}
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#22c55e] text-xs font-medium border border-white/5">
-                                        <span className="material-symbols-outlined text-xs">payments</span>{job.salary}
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-900/20 text-blue-400 text-xs font-medium border border-blue-900/50">
+                                        <span className="material-symbols-outlined text-[14px]">payments</span>{job.salary}
                                     </span>
-                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 text-[#9ca3af] text-xs font-medium border border-white/5">
-                                        <span className="material-symbols-outlined text-xs">schedule</span>
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-neutral-900 text-neutral-400 text-xs font-medium border border-neutral-800">
+                                        <span className="material-symbols-outlined text-[14px]">schedule</span>
                                         {new Date(job.created_at).toLocaleDateString()}
                                     </span>
                                 </div>
@@ -365,12 +317,12 @@ const JobSeekerHome = () => {
                                 </div>
 
                                 {/* AI Match Reason */}
-                                <div className="bg-[#2563eb]/5 border border-[#2563eb]/20 rounded-xl p-4">
+                                <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-4">
                                     <div className="flex items-center gap-2 mb-2">
-                                        <span className="material-symbols-outlined text-[#2563eb] text-sm">auto_awesome</span>
-                                        <span className="text-xs font-bold text-[#2563eb] uppercase tracking-wider">Why This Matches You</span>
+                                        <span className="material-symbols-outlined text-blue-500 text-sm">auto_awesome</span>
+                                        <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">Why This Matches You</span>
                                     </div>
-                                    <p className="text-sm text-[#9ca3af] leading-relaxed">{currentMatch?.reason || 'Analysing your match...'}</p>
+                                    <p className="text-sm text-neutral-400 leading-relaxed">{currentMatch?.reason || 'Analysing your match...'}</p>
                                 </div>
 
                                 {/* Spacer for action bar */}
@@ -384,17 +336,17 @@ const JobSeekerHome = () => {
                                 <button
                                     onClick={() => goNext('skip')}
                                     disabled={animating}
-                                    className="flex-1 py-3.5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-[#9ca3af] hover:text-white text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-2"
+                                    className="flex-1 py-3.5 rounded-2xl border border-neutral-900 bg-[#0a0a0a] hover:bg-neutral-900 text-neutral-400 hover:text-white text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-2"
                                 >
-                                    <span className="material-symbols-outlined text-base">arrow_downward</span>
+                                    <span className="material-symbols-outlined text-base">close</span>
                                     Skip
                                 </button>
                                 <button
                                     onClick={handleSave}
                                     className={`px-5 py-3.5 rounded-2xl border text-sm font-semibold transition-all active:scale-[0.97] flex items-center justify-center gap-1.5 ${
                                         isSaved
-                                            ? 'bg-yellow-500/10 border-yellow-500/50 text-yellow-400'
-                                            : 'bg-white/5 border-white/10 text-[#9ca3af] hover:bg-white/10'
+                                            ? 'bg-blue-900/20 border-blue-900/50 text-blue-400'
+                                            : 'bg-[#0a0a0a] border-neutral-900 text-neutral-400 hover:bg-neutral-900'
                                     }`}
                                 >
                                     <span className="material-symbols-outlined text-base">{isSaved ? 'bookmark_added' : 'bookmark'}</span>
@@ -402,7 +354,7 @@ const JobSeekerHome = () => {
                                 <button
                                     onClick={handleApply}
                                     disabled={animating}
-                                    className="flex-1 py-3.5 rounded-2xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold transition-all active:scale-[0.97] shadow-lg shadow-[#2563eb]/20 flex items-center justify-center gap-2"
+                                    className="flex-1 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all shadow-lg active:scale-[0.97] flex items-center justify-center gap-2"
                                 >
                                     <span className="material-symbols-outlined text-base">send</span>
                                     Apply Now
@@ -549,7 +501,7 @@ const JobSeekerHome = () => {
                         <div className="w-10 h-1 bg-white/10 rounded-full mx-auto" />
                         <h3 className="text-lg font-bold text-[#f9fafb] text-center">Notifications</h3>
                         {[
-                            { icon: 'work', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', title: 'New Job Match', desc: 'A new Senior Developer role matches 92% of your profile.', time: '2m ago' },
+                            { icon: 'work', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', title: 'New Job Match', desc: <>A new Senior Developer role matches <span className="font-['DM_Mono',monospace]">92%</span> of your profile.</>, time: '2m ago' },
                             { icon: 'check_circle', color: 'text-[#22c55e]', bg: 'bg-[#22c55e]/10', title: 'Application Viewed', desc: 'TechFlow Systems viewed your application.', time: '1h ago' },
                             { icon: 'email', color: 'text-purple-400', bg: 'bg-purple-500/10', title: 'Interview Request', desc: 'You have a new message from NexGen Labs.', time: '3h ago' },
                         ].map((n, i) => (

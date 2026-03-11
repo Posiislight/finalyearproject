@@ -23,26 +23,26 @@ const JobSeekerBottomNav = () => {
     };
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-white/10 px-2 pb-[env(safe-area-inset-bottom)]">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-neutral-900 px-2 pb-[env(safe-area-inset-bottom)] font-['Plus_Jakarta_Sans',sans-serif]">
             <div className="flex items-center justify-around max-w-lg mx-auto">
                 {tabs.map(tab => (
                     <button
                         key={tab.path}
                         onClick={() => navigate(tab.path)}
-                        className={`flex flex-col items-center gap-0.5 py-2 px-2 min-w-[50px] transition-colors ${
+                        className={`flex flex-col items-center gap-0.5 py-2 px-2 min-w-[50px] transition-colors relative ${
                             isActive(tab.path)
-                                ? 'text-[#2563eb]'
-                                : 'text-[#9ca3af] hover:text-[#f9fafb]'
+                                ? 'text-blue-500'
+                                : 'text-neutral-500 hover:text-white'
                         }`}
                     >
                         <span className={`material-symbols-outlined text-[22px] ${isActive(tab.path) ? 'scale-110' : ''} transition-transform`}>
                             {tab.icon}
                         </span>
-                        <span className={`text-[9px] font-semibold ${isActive(tab.path) ? 'font-bold' : ''}`}>
+                        <span className={`text-[9px] font-semibold tracking-wide ${isActive(tab.path) ? 'font-bold' : ''}`}>
                             {tab.label}
                         </span>
                         {isActive(tab.path) && (
-                            <div className="absolute top-0 w-6 h-0.5 bg-[#2563eb] rounded-full"></div>
+                            <div className="absolute -top-[1px] w-6 h-[2px] bg-blue-500 rounded-b-full shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
                         )}
                     </button>
                 ))}
@@ -50,12 +50,12 @@ const JobSeekerBottomNav = () => {
                 {/* Logout Button */}
                 <button
                     onClick={handleLogout}
-                    className="flex flex-col items-center gap-0.5 py-2 px-2 min-w-[50px] transition-colors text-red-500 hover:text-red-400"
+                    className="flex flex-col items-center gap-0.5 py-2 px-2 min-w-[50px] transition-colors text-neutral-600 hover:text-red-500"
                 >
                     <span className="material-symbols-outlined text-[22px] transition-transform">
                         logout
                     </span>
-                    <span className="text-[9px] font-semibold">
+                    <span className="text-[9px] font-semibold tracking-wide">
                         Logout
                     </span>
                 </button>

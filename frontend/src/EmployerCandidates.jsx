@@ -141,130 +141,129 @@ const EmployerCandidates = () => {
     }, [view, currentApplicant]);
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex overflow-hidden">
-            {/* Sidebar */}
+        <div className="bg-black text-white font-['Geist_Sans',sans-serif] antialiased h-screen flex overflow-hidden">
             {/* Sidebar */}
             <EmployerSidebar />
 
             {/* Main Content */}
             <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-black">
                 {/* Header */}
-                <header className="flex items-center justify-between px-8 py-4 bg-white/5 border-b border-white/10 shadow-sm z-10 shrink-0">
+                <header className="flex items-center justify-between px-10 py-8 shrink-0">
                     <div className="flex items-center gap-4">
                         {(view === 'profile' || view === 'list') && (
-                            <button onClick={() => { setView('swipe'); setProfileTab('overview'); }} className="text-[#9ca3af] hover:text-[#f9fafb] transition-colors">
-                                <span className="material-symbols-outlined">arrow_back</span>
+                            <button onClick={() => { setView('swipe'); setProfileTab('overview'); }} className="text-neutral-500 hover:text-white transition-colors">
+                                <span className="material-symbols-outlined text-[20px]">arrow_back</span>
                             </button>
                         )}
                         <div>
                             {view === 'list' ? (
                                 <>
-                                    <h2 className="text-lg font-bold text-[#f9fafb]">{listFilter === 'shortlisted' ? 'Shortlisted' : 'Declined'} Candidates</h2>
-                                    <p className="text-sm text-[#9ca3af]">{listFilter === 'shortlisted' ? shortlistedCount : declinedCount} candidates</p>
+                                    <h2 className="text-3xl font-light tracking-tight text-white mb-1">{listFilter === 'shortlisted' ? 'Shortlisted' : 'Declined'} Candidates</h2>
+                                    <p className="text-sm text-neutral-500 font-medium tracking-wide">{listFilter === 'shortlisted' ? shortlistedCount : declinedCount} candidates</p>
                                 </>
                             ) : currentApplicant ? (
                                 view === 'swipe' ? (
                                     <>
-                                        <div className="flex items-center gap-3">
-                                            <h2 className="text-lg font-bold text-[#f9fafb]">{currentApplicant.job_post_details?.title || 'Unknown Role'}</h2>
-                                            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded bg-green-900/20 text-[#22c55e] border border-green-900/30 uppercase tracking-wider">Active</span>
+                                        <div className="flex items-center gap-3 mb-1">
+                                            <h2 className="text-3xl font-light tracking-tight text-white">{currentApplicant.job_post_details?.title || 'Unknown Role'}</h2>
+                                            <span className="text-[10px] font-bold px-2 py-1 rounded bg-neutral-900 text-blue-500 uppercase tracking-widest">Active</span>
                                         </div>
-                                        <p className="text-sm text-[#9ca3af]">Job ID: #{currentApplicant.job_post}</p>
+                                        <p className="text-sm text-neutral-500 font-medium tracking-wide">Job ID: #{currentApplicant.job_post}</p>
                                     </>
                                 ) : (
                                     <>
-                                        <h2 className="text-lg font-bold text-[#f9fafb]">{currentApplicant.job_seeker_details?.first_name} {currentApplicant.job_seeker_details?.last_name}</h2>
-                                        <p className="text-sm text-[#9ca3af]">Applying for <span className="text-[#2563eb] font-medium">{currentApplicant.job_post_details?.title}</span></p>
+                                        <h2 className="text-3xl font-light tracking-tight text-white mb-1">{currentApplicant.job_seeker_details?.first_name} {currentApplicant.job_seeker_details?.last_name}</h2>
+                                        <p className="text-sm text-neutral-500 font-medium tracking-wide">Applying for <span className="text-white font-medium">{currentApplicant.job_post_details?.title}</span></p>
                                     </>
                                 )
                             ) : (
-                                <h2 className="text-lg font-bold text-[#f9fafb]">No Candidates</h2>
+                                <h2 className="text-3xl font-light tracking-tight text-white">No Candidates</h2>
                             )}
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-6">
                         {view === 'swipe' ? (
-                            <button onClick={() => alert("Advanced filtering coming soon")} className="px-4 py-2 rounded-lg bg-white/5 text-[#9ca3af] hover:text-[#f9fafb] text-sm font-medium border border-white/10 flex items-center gap-2 transition-colors">
+                            <button onClick={() => alert("Advanced filtering coming soon")} className="px-5 py-2.5 rounded-full bg-neutral-900 text-neutral-400 hover:text-white text-sm font-medium flex items-center gap-2 transition-colors">
                                 <span className="material-symbols-outlined text-sm">tune</span>
                                 Filters: High Match (&gt;80%)
                             </button>
                         ) : view === 'list' ? (
-                            <div className="flex items-center gap-2">
-                                <button onClick={() => openListView('shortlisted')} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${listFilter === 'shortlisted' ? 'bg-[#2563eb] text-white' : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'}`}>Shortlisted</button>
-                                <button onClick={() => openListView('declined')} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${listFilter === 'declined' ? 'bg-red-500 text-white' : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'}`}>Declined</button>
+                            <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-xl">
+                                <button onClick={() => openListView('shortlisted')} className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors ${listFilter === 'shortlisted' ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-white'}`}>Shortlisted</button>
+                                <button onClick={() => openListView('declined')} className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors ${listFilter === 'declined' ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-white'}`}>Declined</button>
                             </div>
                         ) : (
                             <>
-                                <button onClick={() => alert("Share candidate coming soon")} className="text-[#9ca3af] hover:text-[#f9fafb] transition-colors">
-                                    <span className="material-symbols-outlined">share</span>
+                                <button onClick={() => alert("Share candidate coming soon")} className="text-neutral-500 hover:text-white transition-colors relative">
+                                    <span className="material-symbols-outlined text-[20px]">share</span>
                                 </button>
-                                <button onClick={() => alert("Download candidate data coming soon")} className="text-[#9ca3af] hover:text-[#f9fafb] transition-colors">
-                                    <span className="material-symbols-outlined">download</span>
+                                <button onClick={() => alert("Download candidate data coming soon")} className="text-neutral-500 hover:text-white transition-colors relative border-l border-neutral-800 pl-4">
+                                    <span className="material-symbols-outlined text-[20px]">download</span>
                                 </button>
                             </>
                         )}
                     </div>
                 </header>
 
-                <div className="flex-1 flex overflow-hidden">
+                <div className="flex-1 flex overflow-hidden px-10 pb-10">
                     {/* Center Content */}
-                    <div className="flex-1 overflow-y-auto flex flex-col items-center justify-start p-6 lg:p-10 scrollbar-thin">
+                    <div className="flex-1 overflow-y-auto flex flex-col items-center justify-start pr-10 scrollbar-thin">
                         {view === 'list' ? (
                             /* ===== LIST VIEW for Shortlisted/Declined ===== */
-                            <div className="w-full max-w-4xl">
+                            <div className="w-full max-w-4xl mt-4">
                                 {(() => {
                                     const listApplicants = listFilter === 'shortlisted' ? shortlistedApplicants : declinedApplicants;
                                     if (listApplicants.length === 0) return (
                                         <div className="text-center py-20">
-                                            <span className="material-symbols-outlined text-4xl text-white/20 mb-3">{listFilter === 'shortlisted' ? 'inventory_2' : 'block'}</span>
-                                            <p className="text-[#9ca3af] text-sm">No {listFilter} candidates yet.</p>
+                                            <span className="material-symbols-outlined text-[40px] text-neutral-800 mb-4">{listFilter === 'shortlisted' ? 'inventory_2' : 'block'}</span>
+                                            <p className="text-neutral-500 font-medium">No {listFilter} candidates yet.</p>
                                         </div>
                                     );
                                     return (
-                                        <div className="space-y-3">
+                                        <div className="space-y-4">
                                             {listApplicants.map((app, idx) => {
                                                 const score = aiScores[app.id];
                                                 return (
                                                     <div
                                                         key={app.id}
                                                         onClick={() => viewCandidateFromList(idx)}
-                                                        className="bg-white/5 rounded-2xl border border-white/10 p-5 hover:border-[#2563eb]/40 transition-colors cursor-pointer group flex items-center gap-5"
+                                                        className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5 hover:bg-neutral-900/30 transition-colors cursor-pointer group flex items-center gap-5"
                                                     >
-                                                        <div className={`w-14 h-14 rounded-2xl ${listFilter === 'shortlisted' ? 'bg-[#2563eb]' : 'bg-red-500'} flex items-center justify-center text-white font-bold text-lg shrink-0`}>
+                                                        <div className={`w-14 h-14 rounded-full ${listFilter === 'shortlisted' ? 'bg-blue-600/10 text-blue-500 font-medium' : 'bg-red-500/10 text-red-500 font-medium'} flex items-center justify-center text-lg shrink-0`}>
                                                             {app.job_seeker_details?.first_name?.[0] || 'J'}{app.job_seeker_details?.last_name?.[0] || 'S'}
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <div className="flex items-center gap-2 mb-1">
-                                                                <h3 className="text-sm font-bold text-[#f9fafb] group-hover:text-[#2563eb] transition-colors">
+                                                            <div className="flex items-center gap-3 mb-1.5">
+                                                                <h3 className="text-base font-medium text-white group-hover:text-blue-500 transition-colors">
                                                                     {app.job_seeker_details?.first_name} {app.job_seeker_details?.last_name}
                                                                 </h3>
-                                                                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium border ${
-                                                                    app.status === 'reviewing' ? 'bg-yellow-900/20 text-yellow-400 border-yellow-900/30' :
-                                                                    app.status === 'interviewing' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' :
-                                                                    'bg-red-900/20 text-red-400 border-red-900/30'
+                                                                <span className={`text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-widest ${
+                                                                    app.status === 'reviewing' ? 'bg-neutral-900 text-yellow-500' :
+                                                                    app.status === 'interviewing' ? 'bg-neutral-900 text-blue-500' :
+                                                                    'bg-neutral-900 text-red-500'
                                                                 }`}>{app.status}</span>
                                                             </div>
-                                                            <p className="text-xs text-[#9ca3af] truncate">
-                                                                Applying for <span className="text-[#f9fafb] font-medium">{app.job_post_details?.title || 'Unknown Role'}</span>
+                                                            <p className="text-sm text-neutral-500 truncate font-medium">
+                                                                Applying for <span className="text-white font-medium">{app.job_post_details?.title || 'Unknown Role'}</span>
                                                             </p>
                                                             {app.job_seeker_details?.skills && app.job_seeker_details.skills.length > 0 && (
-                                                                <div className="flex flex-wrap gap-1.5 mt-2">
+                                                                <div className="flex flex-wrap gap-2 mt-3">
                                                                     {app.job_seeker_details.skills.slice(0, 4).map((s, si) => (
-                                                                        <span key={si} className="text-[10px] bg-white/5 text-[#9ca3af] px-2 py-0.5 rounded-full border border-white/10">{s.name}</span>
+                                                                        <span key={si} className="text-[10px] bg-neutral-900 text-neutral-400 px-2 py-1 rounded font-medium uppercase tracking-widest">{s.name}</span>
                                                                     ))}
                                                                     {app.job_seeker_details.skills.length > 4 && (
-                                                                        <span className="text-[10px] text-[#9ca3af]">+{app.job_seeker_details.skills.length - 4}</span>
+                                                                        <span className="text-[10px] text-neutral-500 font-semibold px-1 py-1">+{app.job_seeker_details.skills.length - 4}</span>
                                                                     )}
                                                                 </div>
                                                             )}
                                                         </div>
                                                         {score && (
-                                                            <div className="text-center shrink-0">
-                                                                <p className={`text-lg font-bold ${score.match_score >= 80 ? 'text-[#22c55e]' : score.match_score >= 60 ? 'text-yellow-400' : 'text-[#9ca3af]'}`}>{score.match_score}%</p>
-                                                                <p className="text-[10px] text-[#9ca3af]">Match</p>
+                                                            <div className="text-center shrink-0 w-20">
+                                                                <p className={`text-xl font-light tracking-tight ${score.match_score >= 80 ? 'text-green-500' : score.match_score >= 60 ? 'text-yellow-500' : 'text-neutral-500'}`}>{score.match_score}%</p>
+                                                                <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-semibold">Match</p>
                                                             </div>
                                                         )}
-                                                        <span className="material-symbols-outlined text-[#9ca3af] group-hover:text-[#2563eb] transition-colors shrink-0">chevron_right</span>
+                                                        <span className="material-symbols-outlined text-neutral-600 group-hover:text-blue-500 transition-colors shrink-0">chevron_right</span>
                                                     </div>
                                                 );
                                             })}
@@ -274,80 +273,80 @@ const EmployerCandidates = () => {
                             </div>
                         ) : loading ? (
                             <div className="flex flex-col flex-1 items-center justify-center">
-                                <BlockLoader size={30} gap={4} className="mb-4" />
-                                <p className="text-[#9ca3af]">Loading candidates...</p>
+                                <BlockLoader size={24} gap={3} className="mb-6" />
+                                <p className="text-neutral-500 font-medium text-sm">Loading candidates...</p>
                             </div>
                         ) : !currentApplicant ? (
-                            <div className="flex flex-col flex-1 items-center justify-center max-w-sm mx-auto text-center space-y-4">
-                                <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center mb-2">
-                                    <span className="material-symbols-outlined text-4xl text-[#9ca3af]">inbox</span>
+                            <div className="flex flex-col flex-1 items-center justify-center max-w-sm mx-auto text-center space-y-5">
+                                <div className="w-20 h-20 rounded-full bg-neutral-900 flex items-center justify-center mb-2">
+                                    <span className="material-symbols-outlined text-[32px] text-neutral-500">inbox</span>
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#f9fafb]">You're all caught up!</h3>
-                                <p className="text-sm text-[#9ca3af]">You've reviewed all pending applications across your active job posts.</p>
-                                <button onClick={() => navigate('/employer-dashboard')} className="mt-4 px-6 py-2 rounded-lg bg-[#2563eb] text-white font-medium hover:bg-[#1d4ed8]">
+                                <h3 className="text-3xl font-light tracking-tight text-white">You're caught up</h3>
+                                <p className="text-sm text-neutral-500 font-medium leading-relaxed">You've reviewed all pending applications across your active job posts.</p>
+                                <button onClick={() => navigate('/employer-dashboard')} className="mt-6 px-6 py-2.5 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors">
                                     Return to Dashboard
                                 </button>
                             </div>
                         ) : view === 'swipe' ? (
                             /* ===== SWIPE CARD VIEW ===== */
-                            <div className="flex flex-col items-center w-full max-w-md">
+                            <div className="flex flex-col items-center w-full max-w-md mt-4">
                                 {/* Swipe Card */}
-                                <div className="w-full bg-white/5 rounded-3xl shadow-xl overflow-hidden border border-white/10 relative transition-transform duration-300">
+                                <div className="w-full bg-[#0a0a0a] rounded-3xl shadow-2xl overflow-hidden border border-neutral-900 relative transition-transform duration-300">
                                     {/* Candidate Photo placeholder */}
-                                    <div className="relative h-80 bg-gradient-to-br from-indigo-900 to-gray-900 flex items-center justify-center">
-                                        <span className="text-white text-6xl font-bold pb-10">
+                                    <div className="relative h-80 bg-neutral-900 flex items-center justify-center">
+                                        <span className="text-white text-6xl font-light tracking-tight pb-10">
                                             {currentApplicant.job_seeker_details?.first_name?.[0] || 'A'}
                                             {currentApplicant.job_seeker_details?.last_name?.[0] || 'C'}
                                         </span>
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
                                         {/* Match Badge */}
-                                        <div className="absolute top-4 right-4 bg-black/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
-                                            <span className="material-symbols-outlined text-yellow-400 text-sm">auto_awesome</span>
-                                            <span className="text-sm font-bold text-[#f9fafb]">
+                                        <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded bg-neutral-900 text-blue-500 font-medium uppercase tracking-widest text-[10px] flex items-center gap-1.5">
+                                            <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
+                                            <span>
                                                 {rankingLoading ? 'Ranking...' : currentScore ? `${currentScore.match_score}% Match` : 'Candidate'}
                                             </span>
                                         </div>
                                         {/* Name overlay */}
-                                        <div className="absolute bottom-4 left-5 right-5">
-                                            <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+                                        <div className="absolute bottom-6 left-6 right-6">
+                                            <h3 className="text-3xl font-light tracking-tight text-white mb-2">
                                                 {currentApplicant.job_seeker_details?.first_name} {currentApplicant.job_seeker_details?.last_name}
                                             </h3>
                                             <div className="flex items-center gap-1.5 mt-1">
-                                                <div className="w-2 h-2 rounded-full bg-[#22c55e]"></div>
-                                                <p className="text-sm text-gray-300 drop-shadow-md">Applying for {currentApplicant.job_post_details?.title}</p>
+                                                <div className={`w-2 h-2 rounded-full ${currentApplicant.status === 'reviewing' ? 'bg-yellow-500' : currentApplicant.status === 'interviewing' ? 'bg-blue-500' : currentApplicant.status === 'rejected' ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                                <p className="text-sm text-neutral-400 font-medium">Applying for <span className="text-white">{currentApplicant.job_post_details?.title}</span></p>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Card Body */}
-                                    <div className="p-5 space-y-5">
+                                    <div className="p-6 space-y-6">
                                         {/* AI Recommendation */}
-                                        <div className="bg-purple-900/15 p-4 rounded-xl border border-purple-800/30">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <div className="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
-                                                    <span className="material-symbols-outlined text-purple-400 text-sm">smart_toy</span>
+                                        <div className="bg-neutral-900/50 p-5 rounded-2xl border border-neutral-800">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <div className="w-6 h-6 rounded-full bg-blue-600/20 flex items-center justify-center">
+                                                    <span className="material-symbols-outlined text-blue-500 text-[14px]">smart_toy</span>
                                                 </div>
-                                                <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider">AI Analysis</span>
+                                                <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">AI Analysis</span>
                                             </div>
                                             {currentScore ? (
-                                                <p className="text-sm text-[#9ca3af]">
-                                                    <span className="font-bold text-[#f9fafb]">{currentScore.match_score}% match</span> — {currentScore.reason}
+                                                <p className="text-sm text-neutral-400 leading-relaxed font-medium">
+                                                    <span className="font-semibold text-white">{currentScore.match_score}% match</span> — {currentScore.reason}
                                                 </p>
                                             ) : (
-                                                <p className="text-sm text-[#9ca3af]">Current status: <span className="font-bold text-[#f9fafb]">{currentApplicant.status}</span>. Applied on {new Date(currentApplicant.created_at).toLocaleDateString()}.</p>
+                                                <p className="text-sm text-neutral-400 leading-relaxed font-medium">Current status: <span className="font-semibold text-white capitalize">{currentApplicant.status}</span>. Applied on {new Date(currentApplicant.created_at).toLocaleDateString()}.</p>
                                             )}
                                         </div>
 
                                         {/* Action Buttons */}
-                                        <div className="flex items-center justify-center gap-5 pt-2 pb-2">
-                                            <button onClick={() => handleStatusUpdate('rejected')} className="w-14 h-14 rounded-full bg-red-900/20 border-2 border-red-500/40 flex items-center justify-center text-red-400 hover:bg-red-900/40 hover:scale-110 transition-all shadow-lg">
-                                                <span className="material-symbols-outlined text-2xl">close</span>
+                                        <div className="flex items-center justify-center gap-6 pt-2 pb-2">
+                                            <button onClick={() => handleStatusUpdate('rejected')} className="w-16 h-16 rounded-full bg-[#0a0a0a] border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-red-500 hover:border-red-500/50 hover:bg-red-500/10 transition-all shadow-sm">
+                                                <span className="material-symbols-outlined text-3xl">close</span>
                                             </button>
-                                            <button onClick={() => setView('profile')} className="w-11 h-11 rounded-full bg-[#2563eb]/20 border-2 border-[#2563eb]/40 flex items-center justify-center text-[#2563eb] hover:bg-[#2563eb]/30 hover:scale-110 transition-all">
+                                            <button onClick={() => setView('profile')} className="w-12 h-12 rounded-full bg-[#0a0a0a] border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/10 transition-all shadow-sm">
                                                 <span className="material-symbols-outlined text-xl">info</span>
                                             </button>
-                                            <button onClick={() => handleStatusUpdate('reviewing')} className="w-14 h-14 rounded-full bg-green-900/20 border-2 border-green-500/40 flex items-center justify-center text-[#22c55e] hover:bg-green-900/40 hover:scale-110 transition-all shadow-lg">
-                                                <span className="material-symbols-outlined text-2xl">check</span>
+                                            <button onClick={() => handleStatusUpdate('reviewing')} className="w-16 h-16 rounded-full bg-[#0a0a0a] border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-green-500 hover:border-green-500/50 hover:bg-green-500/10 transition-all shadow-sm">
+                                                <span className="material-symbols-outlined text-3xl">check</span>
                                             </button>
                                         </div>
                                     </div>
@@ -355,161 +354,212 @@ const EmployerCandidates = () => {
                             </div>
                         ) : (
                             /* ===== PROFILE DETAIL VIEW ===== */
-                            <div className="w-full max-w-3xl">
+                            <div className="w-full max-w-4xl mt-4">
                                 {/* Profile Hero */}
-                                <div className="bg-gradient-to-r from-[#2563eb]/20 to-teal-600/20 rounded-2xl p-6 mb-6 border border-white/10">
-                                    <div className="flex items-start gap-5">
-                                        <div className="w-24 h-24 rounded-2xl bg-black flex items-center justify-center border-2 border-white/10 shadow-lg shrink-0 overflow-hidden">
-                                            <span className="text-4xl font-bold text-[#f9fafb]">
+                                <div className="bg-[#0a0a0a] rounded-3xl p-8 border border-neutral-900 mb-8 relative overflow-hidden">
+                                     <div className="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+                                    <div className="flex items-start gap-6">
+                                        <div className="w-28 h-28 rounded-full bg-neutral-900 flex items-center justify-center shrink-0">
+                                            <span className="text-4xl font-light text-white">
                                                 {currentApplicant?.job_seeker_details?.first_name?.[0] || 'A'}
                                                 {currentApplicant?.job_seeker_details?.last_name?.[0] || 'C'}
                                             </span>
                                         </div>
-                                        <div className="flex-1">
-                                            <h3 className="text-2xl font-bold text-white mb-1">
-                                                {currentApplicant?.job_seeker_details?.first_name} {currentApplicant?.job_seeker_details?.last_name}
-                                            </h3>
-                                            <p className="text-sm text-[#9ca3af]">Applicant • Applied {new Date(currentApplicant?.created_at).toLocaleDateString()}</p>
-                                            <div className="flex items-center gap-2 mt-3 text-sm text-[#f9fafb]">
-                                                <span className="material-symbols-outlined text-[#2563eb] text-sm">mail</span> 
-                                                Not currently showing full email for privacy reasons.
+                                        <div className="flex-1 pt-2">
+                                            <div className="flex items-start justify-between">
+                                                <div>
+                                                    <h3 className="text-3xl font-light tracking-tight text-white mb-2">
+                                                        {currentApplicant?.job_seeker_details?.first_name} {currentApplicant?.job_seeker_details?.last_name}
+                                                    </h3>
+                                                    <p className="text-sm text-neutral-500 font-medium">Applicant • Applied {new Date(currentApplicant?.created_at).toLocaleDateString()}</p>
+                                                </div>
+                                                <span className={`text-[10px] px-3 py-1 rounded font-bold uppercase tracking-widest ${
+                                                    currentApplicant?.status === 'reviewing' ? 'bg-neutral-900 text-yellow-500' :
+                                                    currentApplicant?.status === 'interviewing' ? 'bg-neutral-900 text-blue-500' :
+                                                    currentApplicant?.status === 'rejected' ? 'bg-neutral-900 text-red-500' :
+                                                    'bg-neutral-900 text-green-500'
+                                                }`}>{currentApplicant?.status || 'Active'}</span>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2 mt-4 text-sm text-neutral-400 font-medium">
+                                                <span className="flex items-center gap-1.5">
+                                                    <span className="material-symbols-outlined text-[16px] text-neutral-500">mail</span> 
+                                                    Contact hidden for privacy
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Tabs */}
-                                <div className="flex items-center gap-6 border-b border-white/10 mb-6 px-1">
+                                <div className="flex items-center gap-8 border-b border-neutral-900 mb-8 px-2">
                                     <button 
                                         onClick={() => setProfileTab('overview')}
-                                        className={`pb-3 text-sm font-semibold transition-colors ${profileTab === 'overview' ? 'text-[#2563eb] border-b-2 border-[#2563eb]' : 'text-[#9ca3af] hover:text-[#f9fafb]'}`}>
-                                        Profile Overview
+                                        className={`pb-4 text-sm font-semibold tracking-wide transition-colors relative ${profileTab === 'overview' ? 'text-white' : 'text-neutral-500 hover:text-white'}`}>
+                                        Overview
+                                        {profileTab === 'overview' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>}
                                     </button>
                                     <button 
                                         onClick={() => setProfileTab('resume')}
-                                        className={`pb-3 text-sm font-semibold transition-colors ${profileTab === 'resume' ? 'text-[#2563eb] border-b-2 border-[#2563eb]' : 'text-[#9ca3af] hover:text-[#f9fafb]'}`}>
-                                        Full Resume/CV
+                                        className={`pb-4 text-sm font-semibold tracking-wide transition-colors relative ${profileTab === 'resume' ? 'text-white' : 'text-neutral-500 hover:text-white'}`}>
+                                        Resume / CV
+                                        {profileTab === 'resume' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>}
                                     </button>
                                     <button 
                                         onClick={() => setProfileTab('cover_letter')}
-                                        className={`pb-3 text-sm font-semibold transition-colors ${profileTab === 'cover_letter' ? 'text-[#2563eb] border-b-2 border-[#2563eb]' : 'text-[#9ca3af] hover:text-[#f9fafb]'}`}>
+                                        className={`pb-4 text-sm font-semibold tracking-wide transition-colors relative ${profileTab === 'cover_letter' ? 'text-white' : 'text-neutral-500 hover:text-white'}`}>
                                         Cover Letter
+                                        {profileTab === 'cover_letter' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>}
                                     </button>
                                     <button 
                                         onClick={() => setProfileTab('portfolio')}
-                                        className={`pb-3 text-sm font-semibold transition-colors ${profileTab === 'portfolio' ? 'text-[#2563eb] border-b-2 border-[#2563eb]' : 'text-[#9ca3af] hover:text-[#f9fafb]'}`}>
+                                        className={`pb-4 text-sm font-semibold tracking-wide transition-colors relative ${profileTab === 'portfolio' ? 'text-white' : 'text-neutral-500 hover:text-white'}`}>
                                         Portfolio
+                                        {profileTab === 'portfolio' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>}
                                     </button>
                                 </div>
 
                                 {profileTab === 'overview' && (
-                                    <>
-                                        <div className="bg-gradient-to-r from-[#2563eb]/10 to-purple-600/10 p-6 rounded-2xl border border-white/10 mb-8">
-                                            <div className="flex items-center gap-2 mb-3">
-                                                <span className="material-symbols-outlined text-[#2563eb]">auto_awesome</span>
-                                                <h4 className="font-bold text-[#f9fafb] uppercase text-sm tracking-wide">AI-Generated Summary</h4>
-                                            </div>
-                                            {summaryLoading ? (
-                                                <div className="flex items-center gap-2 py-2">
-                                                    <BlockLoader size={14} gap={2} />
-                                                    <span className="text-sm text-[#9ca3af]">Generating AI summary...</span>
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
+                                        <div className="lg:col-span-2 space-y-8">
+                                            {/* AI Summary */}
+                                            <div className="bg-[#0a0a0a] p-6 rounded-2xl border border-neutral-900">
+                                                <div className="flex items-center gap-2 mb-4">
+                                                    <span className="material-symbols-outlined text-blue-500 text-[20px]">auto_awesome</span>
+                                                    <h4 className="font-medium text-white text-base">AI Summary</h4>
                                                 </div>
-                                            ) : (
-                                                <p className="text-sm text-[#9ca3af] leading-relaxed">
-                                                    {aiSummary || 'Summary will appear here...'}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        {/* Work Experience */}
-                                        <div className="mb-8">
-                                            <div className="flex items-center gap-2 mb-5">
-                                                <span className="material-symbols-outlined text-[#2563eb]">work_history</span>
-                                                <h4 className="font-bold text-[#f9fafb] text-lg">Work Experience</h4>
-                                            </div>
-                                                <div className="relative pl-6 border-l-2 border-white/10 space-y-8">
-                                                    {currentApplicant?.job_seeker_details?.experiences?.length > 0 ? (
-                                                        currentApplicant.job_seeker_details.experiences.map((exp, idx) => (
-                                                            <div key={exp.id || idx} className="relative">
-                                                                <div className={`absolute -left-[31px] top-1 w-4 h-4 rounded-full ${idx === 0 ? 'bg-[#2563eb]' : 'bg-gray-600'} border-4 border-black`}></div>
-                                                            <div className="flex items-center justify-between mb-2">
-                                                                <h5 className="font-bold text-[#f9fafb]">{exp.role}</h5>
-                                                                <span className={`text-xs px-2.5 py-0.5 rounded-full border font-medium ${exp.is_current ? 'bg-[#2563eb]/10 text-[#2563eb] border-[#2563eb]/30' : 'bg-gray-800 text-[#9ca3af] border-[#374151]'}`}>
-                                                                    {exp.start_date?.slice(0,4)} → {exp.is_current ? 'Present' : (exp.end_date?.slice(0,4) || 'N/A')}
-                                                                </span>
-                                                            </div>
-                                                            <p className="text-sm text-[#9ca3af] mb-1">{exp.company}</p>
-                                                            {exp.duration && <p className="text-xs text-[#9ca3af]">Duration: {exp.duration}</p>}
-                                                        </div>
-                                                    ))
+                                                {summaryLoading ? (
+                                                    <div className="flex items-center gap-3 py-4">
+                                                        <BlockLoader size={16} gap={2} />
+                                                        <span className="text-sm text-neutral-500 font-medium">Analyzing profile...</span>
+                                                    </div>
                                                 ) : (
-                                                    <p className="text-sm text-[#9ca3af] py-4">No work experience data available.</p>
+                                                    <p className="text-sm text-neutral-400 leading-relaxed font-medium">
+                                                        {aiSummary || 'Summary will appear here...'}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            {/* Work Experience */}
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-6 px-1">
+                                                    <span className="material-symbols-outlined text-neutral-500 text-[20px]">work_history</span>
+                                                    <h4 className="font-medium text-white text-lg">Experience</h4>
+                                                </div>
+                                                {currentApplicant?.job_seeker_details?.experiences?.length > 0 ? (
+                                                    <div className="space-y-4">
+                                                         {currentApplicant.job_seeker_details.experiences.map((exp, idx) => (
+                                                             <div key={exp.id || idx} className="bg-[#0a0a0a] p-6 rounded-2xl border border-neutral-900">
+                                                                <div className="flex items-start justify-between mb-2">
+                                                                    <div>
+                                                                        <h5 className="font-medium text-white text-base mb-1">{exp.role}</h5>
+                                                                        <p className="text-sm text-blue-500 font-medium">{exp.company}</p>
+                                                                    </div>
+                                                                    <div className="text-right">
+                                                                        <span className={`text-[10px] px-2 py-1 rounded font-bold uppercase tracking-widest ${exp.is_current ? 'bg-neutral-900 text-blue-500' : 'text-neutral-500'}`}>
+                                                                            {exp.start_date?.slice(0,4)} — {exp.is_current ? 'Present' : (exp.end_date?.slice(0,4) || 'N/A')}
+                                                                        </span>
+                                                                        {exp.duration && <p className="text-xs text-neutral-600 mt-1 font-medium">{exp.duration}</p>}
+                                                                    </div>
+                                                                </div>
+                                                             </div>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <div className="bg-[#0a0a0a] p-8 rounded-2xl border border-neutral-900 text-center">
+                                                        <p className="text-sm text-neutral-500 font-medium">No experience listed.</p>
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
-                                    </>
+                                        
+                                        <div className="space-y-8">
+                                            {/* Skills */}
+                                            {currentApplicant?.job_seeker_details?.skills && currentApplicant.job_seeker_details.skills.length > 0 && (
+                                                <div className="bg-[#0a0a0a] p-6 rounded-2xl border border-neutral-900">
+                                                    <h4 className="font-medium text-white text-base mb-4">Top Skills</h4>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {currentApplicant.job_seeker_details.skills.map((s, si) => (
+                                                            <span key={si} className="text-xs bg-neutral-900 text-neutral-400 px-3 py-1.5 rounded-lg font-medium">{s.name}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                            
+                                            {/* Side Info */}
+                                            <div className="bg-[#0a0a0a] p-6 rounded-2xl border border-neutral-900 space-y-4">
+                                                <div>
+                                                    <p className="text-xs text-neutral-500 uppercase tracking-widest font-semibold mb-1">Location</p>
+                                                    <p className="text-sm text-white font-medium">{currentApplicant?.job_seeker_details?.location || 'Not specified'}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-neutral-500 uppercase tracking-widest font-semibold mb-1">Applied For</p>
+                                                    <p className="text-sm text-blue-500 font-medium">{currentApplicant?.job_post_details?.title}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
 
                                 {profileTab === 'resume' && (
-                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-center mt-20">
-                                        <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/10">
-                                            <span className="material-symbols-outlined text-3xl text-[#9ca3af]">description</span>
+                                    <div className="bg-[#0a0a0a] border border-neutral-900 rounded-3xl p-12 text-center mt-8">
+                                        <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <span className="material-symbols-outlined text-[32px] text-neutral-500">description</span>
                                         </div>
-                                        <h4 className="text-xl font-bold text-[#f9fafb] mb-2">Resume Not Uploaded</h4>
-                                        <p className="text-sm text-[#9ca3af] max-w-sm mx-auto mb-6">
+                                        <h4 className="text-2xl font-light tracking-tight text-white mb-3">Resume Not Uploaded</h4>
+                                        <p className="text-sm text-neutral-500 font-medium max-w-md mx-auto mb-8 leading-relaxed">
                                             This candidate has not provided a PDF resume. You can review their work experience in the Profile Overview tab.
                                         </p>
                                         {currentApplicant?.job_seeker_details?.resume_file && (
-                                            <a href={currentApplicant.job_seeker_details.resume_file} target="_blank" rel="noopener noreferrer" className="px-6 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#f9fafb] border border-white/10 inline-flex items-center gap-2 font-medium transition-colors cursor-pointer">
-                                                <span className="material-symbols-outlined text-sm">download</span> Download Resume
+                                            <a href={currentApplicant.job_seeker_details.resume_file} target="_blank" rel="noopener noreferrer" className="px-8 py-3 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white font-semibold transition-colors inline-flex items-center gap-2">
+                                                <span className="material-symbols-outlined text-[18px]">download</span> Download Resume
                                             </a>
                                         )}
                                     </div>
                                 )}
 
                                 {profileTab === 'cover_letter' && (
-                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 mt-4">
-                                        <h4 className="text-lg font-bold text-[#f9fafb] mb-4 flex items-center gap-2">
-                                            <span className="material-symbols-outlined text-[#2563eb]">drafts</span>
+                                    <div className="bg-[#0a0a0a] border border-neutral-900 rounded-3xl p-10 mt-8">
+                                        <h4 className="text-xl font-medium text-white mb-6 flex items-center gap-3">
+                                            <span className="material-symbols-outlined text-blue-500">drafts</span>
                                             Cover Letter
                                         </h4>
                                         {currentApplicant?.cover_letter ? (
-                                            <div className="prose prose-invert max-w-none">
-                                                <p className="text-[#9ca3af] leading-relaxed whitespace-pre-wrap">
+                                            <div className="prose prose-invert max-w-none prose-p:text-neutral-400 prose-p:font-medium prose-p:leading-relaxed">
+                                                <p className="whitespace-pre-wrap">
                                                     {currentApplicant.cover_letter}
                                                 </p>
                                             </div>
                                         ) : (
-                                            <div className="text-center py-10">
-                                                <p className="text-[#9ca3af]">No cover letter was submitted for this application.</p>
+                                            <div className="text-center py-16">
+                                                <p className="text-neutral-500 font-medium">No cover letter was submitted for this application.</p>
                                             </div>
                                         )}
                                     </div>
                                 )}
 
                                 {profileTab === 'portfolio' && (
-                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 mt-4">
-                                       <h4 className="text-lg font-bold text-[#f9fafb] mb-6 flex items-center gap-2">
-                                            <span className="material-symbols-outlined text-[#2563eb]">language</span>
+                                    <div className="bg-[#0a0a0a] border border-neutral-900 rounded-3xl p-10 mt-8">
+                                       <h4 className="text-xl font-medium text-white mb-8 flex items-center gap-3">
+                                            <span className="material-symbols-outlined text-blue-500">language</span>
                                             Portfolio Links
                                         </h4>
                                         <div className="space-y-4">
                                             {currentApplicant?.job_seeker_details?.portfolio_link ? (
-                                                <a href={currentApplicant.job_seeker_details.portfolio_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-black border border-white/10 rounded-xl hover:border-[#2563eb] group transition-colors">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#2563eb]/20 group-hover:text-[#2563eb] transition-colors">
-                                                            <span className="material-symbols-outlined">link</span>
+                                                <a href={currentApplicant.job_seeker_details.portfolio_link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-6 bg-black border border-neutral-900 rounded-2xl hover:border-blue-500/50 group transition-colors">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-12 h-12 rounded-full bg-neutral-900 flex items-center justify-center group-hover:bg-blue-600/10 group-hover:text-blue-500 transition-colors">
+                                                            <span className="material-symbols-outlined text-[20px]">link</span>
                                                         </div>
                                                         <div>
-                                                            <p className="font-semibold text-[#f9fafb] group-hover:text-[#2563eb] transition-colors">Personal Portfolio</p>
-                                                            <p className="text-xs text-[#9ca3af] truncate max-w-xs">{currentApplicant.job_seeker_details.portfolio_link}</p>
+                                                            <p className="font-semibold text-white group-hover:text-blue-500 transition-colors mb-1">Personal Portfolio</p>
+                                                            <p className="text-sm text-neutral-500 font-medium truncate max-w-sm">{currentApplicant.job_seeker_details.portfolio_link}</p>
                                                         </div>
                                                     </div>
-                                                    <span className="material-symbols-outlined text-[#9ca3af] group-hover:text-[#2563eb] transition-colors">open_in_new</span>
+                                                    <span className="material-symbols-outlined text-neutral-600 group-hover:text-blue-500 transition-colors">open_in_new</span>
                                                 </a>
                                             ) : (
-                                                <div className="text-center py-8">
-                                                    <p className="text-[#9ca3af]">No portfolio available.</p>
+                                                <div className="text-center py-12">
+                                                    <p className="text-neutral-500 font-medium">No portfolio link provided.</p>
                                                 </div>
                                             )}
                                         </div>
@@ -522,156 +572,132 @@ const EmployerCandidates = () => {
                     </div>
 
                     {/* Right Sidebar */}
-                    <aside className="w-80 bg-white/5 border-l border-white/10 p-6 overflow-y-auto hidden xl:block shrink-0">
+                    <aside className="w-80 bg-[#0a0a0a] border-l border-neutral-900 rounded-tl-3xl p-6 overflow-y-auto hidden xl:block shrink-0">
                         {view === 'swipe' ? (
                             /* Recruitment Queue Sidebar */
                             <>
-                                <div className="flex items-center gap-2 mb-5">
-                                    <span className="material-symbols-outlined text-[#2563eb]">list_alt</span>
-                                    <h3 className="font-bold text-[#f9fafb] text-sm uppercase tracking-wider">Recruitment Queue</h3>
+                                <div className="flex items-center gap-2 mb-6">
+                                    <span className="material-symbols-outlined text-blue-500 text-[20px]">list_alt</span>
+                                    <h3 className="font-semibold text-white text-sm uppercase tracking-widest">Pipeline</h3>
                                 </div>
 
-                                <div className="bg-black p-4 rounded-xl border border-white/10 mb-6">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <p className="text-sm text-[#9ca3af]">Candidates Remaining</p>
-                                        <span className="text-[10px] bg-white/5 text-[#9ca3af] px-2 py-0.5 rounded-full border border-white/10 font-medium">Total: {applicants.length}</span>
+                                <div className="bg-black p-5 rounded-2xl border border-neutral-900 mb-6">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <p className="text-xs text-neutral-500 uppercase tracking-widest font-semibold">Remaining</p>
+                                        <span className="text-[10px] bg-neutral-900 text-neutral-400 px-2 py-1 rounded font-bold uppercase tracking-widest">Total {applicants.length}</span>
                                     </div>
-                                    <p className="text-3xl font-bold text-[#f9fafb] mb-3">{applicants.length - currentIndex}</p>
-                                    <div className="flex justify-between text-xs text-[#9ca3af] mb-1">
+                                    <p className="text-4xl font-light tracking-tight text-white mb-4">{applicants.length - currentIndex}</p>
+                                    <div className="flex justify-between text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-2">
                                         <span>Progress</span>
                                         <span>{applicants.length > 0 ? Math.round((currentIndex / applicants.length) * 100) : 0}%</span>
                                     </div>
-                                    <div className="w-full bg-gray-700 rounded-full h-1.5">
-                                        <div className="bg-[#2563eb] h-1.5 rounded-full" style={{ width: `${applicants.length > 0 ? (currentIndex / applicants.length) * 100 : 0}%` }}></div>
+                                    <div className="w-full bg-neutral-900 rounded-full h-1">
+                                        <div className="bg-blue-600 h-1 rounded-full transition-all duration-300" style={{ width: `${applicants.length > 0 ? (currentIndex / applicants.length) * 100 : 0}%` }}></div>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-3 mb-6">
-                                    <button onClick={() => openListView('shortlisted')} className="bg-black p-4 rounded-xl border border-white/10 text-center hover:border-[#22c55e]/40 transition-colors cursor-pointer">
-                                        <span className="material-symbols-outlined text-[#22c55e] text-2xl mb-1">inventory_2</span>
-                                        <p className="text-2xl font-bold text-[#f9fafb]">{shortlistedCount}</p>
-                                        <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium">Shortlisted</p>
+                                <div className="grid grid-cols-2 gap-3 mb-8">
+                                    <button onClick={() => openListView('shortlisted')} className="bg-black p-5 rounded-2xl border border-neutral-900 text-center hover:bg-neutral-900/50 transition-colors cursor-pointer flex flex-col items-center">
+                                        <span className="material-symbols-outlined text-blue-500 text-[24px] mb-2">inventory_2</span>
+                                        <p className="text-2xl font-light tracking-tight text-white mb-1">{shortlistedCount}</p>
+                                        <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-semibold">Shortlist</p>
                                     </button>
-                                    <button onClick={() => openListView('declined')} className="bg-black p-4 rounded-xl border border-white/10 text-center hover:border-red-500/40 transition-colors cursor-pointer">
-                                        <span className="material-symbols-outlined text-red-400 text-2xl mb-1">block</span>
-                                        <p className="text-2xl font-bold text-[#f9fafb]">{declinedCount}</p>
-                                        <p className="text-[10px] text-[#9ca3af] uppercase tracking-wider font-medium">Declined</p>
+                                    <button onClick={() => openListView('declined')} className="bg-black p-5 rounded-2xl border border-neutral-900 text-center hover:bg-neutral-900/50 transition-colors cursor-pointer flex flex-col items-center">
+                                        <span className="material-symbols-outlined text-neutral-500 text-[24px] mb-2">block</span>
+                                        <p className="text-2xl font-light tracking-tight text-white mb-1">{declinedCount}</p>
+                                        <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-semibold">Declined</p>
                                     </button>
                                 </div>
 
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <h4 className="font-bold text-[#f9fafb] text-sm uppercase tracking-wider">Recent Shortlists</h4>
-                                        <button onClick={() => openListView('shortlisted')} className="text-xs text-[#2563eb] hover:underline font-medium">View All</button>
+                                <div className="mb-8">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <h4 className="font-semibold text-white text-sm uppercase tracking-widest">Recent Activity</h4>
+                                        <button onClick={() => openListView('shortlisted')} className="text-xs text-blue-500 hover:text-blue-400 font-semibold uppercase tracking-widest">View All</button>
                                     </div>
-                                    <div className="space-y-3">
+                                    <div className="space-y-4">
                                         {applicants.filter(a => a.status === 'reviewing' || a.status === 'interviewing').slice(0, 3).map((app, i) => (
-                                            <div key={app.id} className="flex items-center gap-3">
-                                                <div className={`w-10 h-10 rounded-full ${['bg-[#2563eb]', 'bg-purple-600', 'bg-orange-500'][i % 3]} flex items-center justify-center text-sm font-bold text-white`}>
+                                            <div key={app.id} className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center text-sm font-medium text-white shrink-0">
                                                     {app.job_seeker_details?.first_name?.[0] || 'S'}{app.job_seeker_details?.last_name?.[0] || 'L'}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <p className="text-sm font-semibold text-[#f9fafb] truncate">{app.job_seeker_details?.first_name} {app.job_seeker_details?.last_name}</p>
-                                                    <p className="text-[10px] text-[#9ca3af] truncate">{app.job_post_details?.title}</p>
+                                                    <p className="text-sm font-medium text-white truncate mb-0.5">{app.job_seeker_details?.first_name} {app.job_seeker_details?.last_name}</p>
+                                                    <p className="text-xs text-neutral-500 truncate font-medium">{app.job_post_details?.title}</p>
                                                 </div>
-                                                <span className="text-xs font-bold text-[#22c55e]">{app.status}</span>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
 
                                 {/* Pro Tip */}
-                                <div className="bg-purple-900/15 p-4 rounded-xl border border-purple-800/30">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className="material-symbols-outlined text-purple-400 text-sm">diamond</span>
-                                        <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider">Pro Tip</span>
+                                <div className="bg-blue-600/5 p-5 rounded-2xl border border-blue-600/10">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <span className="material-symbols-outlined text-blue-500 text-[16px]">lightbulb</span>
+                                        <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Tip</span>
                                     </div>
-                                    <p className="text-xs text-[#9ca3af]">Customize your <span className="font-bold text-[#f9fafb]">Matching Criteria</span> to improve AI relevance scores.</p>
+                                    <p className="text-xs text-neutral-400 font-medium leading-relaxed">Customize your <span className="font-semibold text-white">Matching Criteria</span> to improve AI relevance scores.</p>
                                 </div>
                             </>
                         ) : (
                             /* Profile Detail Sidebar */
                             <>
-                                <div className="space-y-3 mb-6">
-                                    <button onClick={() => handleStatusUpdate('reviewing')} className="w-full py-3 rounded-xl bg-[#22c55e] hover:bg-green-600 text-white font-bold shadow-lg shadow-green-500/20 transition-all flex items-center justify-center gap-2">
-                                        <span className="material-symbols-outlined">check</span> Shortlist
+                                <div className="space-y-3 mb-8">
+                                    <button onClick={() => handleStatusUpdate('reviewing')} className="w-full py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-yellow-500 font-semibold transition-all flex items-center justify-center gap-2 border border-yellow-500/10 hover:border-yellow-500/30 text-sm">
+                                        <span className="material-symbols-outlined text-[18px]">bookmark_add</span> Shortlist
                                     </button>
-                                    <button onClick={() => handleStatusUpdate('rejected')} className="w-full py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg shadow-red-500/20 transition-all flex items-center justify-center gap-2">
-                                        <span className="material-symbols-outlined">close</span> Reject
+                                    <button onClick={() => handleStatusUpdate('rejected')} className="w-full py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-red-500 font-semibold transition-all flex items-center justify-center gap-2 border border-red-500/10 hover:border-red-500/30 text-sm">
+                                        <span className="material-symbols-outlined text-[18px]">close</span> Decline
                                     </button>
-                                    <button onClick={() => handleStatusUpdate('interviewing')} className="w-full py-3 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold transition-all flex items-center justify-center gap-2">
-                                        <span className="material-symbols-outlined">calendar_month</span> Schedule Interview
+                                    <button onClick={() => handleStatusUpdate('interviewing')} className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 text-sm">
+                                        <span className="material-symbols-outlined text-[18px]">event</span> Set Interview
                                     </button>
-                                    <button
-                                        onClick={async () => {
-                                            if (!currentApplicant?.job_seeker_details?.id) return;
-                                            try {
-                                                const thread = await messagingService.createThread(
-                                                    currentApplicant.job_seeker_details.id,
-                                                    user?.id
-                                                );
-                                                navigate('/employer-messages', { state: { threadId: thread.id } });
-                                            } catch (err) {
-                                                console.error('Failed to create thread:', err);
-                                                // If thread already exists, the backend may return it — navigate anyway
-                                                navigate('/employer-messages');
-                                            }
-                                        }}
-                                        className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-[#f9fafb] font-medium border border-white/10 transition-all flex items-center justify-center gap-2 text-sm"
-                                    >
-                                        <span className="material-symbols-outlined text-sm">mail</span> Send Message
-                                    </button>
-                                </div>
-
-                                {/* Match Breakdown */}
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-4">
-                                        <h4 className="font-bold text-[#f9fafb] text-sm uppercase tracking-wider">Application Detail</h4>
-                                        <span className={`text-sm font-bold ${currentApplicant?.status === 'rejected' ? 'text-red-500' : 'text-[#22c55e]'}`}>{currentApplicant?.status || 'Active'}</span>
-                                    </div>
-                                    <div className="space-y-3">
-                                        <div className="flex items-start gap-3 bg-black p-3 rounded-xl border border-white/10">
-                                            <span className="material-symbols-outlined text-[#22c55e]">check_circle</span>
-                                            <div>
-                                                <p className="text-sm font-semibold text-[#f9fafb]">Submission Status</p>
-                                                <p className="text-xs text-[#9ca3af]">Current Stage: {currentApplicant?.status}</p>
-                                            </div>
-                                        </div>
+                                    <div className="pt-2">
+                                        <button
+                                            onClick={async () => {
+                                                if (!currentApplicant?.job_seeker_details?.id) return;
+                                                try {
+                                                    const thread = await messagingService.createThread(
+                                                        currentApplicant.job_seeker_details.id,
+                                                        user?.id
+                                                    );
+                                                    navigate('/employer-messages', { state: { threadId: thread.id } });
+                                                } catch (err) {
+                                                    console.error('Failed to create thread:', err);
+                                                    // If thread already exists, the backend may return it — navigate anyway
+                                                    navigate('/employer-messages');
+                                                }
+                                            }}
+                                            className="w-full py-3.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold border border-neutral-800 transition-all flex items-center justify-center gap-2 text-sm"
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">mail</span> Message Leticia
+                                        </button>
                                     </div>
                                 </div>
 
                                 {/* Internal Notes */}
                                 <div>
-                                    <div className="flex justify-between items-center mb-4">
-                                        <h4 className="font-bold text-[#f9fafb] text-sm uppercase tracking-wider">Internal Notes</h4>
-                                        <span className="text-[10px] bg-white/5 text-[#9ca3af] px-2 py-0.5 rounded-full border border-white/10 font-medium">Team Only</span>
+                                    <div className="flex justify-between items-center mb-5">
+                                        <h4 className="font-semibold text-white text-sm uppercase tracking-widest">Team Notes</h4>
+                                        <span className="text-[10px] bg-neutral-900 text-neutral-400 px-2 py-1 rounded font-bold uppercase tracking-widest">Internal</span>
                                     </div>
                                     <div className="space-y-4 mb-4">
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-[#2563eb] flex items-center justify-center text-xs font-bold text-white shrink-0">JS</div>
-                                            <div className="flex-1 bg-[#111827] p-3 rounded-xl border border-[#374151]">
-                                                <div className="flex justify-between mb-1">
-                                                    <span className="text-xs font-semibold text-[#f9fafb]">Jane Smith</span>
-                                                    <span className="text-[10px] text-[#9ca3af]">2h ago</span>
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-xs font-medium text-white shrink-0">JS</div>
+                                            <div className="flex-1">
+                                                <div className="flex justify-between mb-1 items-center">
+                                                    <span className="text-xs font-semibold text-white">Jane Smith</span>
+                                                    <span className="text-[10px] text-neutral-600 font-semibold uppercase tracking-widest">2h ago</span>
                                                 </div>
-                                                <p className="text-xs text-[#9ca3af]">Strong portfolio. I'm impressed by the design system documentation. Definitely want to ask about their process for developer handoff.</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-xs font-bold text-white shrink-0">MR</div>
-                                            <div className="flex-1 bg-[#111827] p-3 rounded-xl border border-[#374151]">
-                                                <div className="flex justify-between mb-1">
-                                                    <span className="text-xs font-semibold text-[#f9fafb]">Mike Ross</span>
-                                                    <span className="text-[10px] text-[#9ca3af]">5h ago</span>
+                                                <div className="bg-black p-4 rounded-b-2xl rounded-tr-2xl border border-neutral-900">
+                                                    <p className="text-xs text-neutral-400 font-medium leading-relaxed">Strong portfolio. I'm impressed by the design system documentation. Definitely want to ask about their process for developer handoff.</p>
                                                 </div>
-                                                <p className="text-xs text-[#9ca3af]">Looks good, but salary expectation is on the higher end of our budget.</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <input type="text" placeholder="Add a note..." className="flex-1 h-10 rounded-xl bg-black border border-white/10 text-[#f9fafb] px-4 text-sm placeholder:text-gray-500 focus:border-[#2563eb] focus:ring focus:ring-[#2563eb]/30 outline-none transition" onKeyDown={(e) => { if (e.key === 'Enter') alert('Notes feature coming soon'); }} />
-                                        <button onClick={() => alert("Notes feature coming soon")} className="w-10 h-10 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center transition-colors">
-                                            <span className="material-symbols-outlined text-sm">send</span>
+                                    <div className="flex gap-2">
+                                        <input type="text" placeholder="Add a note..." className="flex-1 h-11 rounded-xl bg-black border border-neutral-800 text-white px-4 text-sm font-medium placeholder:text-neutral-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition" onKeyDown={(e) => { if (e.key === 'Enter') alert('Notes feature coming soon'); }} />
+                                        <button onClick={() => alert("Notes feature coming soon")} className="w-11 h-11 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white flex items-center justify-center transition-colors shrink-0 border border-neutral-800">
+                                            <span className="material-symbols-outlined text-[18px]">send</span>
                                         </button>
                                     </div>
                                 </div>

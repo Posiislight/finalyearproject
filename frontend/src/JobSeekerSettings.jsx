@@ -113,7 +113,7 @@ const JobSeekerSettings = () => {
     ];
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['Plus_Jakarta_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <h1 className="text-xl font-bold text-[#f9fafb] mb-3">Settings</h1>
@@ -124,13 +124,13 @@ const JobSeekerSettings = () => {
                         <button
                             key={s.id}
                             onClick={() => setActiveSection(s.id)}
-                            className={`shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                            className={`shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs font-bold tracking-wide uppercase transition-colors rounded-[8px] ${
                                 activeSection === s.id
-                                    ? 'bg-[#2563eb]/10 text-[#2563eb] border border-[#2563eb]/30'
-                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
+                                    ? 'bg-blue-600 text-white shadow-sm'
+                                    : 'bg-[#0a0a0a] text-neutral-500 border border-neutral-900 hover:text-white hover:bg-neutral-900'
                             }`}
                         >
-                            <span className="material-symbols-outlined text-sm">{s.icon}</span>
+                            <span className="material-symbols-outlined text-[16px]">{s.icon}</span>
                             {s.label}
                         </button>
                     ))}
@@ -143,13 +143,13 @@ const JobSeekerSettings = () => {
                 {/* Account */}
                 {activeSection === 'account' && (
                     <>
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-5">
-                            <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
-                                <span className="material-symbols-outlined text-[#2563eb] text-lg">person</span>
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                            <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
+                                <span className="material-symbols-outlined text-blue-500 text-lg">person</span>
                                 Personal Information
                             </h4>
-                            <div className="flex items-center gap-4 mb-5 pb-5 border-b border-white/10">
-                                <div className="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center text-white font-bold text-lg">{initials}</div>
+                            <div className="flex items-center gap-4 mb-5 pb-5 border-b border-neutral-900">
+                                <div className="w-14 h-14 rounded-full bg-[#171717] border border-neutral-800 shadow-sm flex items-center justify-center text-white font-bold text-lg tracking-widest">{initials}</div>
                                 <div>
                                     <p className="font-semibold text-[#f9fafb]">{formData.first_name} {formData.last_name}</p>
                                     <p className="text-xs text-[#9ca3af]">{formData.bio || 'No bio set'}</p>
@@ -164,12 +164,12 @@ const JobSeekerSettings = () => {
                                     { label: 'Location', field: 'location', type: 'text' },
                                 ].map((f, i) => (
                                     <div key={i}>
-                                        <label className="block text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-1">{f.label}</label>
+                                        <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-1.5">{f.label}</label>
                                         <input
                                             type={f.type}
                                             value={formData[f.field]}
                                             onChange={e => handleChange(f.field, e.target.value)}
-                                            className="w-full bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[#f9fafb] text-sm outline-none focus:border-[#2563eb] transition-colors"
+                                            className="w-full bg-black border border-neutral-900 rounded-xl px-4 py-3 text-white text-[13px] outline-none focus:border-blue-500 transition-colors shadow-sm"
                                         />
                                     </div>
                                 ))}
@@ -184,7 +184,7 @@ const JobSeekerSettings = () => {
                                 <button
                                     onClick={handleSave}
                                     disabled={saving}
-                                    className="bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-50 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all"
+                                    className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-5 py-2.5 rounded-xl text-sm font-bold tracking-wide transition-all shadow-lg"
                                 >
                                     {saving ? 'Saving...' : 'Save Changes'}
                                 </button>
@@ -192,14 +192,14 @@ const JobSeekerSettings = () => {
                         </div>
 
                         {/* Session */}
-                        <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5 mb-5">
-                            <h4 className="font-bold text-[#f9fafb] mb-4 flex items-center gap-2 text-sm">
+                        <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5 mb-5">
+                            <h4 className="font-bold text-white tracking-tight mb-4 flex items-center gap-2 text-sm">
                                 <span className="material-symbols-outlined text-lg">logout</span>
                                 Session
                             </h4>
                             <button
                                 onClick={handleLogout}
-                                className="w-full py-3 rounded-xl border border-red-900/40 text-red-500 hover:bg-red-900/10 text-sm font-bold transition-colors flex items-center justify-center gap-2"
+                                className="w-full py-3 rounded-xl border border-neutral-900 bg-neutral-900/40 text-red-500 hover:bg-red-900/10 hover:border-red-900/30 text-sm font-bold tracking-wide transition-colors flex items-center justify-center gap-2 shadow-sm"
                             >
                                 <span className="material-symbols-outlined">logout</span>
                                 Log Out
@@ -210,9 +210,9 @@ const JobSeekerSettings = () => {
 
                 {/* Notifications */}
                 {activeSection === 'notifications' && (
-                    <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
-                        <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[#2563eb] text-lg">notifications</span>
+                    <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                        <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
+                            <span className="material-symbols-outlined text-blue-500 text-lg">notifications</span>
                             Notification Preferences
                         </h4>
                         <div className="space-y-1">
@@ -224,16 +224,16 @@ const JobSeekerSettings = () => {
                                 { key: 'jobAlerts', label: 'Job Alerts', desc: 'Instant alerts for high-match jobs' },
                                 { key: 'marketingEmails', label: 'Product Updates', desc: 'Tips, news, and feature announcements' },
                             ].map(n => (
-                                <div key={n.key} className="flex items-center justify-between py-3.5 border-b border-white/10 last:border-0">
+                                <div key={n.key} className="flex items-center justify-between py-3.5 border-b border-neutral-900 last:border-0">
                                     <div>
-                                        <p className="font-medium text-[#f9fafb] text-sm">{n.label}</p>
-                                        <p className="text-xs text-[#9ca3af] mt-0.5">{n.desc}</p>
+                                        <p className="font-bold tracking-wide text-white text-[13px]">{n.label}</p>
+                                        <p className="text-xs text-neutral-500 mt-0.5">{n.desc}</p>
                                     </div>
                                     <button
                                         onClick={() => toggle(n.key)}
-                                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${notifications[n.key] ? 'bg-[#2563eb]' : 'bg-gray-700'}`}
+                                        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 border ${notifications[n.key] ? 'bg-blue-600 border-blue-600' : 'bg-neutral-900 border-neutral-800'}`}
                                     >
-                                        <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${notifications[n.key] ? 'translate-x-5' : 'translate-x-0'}`}></span>
+                                        <span className={`absolute top-[1px] left-[1px] w-[20px] h-[20px] bg-white rounded-full shadow-sm transition-transform ${notifications[n.key] ? 'translate-x-[18px]' : 'translate-x-[2px]'}`}></span>
                                     </button>
                                 </div>
                             ))}
@@ -243,12 +243,12 @@ const JobSeekerSettings = () => {
 
                 {/* Privacy */}
                 {activeSection === 'privacy' && (
-                    <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
-                        <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[#2563eb] text-lg">visibility</span>
+                    <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                        <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
+                            <span className="material-symbols-outlined text-blue-500 text-lg">visibility</span>
                             Profile Visibility
                         </h4>
-                        <p className="text-xs text-[#9ca3af] mb-4">Control who can see your profile and contact you.</p>
+                        <p className="text-xs text-neutral-500 mb-4 font-medium">Control who can see your profile and contact you.</p>
                         <div className="space-y-2">
                             {[
                                 { value: 'visible', label: 'Visible to All Employers', desc: 'Any employer can view and contact you' },
@@ -258,20 +258,20 @@ const JobSeekerSettings = () => {
                                 <button
                                     key={opt.value}
                                     onClick={() => handleVisibilityChange(opt.value)}
-                                    className={`w-full flex items-start gap-3 p-3 rounded-xl border text-left transition-colors ${
+                                    className={`w-full flex items-start gap-3 p-4 rounded-xl border text-left transition-colors shadow-sm ${
                                         profileVisibility === opt.value
-                                            ? 'bg-[#2563eb]/10 border-[#2563eb]/40'
-                                            : 'bg-black border-white/10 hover:border-white/20'
+                                            ? 'bg-blue-900/10 border-blue-500/40 text-blue-50'
+                                            : 'bg-black border-neutral-900 hover:border-neutral-700'
                                     }`}
                                 >
                                     <div className={`w-4 h-4 rounded-full border-2 mt-0.5 shrink-0 flex items-center justify-center ${
-                                        profileVisibility === opt.value ? 'border-[#2563eb]' : 'border-white/10'
+                                        profileVisibility === opt.value ? 'border-blue-500' : 'border-neutral-800'
                                     }`}>
-                                        {profileVisibility === opt.value && <div className="w-2 h-2 rounded-full bg-[#2563eb]"></div>}
+                                        {profileVisibility === opt.value && <div className="w-2 h-2 rounded-full bg-blue-500"></div>}
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-[#f9fafb]">{opt.label}</p>
-                                        <p className="text-xs text-[#9ca3af]">{opt.desc}</p>
+                                        <p className="text-sm font-bold tracking-tight text-white mb-0.5">{opt.label}</p>
+                                        <p className="text-xs text-neutral-500">{opt.desc}</p>
                                     </div>
                                 </button>
                             ))}
@@ -281,9 +281,9 @@ const JobSeekerSettings = () => {
 
                 {/* Appearance */}
                 {activeSection === 'appearance' && (
-                    <div className="bg-[#1F2937] rounded-2xl border border-[#374151] p-5">
-                        <h4 className="font-bold text-sm text-[#f9fafb] mb-4 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[#2563eb] text-lg">palette</span>
+                    <div className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-5">
+                        <h4 className="font-bold text-sm text-white mb-4 flex items-center gap-2 tracking-tight">
+                            <span className="material-symbols-outlined text-blue-500 text-lg">palette</span>
                             Theme & Appearance
                         </h4>
                         <div className="space-y-4">
@@ -296,14 +296,14 @@ const JobSeekerSettings = () => {
                                     <button
                                         key={t.value}
                                         onClick={() => handleThemeChange(t.value)}
-                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-colors ${
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-colors shadow-sm ${
                                             theme === t.value
-                                                ? 'bg-[#2563eb]/10 border-[#2563eb]/40 text-[#2563eb]'
-                                                : 'bg-black border-white/10 text-[#9ca3af] hover:border-white/20'
+                                                ? 'bg-blue-900/10 border-blue-500/40 text-blue-500'
+                                                : 'bg-black border-neutral-900 text-neutral-500 hover:border-neutral-700 hover:text-white'
                                         }`}
                                     >
-                                        <span className="material-symbols-outlined text-2xl">{t.icon}</span>
-                                        <span className="text-xs font-medium">{t.label}</span>
+                                        <span className="material-symbols-outlined text-[20px]">{t.icon}</span>
+                                        <span className="text-[11px] font-bold tracking-widest leading-none uppercase">{t.label}</span>
                                     </button>
                                 ))}
                             </div>

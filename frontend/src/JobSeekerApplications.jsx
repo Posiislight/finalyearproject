@@ -31,11 +31,11 @@ const JobSeekerApplications = () => {
     ];
 
     const statusConfig = {
-        applied: { label: 'Applied', color: 'text-gray-400', bg: 'bg-gray-900/20', border: 'border-gray-900/30' },
+        applied: { label: 'Applied', color: 'text-neutral-400', bg: 'bg-neutral-900/50', border: 'border-neutral-800' },
         reviewing: { label: 'Under Review', color: 'text-yellow-400', bg: 'bg-yellow-900/20', border: 'border-yellow-900/30' },
-        interviewing: { label: 'Interview', color: 'text-[#2563eb]', bg: 'bg-[#2563eb]/10', border: 'border-[#2563eb]/30' },
+        interviewing: { label: 'Interview', color: 'text-blue-500', bg: 'bg-blue-900/20', border: 'border-blue-900/30' },
         rejected: { label: 'Not Selected', color: 'text-red-400', bg: 'bg-red-900/20', border: 'border-red-900/30' },
-        offered: { label: 'Offer Received', color: 'text-emerald-400', bg: 'bg-emerald-900/20', border: 'border-emerald-900/30' },
+        offered: { label: 'Offer Received', color: 'text-green-400', bg: 'bg-green-900/20', border: 'border-green-900/30' },
     };
 
     const filters = [
@@ -84,7 +84,7 @@ const JobSeekerApplications = () => {
     };
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['Plus_Jakarta_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-2 shrink-0">
                 <h1 className="text-xl font-bold text-[#f9fafb] mb-3">Applications</h1>
@@ -92,26 +92,26 @@ const JobSeekerApplications = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-3 mb-4">
                     {stats.map((s, i) => (
-                        <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                        <div key={i} className="bg-[#0a0a0a] border border-neutral-900 rounded-xl p-3 text-center">
                             <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-1.5" style={{ backgroundColor: s.color + '15' }}>
-                                <span className="material-symbols-outlined text-lg" style={{ color: s.color }}>{s.icon}</span>
+                                <span className="material-symbols-outlined text-[16px]" style={{ color: s.color }}>{s.icon}</span>
                             </div>
-                            <p className="text-lg font-extrabold text-[#f9fafb]">{s.value}</p>
-                            <p className="text-[10px] text-[#9ca3af]">{s.label}</p>
+                            <p className="text-lg font-bold text-white leading-tight font-['DM_Mono',monospace]">{s.value}</p>
+                            <p className="text-[10px] text-neutral-500 font-medium">{s.label}</p>
                             <p className="text-[9px] text-[#22c55e] mt-0.5">{s.trend}</p>
                         </div>
                     ))}
                 </div>
 
                 {/* Search */}
-                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 mb-3 focus-within:border-[#2563eb] transition-colors">
-                    <span className="material-symbols-outlined text-[#9ca3af] text-lg">search</span>
+                <div className="flex items-center gap-2 bg-[#0a0a0a] border border-neutral-900 rounded-[12px] px-3 py-2.5 mb-3 focus-within:border-blue-500 transition-colors shadow-sm">
+                    <span className="material-symbols-outlined text-neutral-500 text-[18px]">search</span>
                     <input
                         type="text"
                         placeholder="Search applications..."
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
-                        className="flex-1 bg-transparent text-[#f9fafb] text-sm outline-none placeholder:text-gray-500"
+                        className="flex-1 bg-transparent text-white text-[13px] outline-none placeholder:text-neutral-600"
                     />
                 </div>
 
@@ -121,10 +121,10 @@ const JobSeekerApplications = () => {
                         <button
                             key={f.key}
                             onClick={() => setActiveFilter(f.key)}
-                            className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                            className={`shrink-0 px-3 py-1.5 rounded-[12px] text-[11px] font-bold tracking-wide uppercase transition-colors ${
                                 activeFilter === f.key
-                                    ? 'bg-[#2563eb] text-white'
-                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'bg-[#0a0a0a] text-neutral-500 border border-neutral-900 hover:text-white hover:bg-neutral-900/50'
                             }`}
                         >
                             {f.label}
@@ -141,46 +141,46 @@ const JobSeekerApplications = () => {
                     const timeline = generateTimeline(app.status);
 
                     return (
-                        <div key={app.id} className="bg-white/5 rounded-2xl border border-white/10 p-4 hover:border-[#2563eb]/30 transition-colors">
+                        <div key={app.id} className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-4 hover:border-neutral-700 transition-colors flex flex-col gap-3">
                             {/* Job Info */}
-                            <div className="flex items-start gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0" style={{ backgroundColor: job.logo_color }}>
-                                    {job.logo_initials}
+                            <div className="flex items-start gap-3">
+                                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0 border border-neutral-800 shadow-sm" style={{ backgroundColor: job.logo_color || '#171717' }}>
+                                    {job.logo_initials || 'C'}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className="font-bold text-[#f9fafb] text-sm">{job.title}</h3>
-                                    <p className="text-xs text-[#9ca3af]">{job.company_name}</p>
+                                    <h3 className="font-bold text-white text-sm tracking-tight">{job.title}</h3>
+                                    <p className="text-xs text-neutral-500 mt-0.5">{job.company_name}</p>
                                 </div>
-                                <span className={`shrink-0 px-2 py-1 rounded-lg text-[11px] font-semibold ${status.bg} ${status.color} border ${status.border}`}>
+                                <span className={`shrink-0 px-2.5 py-1 rounded-[6px] text-[9px] font-bold tracking-widest uppercase ${status.bg} ${status.color} border ${status.border}`}>
                                     {status.label}
                                 </span>
                             </div>
 
                             {/* Timeline */}
-                            <div className="flex items-center gap-0 mb-3 px-1">
+                            <div className="flex items-center gap-0 px-1 mt-1 mb-2">
                                 {timeline.map((step, i) => (
                                     <React.Fragment key={i}>
-                                        <div className="flex flex-col items-center gap-1 relative" style={{ minWidth: '44px' }}>
-                                            <div className={`w-3 h-3 rounded-full border-2 ${
-                                                step.rejected ? 'bg-red-500 border-red-500' :
-                                                step.done ? 'bg-[#22c55e] border-[#22c55e]' :
-                                                step.active ? 'bg-[#2563eb] border-[#2563eb] animate-pulse' :
-                                                'bg-transparent border-white/10'
+                                        <div className="flex flex-col items-center gap-1.5 relative" style={{ minWidth: '44px' }}>
+                                            <div className={`w-2.5 h-2.5 rounded-full border border-neutral-900 shadow-sm ${
+                                                step.rejected ? 'bg-red-500 shadow-red-500/50' :
+                                                step.done ? 'bg-green-500 shadow-green-500/50' :
+                                                step.active ? 'bg-blue-500 shadow-blue-500/50 animate-pulse' :
+                                                'bg-neutral-800'
                                             }`}></div>
-                                            <span className={`text-[9px] text-center leading-tight ${step.done || step.active ? 'text-[#f9fafb]' : 'text-[#9ca3af]/50'}`}>{step.step}</span>
+                                            <span className={`text-[8px] font-bold tracking-widest uppercase text-center leading-tight ${step.done || step.active ? 'text-neutral-300' : 'text-neutral-600'}`}>{step.step}</span>
                                         </div>
                                         {i < timeline.length - 1 && (
-                                            <div className={`flex-1 h-0.5 -mt-4 ${step.done ? 'bg-[#22c55e]' : 'bg-white/10'}`}></div>
+                                            <div className={`flex-1 h-[2px] -mt-4 rounded-full ${step.done ? 'bg-green-500' : 'bg-neutral-800'}`}></div>
                                         )}
                                     </React.Fragment>
                                 ))}
                             </div>
 
                             {/* Footer */}
-                            <div className="flex items-center justify-between pt-2 border-t border-white/10">
-                                <span className="text-[10px] text-[#9ca3af]">Applied {new Date(app.created_at).toLocaleDateString()}</span>
-                                <button onClick={() => navigate(`/job/${job.id}`)} className="text-xs text-[#2563eb] hover:underline flex items-center gap-1">
-                                    View Details <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                            <div className="flex items-center justify-between pt-3 border-t border-neutral-900">
+                                <span className="text-[10px] uppercase tracking-widest font-bold text-neutral-600">Applied {new Date(app.created_at).toLocaleDateString()}</span>
+                                <button onClick={() => navigate(`/job/${job.id}`)} className="text-[11px] font-bold tracking-wide uppercase text-blue-500 hover:text-blue-400 flex items-center gap-1 transition-colors">
+                                    View Details <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                                 </button>
                             </div>
                         </div>

@@ -103,11 +103,11 @@ const EmployerJobPost = () => {
             {/* Sidebar */}
             <aside className="hidden lg:flex flex-col w-64 h-full bg-[#1F2937] border-r border-[#374151] shadow-sm z-10 shrink-0">
                 <div className="flex items-center gap-3 p-6 mb-4">
-                    <div className="bg-[#2563eb]/20 rounded-xl p-2">
-                        <span className="material-symbols-outlined text-[#2563eb] text-3xl">swipe</span>
+                    <div className="flex items-center justify-center">
+                        <span className="material-symbols-outlined text-blue-500 text-[32px] font-light">dashboard_customize</span>
                     </div>
-                    <h1 className="text-xl font-extrabold tracking-tight text-white">
-                        JobSwipe <span className="text-xs font-normal text-[#9ca3af] block">for Employers</span>
+                    <h1 className="text-2xl font-bold tracking-tight text-white leading-tight">
+                        RecruitAI
                     </h1>
                 </div>
                 <div className="px-6 space-y-8 relative">
@@ -150,7 +150,7 @@ const EmployerJobPost = () => {
                             Need help?
                         </div>
                         <p className="text-xs text-[#9ca3af] mb-3">Our support team is available 24/7 to assist with onboarding.</p>
-                        <button onClick={() => window.location.href = 'mailto:support@jobswipe.com'} className="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] hover:underline">Contact Support</button>
+                        <button onClick={() => window.location.href = 'mailto:support@recruitai.com'} className="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] hover:underline">Contact Support</button>
                     </div>
                 </div>
             </aside>
@@ -276,7 +276,7 @@ const EmployerJobPost = () => {
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[#9ca3af]">smart_toy</span>
-                                <h3 className="font-bold text-[#f9fafb]">JobSwipe Assistant</h3>
+                                <h3 className="font-bold text-[#f9fafb]">RecruitAI Assistant</h3>
                             </div>
                             <button onClick={() => setAiInsights(null)} className="text-[#9ca3af] hover:text-[#f9fafb]">
                                 <span className="material-symbols-outlined">close</span>

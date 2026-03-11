@@ -217,7 +217,7 @@ const EmployerJobPostModal = ({ isOpen, onClose, onSuccess }) => {
                     <div className="w-full lg:w-80 bg-black border-t lg:border-t-0 lg:border-l border-white/10 p-6 shrink-0 flex flex-col">
                         <div className="flex items-center gap-2 mb-6 text-indigo-400">
                             <span className="material-symbols-outlined">smart_toy</span>
-                            <h3 className="font-bold text-[#f9fafb]">JobSwipe Assistant</h3>
+                            <h3 className="font-bold text-[#f9fafb]">RecruitAI Assistant</h3>
                         </div>
 
                         <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin">
@@ -229,7 +229,7 @@ const EmployerJobPostModal = ({ isOpen, onClose, onSuccess }) => {
                                         <div className="w-full bg-white/10 rounded-full h-1.5 mb-2">
                                             <div className="bg-green-500 h-1.5 rounded-full" style={{ width: `${aiInsights.atsScore}%` }}></div>
                                         </div>
-                                        <p className="text-xs text-green-400 font-medium mb-4">{aiInsights.atsScore}% Optimized for JobSwipe ATS</p>
+                                        <p className="text-xs text-green-400 font-medium mb-4">{aiInsights.atsScore}% Optimized for RecruitAI ATS</p>
 
                                         <ul className="space-y-3">
                                             {aiInsights.tips.map((tip, idx) => (

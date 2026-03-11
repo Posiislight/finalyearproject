@@ -107,7 +107,7 @@ const EmployerAnalytics = () => {
     // ---- Export Report as CSV ---- //
     const exportReport = () => {
         const rows = [
-            ['JobSwipe Analytics Report'],
+            ['RecruitAI Analytics Report'],
             [`Date Range: ${dateRange}`],
             [`Generated: ${new Date().toLocaleString()}`],
             [],
@@ -146,7 +146,7 @@ const EmployerAnalytics = () => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `jobswipe-analytics-${dateRange.replace(/\s+/g, '-').toLowerCase()}.csv`;
+        a.download = `recruitai-analytics-${dateRange.replace(/\s+/g, '-').toLowerCase()}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -203,10 +203,10 @@ const EmployerAnalytics = () => {
                     {/* Active Jobs */}
                     <div className="bg-white/5 border border-white/10 rounded-xl p-5 hover:shadow-[0_0_15px_rgba(36,99,235,0.3)] hover:border-[#2463eb] transition-all group">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-2 bg-blue-500/10 rounded-lg text-blue-400">
+                            <div className="p-2 bg-[#2563eb]/10 rounded-lg text-[#2563eb]">
                                 <span className="material-symbols-outlined">work</span>
                             </div>
-                            <span className="px-2 py-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 rounded-full flex items-center gap-1">
+                            <span className="px-2 py-1 text-xs font-medium text-[#2563eb] bg-[#2563eb]/10 rounded-full flex items-center gap-1">
                                 <span className="material-symbols-outlined text-[12px]">trending_up</span> 2 New
                             </span>
                         </div>
@@ -219,10 +219,10 @@ const EmployerAnalytics = () => {
                     {/* Total Views */}
                     <div className="bg-white/5 border border-white/10 rounded-xl p-5 hover:shadow-[0_0_15px_rgba(36,99,235,0.3)] hover:border-[#2463eb] transition-all group">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400">
+                            <div className="p-2 bg-[#2563eb]/10 rounded-lg text-[#2563eb]">
                                 <span className="material-symbols-outlined">visibility</span>
                             </div>
-                            <span className="px-2 py-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 rounded-full flex items-center gap-1">
+                            <span className="px-2 py-1 text-xs font-medium text-[#2563eb] bg-[#2563eb]/10 rounded-full flex items-center gap-1">
                                 <span className="material-symbols-outlined text-[12px]">trending_up</span> Live
                             </span>
                         </div>
@@ -235,10 +235,10 @@ const EmployerAnalytics = () => {
                     {/* Swipe Right Rate */}
                     <div className="bg-white/5 border border-white/10 rounded-xl p-5 hover:shadow-[0_0_15px_rgba(36,99,235,0.3)] hover:border-[#2463eb] transition-all group">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-2 bg-rose-500/10 rounded-lg text-rose-400">
+                            <div className="p-2 bg-[#2563eb]/10 rounded-lg text-[#2563eb]">
                                 <span className="material-symbols-outlined">favorite</span>
                             </div>
-                            <span className="px-2 py-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 rounded-full flex items-center gap-1">
+                            <span className="px-2 py-1 text-xs font-medium text-[#2563eb] bg-[#2563eb]/10 rounded-full flex items-center gap-1">
                                 <span className="material-symbols-outlined text-[12px]">trending_up</span> Live
                             </span>
                         </div>
@@ -251,10 +251,10 @@ const EmployerAnalytics = () => {
                     {/* Applications */}
                     <div className="bg-white/5 border border-white/10 rounded-xl p-5 hover:shadow-[0_0_15px_rgba(36,99,235,0.3)] hover:border-[#2463eb] transition-all group">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400">
+                            <div className="p-2 bg-[#2563eb]/10 rounded-lg text-[#2563eb]">
                                 <span className="material-symbols-outlined">description</span>
                             </div>
-                            <span className="px-2 py-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 rounded-full flex items-center gap-1">
+                            <span className="px-2 py-1 text-xs font-medium text-[#2563eb] bg-[#2563eb]/10 rounded-full flex items-center gap-1">
                                 <span className="material-symbols-outlined text-[12px]">trending_up</span> Live
                             </span>
                         </div>

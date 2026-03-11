@@ -58,23 +58,23 @@ const JobSeekerMatches = () => {
     }
 
     return (
-        <div className="bg-black text-[#f9fafb] font-['DM_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
+        <div className="bg-black text-[#f9fafb] font-['Plus_Jakarta_Sans',sans-serif] antialiased h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <header className="px-5 pt-4 pb-3 shrink-0">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h1 className="text-xl font-bold text-[#f9fafb]">Matches</h1>
-                        <p className="text-xs text-[#9ca3af]">{applications.length} employer engagements</p>
+                        <h1 className="text-xl font-bold text-white tracking-tight">Matches</h1>
+                        <p className="text-xs text-neutral-500">{applications.length} employer engagements</p>
                     </div>
                     <div className="relative">
                         <select
                             value={sortBy}
                             onChange={e => setSortBy(e.target.value)}
-                            className="appearance-none bg-white/5 border border-white/10 text-[#9ca3af] text-xs rounded-lg px-3 py-2 pr-8 outline-none focus:border-[#2563eb] cursor-pointer"
+                            className="appearance-none bg-[#0a0a0a] border border-neutral-900 text-neutral-400 text-xs rounded-lg px-3 py-2 pr-8 outline-none focus:border-blue-500 cursor-pointer"
                         >
                             <option value="recent">Most Recent</option>
                         </select>
-                        <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-[#9ca3af] text-sm pointer-events-none">expand_more</span>
+                        <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 text-sm pointer-events-none">expand_more</span>
                     </div>
                 </div>
 
@@ -84,14 +84,14 @@ const JobSeekerMatches = () => {
                         <button
                             key={f.key}
                             onClick={() => setActiveFilter(f.key)}
-                            className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                            className={`shrink-0 px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-colors flex items-center gap-1.5 ${
                                 activeFilter === f.key
-                                    ? 'bg-[#2563eb] text-white'
-                                    : 'bg-white/5 text-[#9ca3af] border border-white/10 hover:text-[#f9fafb]'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'bg-[#0a0a0a] text-neutral-400 border border-neutral-900 hover:text-white hover:bg-neutral-900'
                             }`}
                         >
                             {f.label}
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeFilter === f.key ? 'bg-white/20' : 'bg-white/10'}`}>{f.count}</span>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${activeFilter === f.key ? 'bg-white/20' : 'bg-neutral-800'}`}>{f.count}</span>
                         </button>
                     ))}
                 </div>
@@ -110,35 +110,35 @@ const JobSeekerMatches = () => {
                     const job = app.job_post_details;
                     if (!job) return null;
                     return (
-                        <div key={app.id} className="bg-white/5 rounded-2xl border border-white/10 p-4 hover:border-[#2563eb]/30 transition-colors">
+                        <div key={app.id} className="bg-[#0a0a0a] rounded-2xl border border-neutral-900 p-4 hover:border-neutral-700 transition-colors">
                             <div className="flex items-start gap-3">
-                                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0" style={{ backgroundColor: job.logo_color || '#2563eb' }}>
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 border border-neutral-800 shadow-sm" style={{ backgroundColor: job.logo_color || '#171717' }}>
                                     {job.logo_initials || 'C'}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-start justify-between gap-2">
                                         <div>
-                                            <h3 className="font-bold text-[#f9fafb] text-sm">{job.title}</h3>
-                                            <p className="text-xs text-[#9ca3af]">{job.company_name} · {job.location}</p>
+                                            <h3 className="font-bold text-white text-sm tracking-tight">{job.title}</h3>
+                                            <p className="text-xs text-neutral-500 mt-0.5">{job.company_name} · {job.location}</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-center gap-2 mt-2.5">
-                                        <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-semibold ${status.bg} ${status.color} border ${status.border}`}>
-                                            <span className="material-symbols-outlined text-xs">{status.icon}</span>
+                                        <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold tracking-wide uppercase ${status.bg} ${status.color} border ${status.border}`}>
+                                            <span className="material-symbols-outlined text-[12px]">{status.icon}</span>
                                             {status.label}
                                         </span>
-                                        <span className="text-[10px] text-[#9ca3af]">{job.salary}</span>
+                                        <span className="text-[10px] font-medium text-neutral-500 bg-neutral-900/50 px-2 py-1 rounded-md border border-neutral-800/50">{job.salary}</span>
                                     </div>
 
-                                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
-                                        <span className="text-[10px] text-[#9ca3af]">Updated {new Date(app.updated_at).toLocaleDateString()}</span>
+                                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-neutral-900">
+                                        <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">Updated {new Date(app.updated_at).toLocaleDateString()}</span>
                                         <div className="flex items-center gap-2">
                                             <button
                                                 onClick={() => navigate('/jobseeker-applications')}
-                                                className="text-xs text-[#9ca3af] hover:text-[#f9fafb] transition-colors flex items-center gap-1"
+                                                className="text-[11px] font-bold tracking-wide text-neutral-400 hover:text-white transition-colors flex items-center gap-1 uppercase"
                                             >
-                                                <span className="material-symbols-outlined text-sm">visibility</span>Details
+                                                Details <span className="material-symbols-outlined text-[12px]">open_in_new</span>
                                             </button>
                                         </div>
                                     </div>

@@ -1,17 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import { WebGLShader } from './components/ui/web-gl-shader';
 import CTASection from './components/CTASection';
 
 const EmployersPage = () => {
   return (
-    <div className="bg-transparent font-display text-white min-h-screen flex flex-col overflow-x-hidden relative">
-      <WebGLShader />
-      <Navbar />
-      <main className="flex-grow flex flex-col items-center w-full">
-        <section className="w-full px-4 py-12 md:py-20 flex justify-center bg-transparent">
+    <>
+      <section className="w-full px-4 py-12 md:py-20 flex justify-center bg-transparent">
           <div className="max-w-7xl w-full flex flex-col gap-12 items-center">
             <div className="text-center max-w-4xl flex flex-col gap-6 items-center z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
@@ -102,10 +96,7 @@ const EmployersPage = () => {
           </div>
         </section>
         
-        <CTASection />
-      </main>
-      <Footer />
-    </div>
+      </>
   );
 };
 

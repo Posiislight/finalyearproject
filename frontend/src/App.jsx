@@ -9,6 +9,7 @@ import EmployerVerification from './EmployerVerification';
 import EmployerJobPost from './EmployerJobPost';
 import CompanyInfo from './CompanyInfo';
 import PlanSelection from './PlanSelection';
+import MarketingLayout from './components/MarketingLayout';
 import EmployerDashboard from './EmployerDashboard';
 import EmployerJobs from './EmployerJobs';
 import EmployerCandidates from './EmployerCandidates';
@@ -34,10 +35,12 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/candidates" element={<CandidatesPage />} />
-        <Route path="/employers" element={<EmployersPage />} />
+        <Route element={<MarketingLayout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/candidates" element={<CandidatesPage />} />
+          <Route path="/employers" element={<EmployersPage />} />
+        </Route>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

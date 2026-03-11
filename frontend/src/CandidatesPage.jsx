@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import { WebGLShader } from './components/ui/web-gl-shader';
+
+
+
 import CTASection from './components/CTASection';
 import { Button, ArrowRight } from './components/ui/saa-s-template';
 
@@ -30,10 +30,7 @@ const CandidatesPage = () => {
   const marketDemand = MARKET_DEMAND_BY_RANGE[marketRange];
 
   return (
-    <div className="bg-transparent font-display text-white min-h-screen flex flex-col overflow-x-hidden relative">
-      <WebGLShader />
-      <Navbar />
-      <main className="flex-grow flex flex-col items-center w-full">
+    <>
         <section className="w-full px-4 py-12 md:py-20 flex justify-center bg-transparent">
           <div className="max-w-7xl w-full flex flex-col gap-12 items-center">
             <div className="text-center max-w-4xl flex flex-col gap-6 items-center z-10">
@@ -264,9 +261,7 @@ const CandidatesPage = () => {
         </section>
 
         <CTASection />
-      </main>
-      <Footer />
-    </div>
+    </>
   );
 };
 

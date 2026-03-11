@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@21st-dev/cli": "^0.0.29",
+    "@fontsource/dm-mono": "^5.2.7",
+    "@fontsource/geist-sans": "^5.2.5",
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.5",
