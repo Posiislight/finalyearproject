@@ -176,10 +176,10 @@ const JobSeekerOnboarding = () => {
                 <div className="max-w-3xl w-full">
                     {/* Logo */}
                     <div className="flex items-center gap-3 justify-center mb-8">
-                        <div className="bg-blue-900/10 border border-blue-500/20 rounded-xl p-2.5 flex items-center justify-center">
-                            <span className="material-symbols-outlined text-blue-500 text-3xl">swipe</span>
+                        <div className="size-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-[0_0_15px_rgba(36,99,235,0.4)]">
+                            <span className="material-symbols-outlined text-[28px]">smart_toy</span>
                         </div>
-                        <h1 className="text-3xl font-extrabold tracking-tight text-white">HireFlow</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-white">RecruitAI</h1>
                     </div>
 
                     <h2 className="text-2xl font-bold text-center mb-2">How would you like to set up your profile?</h2>
@@ -197,8 +197,12 @@ const JobSeekerOnboarding = () => {
                             <h3 className="text-lg font-bold text-[#f9fafb] mb-2">Upload Your Resume</h3>
                             <p className="text-sm text-[#9ca3af] mb-4">Upload your PDF resume and our AI will automatically extract your details, skills, and experience.</p>
                             <div className="flex flex-wrap gap-2">
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-green-900/20 text-green-400 border border-green-800/30 font-medium">⚡ Fastest</span>
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-blue-900/20 text-blue-400 border border-blue-800/30 font-medium">🤖 AI-Powered</span>
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-green-900/20 text-green-400 border border-green-800/30 font-medium flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-[12px]">bolt</span> Fastest
+                                </span>
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-blue-900/20 text-blue-400 border border-blue-800/30 font-medium flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-[12px]">smart_toy</span> AI-Powered
+                                </span>
                             </div>
                         </button>
 
@@ -213,8 +217,12 @@ const JobSeekerOnboarding = () => {
                             <h3 className="text-lg font-bold text-[#f9fafb] mb-2">Fill in Manually</h3>
                             <p className="text-sm text-[#9ca3af] mb-4">Step through a guided flow to enter your personal info, skills, and work experience one by one.</p>
                             <div className="flex flex-wrap gap-2">
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-purple-900/20 text-purple-400 border border-purple-800/30 font-medium">📝 Step-by-step</span>
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-yellow-900/20 text-yellow-400 border border-yellow-800/30 font-medium">🎯 Full control</span>
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-purple-900/20 text-purple-400 border border-purple-800/30 font-medium flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-[12px]">edit_note</span> Step-by-step
+                                </span>
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-yellow-900/20 text-yellow-400 border border-yellow-800/30 font-medium flex items-center gap-1">
+                                    <span className="material-symbols-outlined text-[12px]">tune</span> Full control
+                                </span>
                             </div>
                         </button>
                     </div>
@@ -429,11 +437,11 @@ const JobSeekerOnboarding = () => {
             {/* Sidebar */}
             <aside className="hidden lg:flex flex-col w-64 h-full bg-[#0a0a0a] border-r border-neutral-900 shadow-sm z-10 shrink-0">
                 <div className="flex items-center gap-3 p-6 mb-4">
-                    <div className="bg-[#2563eb]/20 rounded-xl p-2">
-                        <span className="material-symbols-outlined text-[#2563eb] text-3xl">swipe</span>
+                    <div className="size-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-[0_0_15px_rgba(36,99,235,0.4)]">
+                        <span className="material-symbols-outlined text-[24px]">smart_toy</span>
                     </div>
                     <h1 className="text-xl font-extrabold tracking-tight text-white">
-                        HireFlow <span className="text-xs font-normal text-[#9ca3af] block">for Job Seekers</span>
+                        RecruitAI <span className="text-xs font-normal text-[#9ca3af] block">for Job Seekers</span>
                     </h1>
                 </div>
                 <div className="px-6 space-y-8 relative">
