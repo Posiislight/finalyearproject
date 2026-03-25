@@ -14,6 +14,11 @@ This project consists of a Django backend and a React (Vite) frontend.
 Navigate to the project root:
 
 ```bash
+
+#create virtual environment
+
+python -m venv venv
+
 # Activate virtual environment (Windows)
 .venv\Scripts\activate
 
